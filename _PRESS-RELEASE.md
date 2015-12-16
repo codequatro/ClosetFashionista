@@ -1,5 +1,9 @@
 # Project Name #
 
+# Project Team #
+Product Owner -- Garret Brustkern
+Scrum Master  -- Michael Wheatley
+Development Team -- Mike Mitchel, Asheley Augustini, Michael Wheatley, Garret Brustkern
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
