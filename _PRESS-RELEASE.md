@@ -6,7 +6,7 @@
 Product Owner -- Garret Brustkern
 Scrum Master  -- Michael Wheatley
 Development Team -- Mike Mitchel, Ashley Augustini, Michael Wheatley, Garret Brustkern
-<!-- 
+<!--
 =======
 
 
@@ -52,6 +52,7 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  Before ClosetFashionista, I was stuck in front of the mirror for hours trying to decide if my clothes were cool or not, now I know!!!  ~Frank Sinatra
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
