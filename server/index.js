@@ -2,6 +2,7 @@ var express = require('express');
 var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
+var connectString = 'postgres://localhost:5432/closet';
 
 //
 //route to your index.html
@@ -15,6 +16,33 @@ routes.use(express.static(assetFolder));
 routes.get('/api/tags-example', function(req, res) {
   res.send(['node', 'express', 'angular'])
 });
+
+// User Route
+// Still need to add session and check username if exists
+routes.post('/signup', function (req, res){
+  var username = req.body.username;
+  var password = req.body.password;
+  pg.connect(connectString, function (err, client, done){
+    if(err){
+      console.error(err);
+    }
+    client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
+      if(err){
+        console.error(err);
+      }else {
+        done();
+        res.sendStatus(201);
+      }
+    })
+  })
+})
+
+
+// Sign In - if username exists and password matches give session - select to looks for user and password
+// GET request for all images
+// POST request to upload an image
+// GET request for a random image
+// POST request for voting
 
 if(process.env.NODE_ENV !== 'test') {
   //
