@@ -48,7 +48,7 @@ Once the project moves into development, the press release can be used as a touc
   > A quote from a spokesperson in your company.
 
 ## How to Get Started ##
-  Building a closet only take a few clicks.  In minutes you will have a peer reviewed wardrobe and can tackle the day with swag.
+  Building a closet only takes a few clicks.  In minutes you will have a peer reviewed wardrobe and can tackle the day with swag.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
