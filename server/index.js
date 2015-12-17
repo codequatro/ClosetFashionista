@@ -48,8 +48,8 @@ if(process.env.NODE_ENV !== 'test') {
 }
 
 // pg connection
-pg.connect(process.env.DATABSAE_URL || 'tcp://postgres:5432@localhost/postgres', function(err, client){
+pg.connect(process.env.DATABSAE_URL || 'postgres://localhost:5432/closet', function(err, client){
   if (err) throw err;
-  console.log('Connected to postgres!');
+  console.log('Connected to closet!');
 
 });
