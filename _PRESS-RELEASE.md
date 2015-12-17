@@ -3,7 +3,7 @@
 # Project Team #
 Product Owner -- Garret Brustkern
 Scrum Master  -- Michael Wheatley
-Development Team -- Mike Mitchel, Asheley Augustini, Michael Wheatley, Garret Brustkern
+Development Team -- Mike Mitchel, Ashley Augustini, Michael Wheatley, Garret Brustkern
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
@@ -32,7 +32,7 @@ Once the project moves into development, the press release can be used as a touc
   Testing 1 2
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Our app helps you choose an outfit for the day.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
