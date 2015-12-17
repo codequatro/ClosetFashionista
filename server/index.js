@@ -1,7 +1,7 @@
 var express = require('express');
 var Path = require('path');
 var routes = express.Router();
-
+var pg = require('pg');
 
 //
 //route to your index.html
@@ -46,3 +46,10 @@ if(process.env.NODE_ENV !== 'test') {
   // We're in test mode; make this file importable instead.
   module.exports = routes;
 }
+
+// pg connection
+pg.connect(process.env.DATABSAE_URL || 'tcp://postgres:5432@localhost/postgres', function(err, client){
+  if (err) throw err;
+  console.log('Connected to postgres!');
+
+});
