@@ -43,9 +43,11 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  It simply asks your friends and other fashion forward people for a thumb up or thumb down to confirm your clothing for the day.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  Where was Fashionista when I was in college?  It makes feeling good about my style so easy.
 
 ## How to Get Started ##
   Building a closet only takes a few clicks.  In minutes you will have a peer reviewed wardrobe and can tackle the day with swag.
