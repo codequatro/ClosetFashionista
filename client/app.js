@@ -5,9 +5,9 @@ angular.module('myApp', [
   ])
 
     .config(function($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider.otherwise('/');
-    
+
     $stateProvider
         .state('home', {
             url: '/',
@@ -19,6 +19,18 @@ angular.module('myApp', [
           url: '/vote',
           templateUrl: 'views/vote.html',
           controller: 'VoteCtrl'
-        });
-        
+        })
+
+        .state('auth', {
+          url:'/auth',
+          templateUrl: 'views/auth.html',
+          controller: 'AuthCtrl'
+        })
+
+        .state('closet', {
+          url: '/closet',
+          templateUrl: 'views/closet.html',
+          controller: 'ClosetCtrl'
+        })
+
 });

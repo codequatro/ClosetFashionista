@@ -3,13 +3,19 @@
   <head>
     <meta charset="utf-8">
   </head>
-  
+
   <body ng-app="myApp">
-    <header>Title</header>
-    <h1 class="title">Closet Fashionista</h1>
+    <div class='navbar'>
+      <h1 class="title">Closet Fashionista</h1>
+      <a class='btn' ui-sref='auth'>SignIn</a>
+      <a class='btn' ui-sref='auth'>SignUp</a>
+    </div>
+
+
     <div class="container">
       <div ui-view></div>
     </div>
+
   </body>
 
 
@@ -25,6 +31,8 @@
     <script src="app.js"></script>
     <script src="src/main.js"></script>
     <script src="src/vote.js"></script>
+    <script src="src/closet.js"></script>
+    <script src="src/auth.js"></script>
     <link rel="stylesheet" type="text/css" href="index.css">
   </footer>
 </html>
