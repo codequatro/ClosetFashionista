@@ -15,10 +15,10 @@ angular.module('myApp', [
             controller: 'MainCtrl'
         })
 
-        .state('about', {
-          url: '/about',
-          templateUrl: 'views/about.html',
-          controller: 'AboutCtrl'
+        .state('vote', {
+          url: '/vote',
+          templateUrl: 'views/vote.html',
+          controller: 'VoteCtrl'
         });
         
 });
