@@ -5,14 +5,14 @@
   </head>
 
   <body ng-app="myApp">
-    <h1 class="title">Closet Fashionista</h1>
+    <div class='navbar'>
+      <h1 class="title">Closet Fashionista</h1>
+      <a class='btn' ui-sref='auth'>SignIn</a>
+      <a class='btn' ui-sref='auth'>SignUp</a>
+    </div>
 
 
     <div class="container">
-      <div class='navbar'>
-        <a class='btn' ui-sref='auth'>SignIn</a>
-        <a class='btn' ui-sref='auth'>SignUp</a>
-      </div>
       <div ui-view></div>
     </div>
 
