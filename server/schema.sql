@@ -83,11 +83,11 @@ ALTER TABLE images ADD FOREIGN KEY (type_id) REFERENCES clothing_types (type_id)
 -- Test Data
 -- ---
 
-INSERT INTO users (user_id,username,password) VALUES
-('','','');
-INSERT INTO Votes (user_id,image_id,vote) VALUES
-('','','');
-INSERT INTO image (image_id,user_id,image,type_id) VALUES
-('','','','');
-INSERT INTO clothing_types (type_id,description) VALUES
-('','');
+-- INSERT INTO users (user_id,username,password) VALUES
+-- ('','','');
+-- INSERT INTO Votes (user_id,image_id,vote) VALUES
+-- ('','','');
+-- INSERT INTO image (image_id,user_id,image,type_id) VALUES
+-- ('','','','');
+-- INSERT INTO clothing_types (type_id,description) VALUES
+-- ('','');
