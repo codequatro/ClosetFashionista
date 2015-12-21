@@ -3,6 +3,8 @@ var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
 var connectString = 'postgres://localhost:5432/closet';
+var knex = require('knex');
+var jwt = require('jwt-simple');
 
 //
 //route to your index.html
@@ -17,8 +19,36 @@ routes.get('/api/tags-example', function(req, res) {
   res.send(['node', 'express', 'angular'])
 });
 
-// User Route
-// Still need to add session and check username if exists
+
+// User route SIGNIN
+// need better error handling for bad username
+routes.post('/signin', function (req, res){
+  var attemptedUsername = req.body.username;
+  var attemptedPassword = req.body.password;
+  // console.log('SEE THIS', attemptedPassword, attemptedUsername);
+  pg.connect(connectString, function (err, client, done){ 
+    if(err){
+      console.error(err);
+    }
+    client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
+      var username = result.rows[0].username;
+      if(!username){
+        res.status(401).json({answer: 'invalid username'})
+      }else {
+        var password = result.rows[0].password
+        if(attemptedPassword === password){ 
+        var token = jwt.encode(result.rows[0].password, 'secret')
+        res.status(200).json({token: token})
+        }else {
+          res.status(401).json({answer: 'invalid password'})
+          }
+        }
+    })
+  })
+})
+      
+
+// User route SIGNUP
 routes.post('/signup', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
@@ -37,12 +67,6 @@ routes.post('/signup', function (req, res){
   })
 })
 
-
-// Sign In - if username exists and password matches give session - select to looks for user and password
-// GET request for all images
-// POST request to upload an image
-// GET request for a random image
-// POST request for voting
 
 if(process.env.NODE_ENV !== 'test') {
   //
@@ -76,7 +100,7 @@ if(process.env.NODE_ENV !== 'test') {
 }
 
 // pg connection
-pg.connect(process.env.DATABSAE_URL || 'postgres://localhost:5432/closet', function(err, client){
+pg.connect(process.env.DATABASE_URL || 'postgres://localhost:5432/closet', function(err, client){
   if (err) throw err;
   console.log('Connected to closet!');
 
