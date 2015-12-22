@@ -27,6 +27,12 @@ angular.module('myApp', [
           controller: 'AuthCtrl'
         })
 
+        .state('signout', {
+          url:'/signout',
+          templateUrl: 'views/signout.html',
+          controller: 'AuthCtrl'
+        })
+
         .state('vote', {
           url: '/vote',
           templateUrl: 'views/vote.html',
@@ -48,9 +54,14 @@ angular.module('myApp', [
         })
 
 })
-.service('Authorization', function($state) {
-  this.authorized = false;
-  this.memorizedState = null;
+.service('Authorization', function($state, $window) {
+
+  if ($window.localStorage.authtoken) {
+    this.authorized = true;
+  } else {
+    this.authorized = false;
+    this.memorizedState = null;
+  }
 
   var
   clear = function(){

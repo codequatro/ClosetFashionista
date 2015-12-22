@@ -35,10 +35,16 @@ angular.module('myApp')
       })
     }
 
-    $scope.reset = function() {
-      $scope.user = angular.copy($scope.master)
+    $scope.signout = function() {
+      Authorization.authorized = false
+      $window.localStorage.removeItem('authtoken')
+      $window.localStorage.removeItem('username')
     }
 
-    $scope.reset();
+    // $scope.reset = function() {
+    //   $scope.user = angular.copy($scope.master)
+    // }
+
+    // $scope.reset();
 
   }]);
