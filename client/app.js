@@ -34,3 +34,61 @@ angular.module('myApp', [
         })
 
 });
+
+
+ .factory('Register', function($http, $window){
+    var register = {};
+    register.currentUser =  $window.localStorage.getItem('username') || '' ;
+    register.users = [];
+
+    register.updateProfile = function(userObj){
+      // register.users.push(userObj);
+      // console.log(register);
+      return $http({
+        method: 'POST',
+        url: '/updateprofile',
+        data: userObj
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    register.signup = function(user) {
+      return $http({
+        method: 'POST',
+        url: '/signup',
+        data: user
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    register.signin = function(user){
+      return $http({
+        method: 'POST',
+        url: '/signin',
+        data: user
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    register.isAuth = function() {
+      return !!$window.localStorage.getItem('lunchAnyone');
+    };
+
+    return {
+      register: register
+    }
+  })
+.run(function($window, $location, $rootScope){
+  $rootScope.signout = function(){
+    $window.localStorage.removeItem('lunchAnyone');
+    $window.localStorage.removeItem('username');
+    console.log('logout');
+    $location.path('/signin');
+  }
+})
