@@ -3,20 +3,12 @@ var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
 var connectString = 'postgres://localhost:5432/closet';
-<<<<<<< c85740147f8132dcaf80028b9948c784b9fa60ed
 var knex = require('knex');
 var jwt = require('jwt-simple');
-=======
 var bodyParser = require('body-parser');
-// var multiparty = require('multiparty');
 var formidable = require('formidable');
-// var busboy = require('connect-busboy');
-// var multer  = require('multer');
 var util = require('util');
 var fs   = require('fs-extra')
-
-// var IMAGE_TYPES = ['image/jpeg', 'image/png']; 
->>>>>>> building out routes for images
 
 //
 //route to your index.html
