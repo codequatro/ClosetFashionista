@@ -3,8 +3,20 @@ var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
 var connectString = 'postgres://localhost:5432/closet';
+<<<<<<< c85740147f8132dcaf80028b9948c784b9fa60ed
 var knex = require('knex');
 var jwt = require('jwt-simple');
+=======
+var bodyParser = require('body-parser');
+// var multiparty = require('multiparty');
+var formidable = require('formidable');
+// var busboy = require('connect-busboy');
+// var multer  = require('multer');
+var util = require('util');
+var fs   = require('fs-extra')
+
+// var IMAGE_TYPES = ['image/jpeg', 'image/png']; 
+>>>>>>> building out routes for images
 
 //
 //route to your index.html
@@ -65,6 +77,75 @@ routes.post('/signup', function (req, res){
       }
     })
   })
+});
+
+routes.post('/postimage', function (req, res){
+  
+  var form = new formidable.IncomingForm();
+
+  form.parse(req, function(err, fields, files) {
+    res.end(util.inspect({fields: fields, files: files}));
+  });
+
+  form.on('end', function(fields, files) {
+    /* Temporary location of our uploaded file */
+    var temp_path = this.openedFiles[0].path;
+    /* The file name of the uploaded file */
+    var file_name = this.openedFiles[0].name;
+    /* Location where we want to copy the uploaded file */
+    var new_location = 'uploads/';
+
+    fs.copy(temp_path, new_location + file_name, function(err) {  
+      if (err) {
+        console.error(err);
+      } 
+      else {
+        pg.connect(connectString, function (err, client, done){
+          if(err){
+            console.error('error connecting to the DB:', err);
+          }
+          console.log('file_name', file_name);
+          client.query('INSERT INTO images (image_name) VALUES ($1)', [file_name], function (err, result){
+            if(err){
+              console.error(err);
+            }else {
+              done();
+              console.log('wrote to database', result);
+            }
+          })
+        })
+      }
+    });
+  });
+});
+
+routes.get('/randomimage', function (req, res){
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('SELECT image_name FROM images ORDER BY RANDOM() LIMIT 1', function(err, image){
+        res.json(200, {image_name: image.rows[0].image_name});
+        done();
+      })
+    }
+  })
+})
+
+routes.get('/closet', function (req, res){
+  var username = req.body.username;
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('SELECT image_name FROM images i, users u where i.image_id = u.image_id', function(err, images){
+        res.status(200).json({images: image.rows.image_name});
+        done();
+      })
+    }
+  })
 })
 
 
@@ -85,7 +166,7 @@ if(process.env.NODE_ENV !== 'test') {
   var app = express();
 
   // Parse incoming request bodies as JSON
-  app.use( require('body-parser').json() );
+  app.use( bodyParser.json() );
 
   // Mount our main router
   app.use('/', routes);

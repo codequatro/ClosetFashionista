@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS images;
 CREATE TABLE images (
   image_id SERIAL,
   user_id INTEGER,
-  image bytea,
+  image_name varchar(300),
   type_id INTEGER,
   PRIMARY KEY (image_id)
 );
@@ -91,3 +91,12 @@ ALTER TABLE images ADD FOREIGN KEY (type_id) REFERENCES clothing_types (type_id)
 -- ('','','','');
 -- INSERT INTO clothing_types (type_id,description) VALUES
 -- ('','');
+insert into users (username, password) values ('me', '123');
+-- INSERT INTO users (user_id,username,password) VALUES
+-- ('','','');
+INSERT INTO Votes (user_id,image_id,vote) VALUES
+('','','');
+INSERT INTO image (image_id,user_id,image,type_id) VALUES
+('','','','');
+INSERT INTO clothing_types (type_id,description) VALUES
+('','');
