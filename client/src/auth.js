@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('AuthCtrl', ['$scope','$http', '$window', 'Register', function($scope,$http, $window, Register) {
+  .controller('AuthCtrl', ['$scope', '$window', '$location', 'Register', function($scope, $window, $location, Register) {
     // $scope.header = 'this will be the auth page';
 
     $scope.user = {}
@@ -11,11 +11,14 @@ angular.module('myApp')
       var username = $scope.user.username;
       var password = $scope.user.password;
 
-      var user = {username: username, password: password}
+      var user = user || {username: username, password: password}
 
       Register.register.signin(user)
       .then(function(data){
-        console.log(' signin reg data', data)
+        console.log(' signin data from our authjs', data)
+        $window.localStorage.setItem('authtoken', data.token)
+        $window.localStorage.setItem('username', data.username)
+        $location.path('/closet')
       })
     }
 
@@ -27,7 +30,7 @@ angular.module('myApp')
 
       Register.register.signup(user)
       .then(function(data){
-        console.log('signup reg data', data)
+        $scope.signin(user)
       })
     }
 
