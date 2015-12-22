@@ -18,9 +18,10 @@ routes.use(express.static(assetFolder));
 // User route SIGNIN
 // need better error handling for bad username
 routes.post('/signin', function (req, res){
+  console.log('singin index.js', req.body.username, req.body.password)
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
-  pg.connect(connectString, function (err, client, done){ 
+  pg.connect(connectString, function (err, client, done){
     if(err){
       console.error(err);
     }
@@ -29,11 +30,11 @@ routes.post('/signin', function (req, res){
       if(result.rows.length === 0){
         res.status(401).json({answer: 'invalid username'});
       }
-      else 
+      else
       {
         var username = result.rows[0].username;
         var password = result.rows[0].password
-        if(attemptedPassword === password){ 
+        if(attemptedPassword === password){
           var token = jwt.encode(result.rows[0].password, 'secret')
           res.status(200).json({token: token, username: username})
           }
@@ -44,7 +45,7 @@ routes.post('/signin', function (req, res){
     })
   })
 })
-      
+
 
 /*User route SIGNUP*/
 routes.post('/signup', function (req, res){
@@ -56,10 +57,11 @@ routes.post('/signup', function (req, res){
     }
     client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
       if(err){
+        console.log('database error on signup')
         console.error(err);
-      }else {
+      } else {
+        res.status(201).json({username: username}) // removed token as was undefined for signup
         done();
-        res.status(201).json({token: token, username: username})
       }
     })
   })
@@ -85,10 +87,10 @@ routes.post('/postimage', function (req, res){
       /* Location where we want to copy the uploaded file */
       var new_location = 'uploads/';
 
-      fs.copy(temp_path, new_location + file_name, function(err) {  
+      fs.copy(temp_path, new_location + file_name, function(err) {
         if (err) {
           console.error(err);
-        } 
+        }
         else {
           pg.connect(connectString, function (err, client, done){
             if(err){
@@ -100,7 +102,7 @@ routes.post('/postimage', function (req, res){
               if(err){
                 console.error('error on lookup of user id:', err)
               }
-              else 
+              else
               {
                 console.log('select user result', result);
                 client.query('INSERT INTO images (image_name, user_id) VALUES ($1, $2)', [file_name, user_id], function (err, result){
