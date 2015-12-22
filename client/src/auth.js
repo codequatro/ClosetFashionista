@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('AuthCtrl', ['$scope', '$window', '$location', 'Register', function($scope, $window, $location, Register) {
+  .controller('AuthCtrl', ['$scope', '$window', '$location', 'Register', 'Authorization', function($scope, $window, $location, Register, Authorization) {
     // $scope.header = 'this will be the auth page';
 
     $scope.user = {}
@@ -16,6 +16,7 @@ angular.module('myApp')
       Register.register.signin(user)
       .then(function(data){
         console.log(' signin data from our authjs', data)
+        Authorization.authorized = true
         $window.localStorage.setItem('authtoken', data.token)
         $window.localStorage.setItem('username', data.username)
         $location.path('/closet')
