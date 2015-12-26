@@ -82,15 +82,13 @@ routes.post('/postimage', function (req, res){
     // res.end(util.inspect({fields: fields, files: files}));
   });
 
-  console.log('made it to 1');
   form.on('field', function(name, value) {
     /*Get username to associate username with picture*/
     console.log('value from form.on field', value);
     var username = value;
-    console.log('made it to 2');
 
     form.on('end', function(fields, files) {
-      console.log('made it to 3');
+
       /* Temporary location of our uploaded file */
       var temp_path = this.openedFiles[0].path;
       /* The file name of the uploaded file */
