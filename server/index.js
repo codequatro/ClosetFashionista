@@ -72,7 +72,14 @@ routes.post('/postimage', function (req, res){
   var form = new formidable.IncomingForm();
 
   form.parse(req, function(err, fields, files) {
-    res.end(util.inspect({fields: fields, files: files}));
+
+    //this is not the right way to go about it. url gets wierd
+    //NEED TO FIX
+
+    res.redirect('#/closet');
+
+    //if you want to look at the form getting sent to the server
+    // res.end(util.inspect({fields: fields, files: files}));
   });
 
   console.log('made it to 1');
@@ -81,7 +88,6 @@ routes.post('/postimage', function (req, res){
     console.log('value from form.on field', value);
     var username = value;
     console.log('made it to 2');
-  });
 
     form.on('end', function(fields, files) {
       console.log('made it to 3');
@@ -97,34 +103,34 @@ routes.post('/postimage', function (req, res){
           console.error(err);
         }
         else {
-          // pg.connect(connectString, function (err, client, done){
-          //   if(err){
-          //     console.error('error connecting to the DB:', err);
-          //   }
-          //   console.log('username', username);
-          //   client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-          //     var user_id = result.rows[0].user_id;
-          //     if(err){
-          //       console.error('error on lookup of user id:', err)
-          //     }
-          //     else
-          //     {
-          //       console.log('select user result', result);
-          //       client.query('INSERT INTO images (image_name, user_id) VALUES ($1, $2)', [file_name, user_id], function (err, result){
-          //         if(err){
-          //           console.error(err);
-          //         }else {
-          //           done();
-          //           console.log('wrote to database', result);
-          //         }
-          //       })
-          //     }
-          //   });
-          // })
+          pg.connect(connectString, function (err, client, done){
+            if(err){
+              console.error('error connecting to the DB:', err);
+            }
+            console.log('username', username);
+            client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+              var user_id = result.rows[0].user_id;
+              if(err){
+                console.error('error on lookup of user id:', err)
+              }
+              else
+              {
+                console.log('select user result', result);
+                client.query('INSERT INTO images (image_name, user_id) VALUES ($1, $2)', [file_name, user_id], function (err, result){
+                  if(err){
+                    console.error(err);
+                  }else {
+                    done();
+                    console.log('wrote to database', result);
+                  }
+                })
+              }
+            });
+          })
         }
       }); //fs copy end
     }); //form.on 'end' end
-  // }); //form.on 'field'
+  }); //form.on 'field'
 });
 
 routes.get('/randomimage', function (req, res){
