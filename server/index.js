@@ -75,51 +75,56 @@ routes.post('/postimage', function (req, res){
     res.end(util.inspect({fields: fields, files: files}));
   });
 
+  console.log('made it to 1');
   form.on('field', function(name, value) {
     /*Get username to associate username with picture*/
+    console.log('value from form.on field', value);
     var username = value;
+    console.log('made it to 2');
+  });
 
     form.on('end', function(fields, files) {
+      console.log('made it to 3');
       /* Temporary location of our uploaded file */
       var temp_path = this.openedFiles[0].path;
       /* The file name of the uploaded file */
       var file_name = this.openedFiles[0].name;
       /* Location where we want to copy the uploaded file */
-      var new_location = 'uploads/';
+      var new_location = '../uploads/';
 
       fs.copy(temp_path, new_location + file_name, function(err) {
         if (err) {
           console.error(err);
         }
         else {
-          pg.connect(connectString, function (err, client, done){
-            if(err){
-              console.error('error connecting to the DB:', err);
-            }
-            console.log('username', username);
-            client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-              var user_id = result.rows[0].user_id;
-              if(err){
-                console.error('error on lookup of user id:', err)
-              }
-              else
-              {
-                console.log('select user result', result);
-                client.query('INSERT INTO images (image_name, user_id) VALUES ($1, $2)', [file_name, user_id], function (err, result){
-                  if(err){
-                    console.error(err);
-                  }else {
-                    done();
-                    console.log('wrote to database', result);
-                  }
-                })
-              }
-            });
-          })
+          // pg.connect(connectString, function (err, client, done){
+          //   if(err){
+          //     console.error('error connecting to the DB:', err);
+          //   }
+          //   console.log('username', username);
+          //   client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+          //     var user_id = result.rows[0].user_id;
+          //     if(err){
+          //       console.error('error on lookup of user id:', err)
+          //     }
+          //     else
+          //     {
+          //       console.log('select user result', result);
+          //       client.query('INSERT INTO images (image_name, user_id) VALUES ($1, $2)', [file_name, user_id], function (err, result){
+          //         if(err){
+          //           console.error(err);
+          //         }else {
+          //           done();
+          //           console.log('wrote to database', result);
+          //         }
+          //       })
+          //     }
+          //   });
+          // })
         }
-      });
-    });
-  });
+      }); //fs copy end
+    }); //form.on 'end' end
+  // }); //form.on 'field'
 });
 
 routes.get('/randomimage', function (req, res){
