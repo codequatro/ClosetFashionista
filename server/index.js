@@ -2,7 +2,7 @@ var express = require('express');
 var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
-var connectString = process.env.DATABASE_URL || 'jdbc:postgres://localhost:5432/closet?currentSchema=schema.sql';
+var connectString = process.env.DATABASE_URL || 'postgres://localhost:5432/closet';
 var knex = require('knex');
 var jwt = require('jwt-simple');
 var bodyParser = require('body-parser');

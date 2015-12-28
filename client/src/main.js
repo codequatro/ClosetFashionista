@@ -4,9 +4,8 @@ var url = 'http://www.fantasticviewpoint.com/wp-content/uploads/2013/09/street-s
 
 angular.module('myApp')
   .controller('MainCtrl', ['$scope','$window', function($scope, $window) {
-    console.log($scope)
   	$scope.imageUrl = url;
-   $scope.signout = function() {
+    $scope.signout = function() {
      console.log('signing out!')
      $window.localStorage.removeItem("authtoken")
      $window.localStorage.removeItem(username)
