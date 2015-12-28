@@ -77,7 +77,7 @@ routes.post('/postimage', function (req, res){
     //this is not the right way to go about it. url gets wierd
     //NEED TO FIX
 
-    // res.redirect('#/closet');
+    res.redirect('#/closet');
 
     //if you want to look at the form getting sent to the server
     // res.end(util.inspect({fields: fields, files: files}));
