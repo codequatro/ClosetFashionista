@@ -118,6 +118,29 @@ angular.module('myApp', [
         return resp.data;
       })
     };
+    /*****************VOTING ON IMAGE*******************/
+    register.randomImage = function(){
+      return $http({
+        method: 'GET',
+        url: '/randomimage'
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    }
+    
+    register.vote = function(hotOrNot, username, imageId){
+      console.log('Factory Image ID', imageId);
+      return $http({
+        method: 'POST',
+        url: '/vote',
+        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    }
+    /*****************VOTING ON IMAGE*******************/
 
     register.signup = function(user) {
       return $http({
