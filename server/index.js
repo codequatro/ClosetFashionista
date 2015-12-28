@@ -94,7 +94,7 @@ routes.post('/postimage', function (req, res){
       /* The file name of the uploaded file */
       var file_name = this.openedFiles[0].name;
       /* Location where we want to copy the uploaded file */
-      var new_location = '../uploads/';
+      var new_location = './client/uploads/';
 
       fs.copy(temp_path, new_location + file_name, function(err) {
         if (err) {
@@ -137,8 +137,9 @@ routes.get('/randomimage', function (req, res){
       console.error('error connecting to the DB:', err);
     }
     else {
-      client.query('SELECT image_name FROM images ORDER BY RANDOM() LIMIT 1', function(err, image){
-        res.json(200, {image_name: image.rows[0].image_name});
+      client.query('SELECT image_name, image_id FROM images ORDER BY RANDOM() LIMIT 1', function(err, image){
+        res.json(200, {image_name: image.rows[0].image_name, image_id: image.rows[0].image_id});
+        // res.sendFile(Path.resolve('./uploads/' + image.rows[0].image_name ));
         done();
       });
     }
@@ -157,13 +158,44 @@ routes.post('/closet', function (req, res){
           console.error('error on lookup of user_id', err)
         }
         else {
-          var user_id = result.rows[0].user_id
-          client.query('SELECT image_name FROM images i, users u where i.user_id = u.user_id and u.user_id = $1', [user_id], function(err, result){
+          var userId = result.rows[0].user_id
+          client.query('SELECT image_name FROM images i, users u where i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
             if(err){
               console.error('error fetching closet images: ', err);
             }
             else{
               res.status(200).json({images: result.rows});
+              done();
+            }
+          });
+        }
+      })
+    }
+  });
+});
+
+routes.post('/vote', function (req, res){
+  var username = req.body.username;
+  var hotOrNot = req.body.hotOrNot;
+  var imageId = req.body.imageId;
+  console.log('imageId', imageId);
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+        if(err){
+          console.error('error on lookup of user_id', err)
+        }
+        else {
+          var userId = result.rows[0].user_id
+          client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
+            if(err){
+              console.error('error inserting vote into votes table: ', err);
+            }
+            else{
+              res.status(201).json({result: result.rows});
               done();
             }
           });

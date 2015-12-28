@@ -129,11 +129,12 @@ angular.module('myApp', [
       })
     }
     
-    register.vote = function(hotOrNot, username){
+    register.vote = function(hotOrNot, username, imageId){
+      console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
         url: '/vote',
-        data: {hotOrNot: hotOrNot, username: username}
+        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;
