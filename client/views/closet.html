@@ -1,7 +1,14 @@
 <div class='closet'> <!-- controller assigned via router -->
 
-  <a ><img class='image' ng-src="{{imageUrl}}"></a>
 
+  <form action="/postimage" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload" multiple="multiple">
+    <br>
+    <input type="submit" value="Upload File">
+    <input type="hidden" name="name" value="{{username}}">
+  </form>
+
+  <img class='image' ng-src="{{imageUrl}}">
 
 </div>
 
