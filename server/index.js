@@ -147,6 +147,7 @@ routes.get('/randomimage', function (req, res){
   });
 });
 
+
 routes.post('/closet', function (req, res){
   var username = req.body.username;
   pg.connect(connectString, function (err, client, done) {
@@ -166,6 +167,9 @@ routes.post('/closet', function (req, res){
             }
             else{
               res.status(200).json({images: result.rows});
+
+              //returns an array of objects. Need to grab image_name from each object
+              console.log('these are the users images', result.rows);
               done();
             }
           });
