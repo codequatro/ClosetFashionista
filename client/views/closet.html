@@ -1,4 +1,6 @@
-<div class='closet'> <!-- controller assigned via router -->
+<div class='closet' ng-init="getCloset()"> <!-- controller assigned via router -->
+
+<h1>This is the closet</h1>
 
 
   <form action="/postimage" method="post" enctype="multipart/form-data">
@@ -8,8 +10,12 @@
     <input type="hidden" name="name" value="{{username}}">
   </form>
 
-  <img class='image' ng-src="{{imageUrl}}">
+  <br>
+
+  <!-- ng-repeat uses a directive called picInfo to display each image -->
+  <div class="closet item" ng-repeat="pic in pics">
+    <pic-info info="pic"></pic-info>
+  </div>
 
 </div>
 
-<h1>This is the closet</h1>

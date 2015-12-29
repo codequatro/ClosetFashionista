@@ -128,7 +128,7 @@ angular.module('myApp', [
         return resp.data;
       })
     }
-    
+
     register.vote = function(hotOrNot, username, imageId){
       console.log('Factory Image ID', imageId);
       return $http({
@@ -158,6 +158,18 @@ angular.module('myApp', [
         method: 'POST',
         url: '/signin',
         data: user
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    //GET all of the images for a particular user
+    register.getCloset = function(user){
+      return $http({
+        method: 'POST',
+        url: '/closet',
+        data: {username: user}
       })
       .then(function(resp){
         return resp.data;

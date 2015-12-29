@@ -1,11 +1,17 @@
 'use strict';
 
-var url = 'http://images.containerstore.com/medialibrary/images/tcsclosets/slideshow/Image01-TCSClosets-960.jpg';
-
 angular.module('myApp')
-  .controller('ClosetCtrl', ['$scope', '$window', '$http', function($scope, $window, $http) {
+  .controller('ClosetCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
     $scope.header = 'You will find your closet here';
     $scope.imageUrl = url;
-    $scope.username = $window.localStorage.username;
-    $scope.imageUrls;  /*will pull an array from database*/
+    $scope.username = $window.localStorage.getItem('username');
+
+    $scope.getCloset = function(){
+      Register.register.getCloset($scope.username)
+      .then(function(data){
+        //data.images is the array of objects. Need to pull image_name from each one of these objects
+        $scope.pics = data.images;
+      });
+    };
+
   }]);
