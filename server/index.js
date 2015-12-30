@@ -2,7 +2,7 @@ var express = require('express');
 var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
-var connectString = 'postgres://localhost:5432/closet';
+var connectString = process.env.DATABASE_URL || 'postgres://localhost:5432/closet';
 var knex = require('knex');
 var jwt = require('jwt-simple');
 var bodyParser = require('body-parser');
@@ -21,6 +21,7 @@ routes.post('/signin', function (req, res){
   console.log('singin index.js', req.body.username, req.body.password)
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
+  console.log('connectStr dev vs prod: ',connectString)
   pg.connect(connectString, function (err, client, done){
     if(err){
       console.error(err);

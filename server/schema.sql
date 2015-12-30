@@ -6,12 +6,31 @@
 -- SET FOREIGN_KEY_CHECKS=0;
 
 -- ---
+-- Adds db link module for auto db create script
+-- possibly redundant, due to dif db name in heroku
+--
+-- ---
+-- CREATE EXTENSION dblink;
+-- DO
+-- $do$
+-- BEGIN
+
+-- IF EXISTS (SELECT 1 FROM pg_database WHERE datname = 'closet') THEN
+--    RAISE NOTICE 'Database already exists';
+-- ELSE
+--    PERFORM dblink_exec('dbname=' || current_database()  -- current db
+--                      , 'CREATE DATABASE closet');
+-- END IF;
+
+-- END
+-- $do$
+-- ---
 -- Table 'User'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS User;
-		
+
 CREATE TABLE users (
   user_id SERIAL,
   username varchar(30),
@@ -21,11 +40,11 @@ CREATE TABLE users (
 
 -- ---
 -- Table 'Votes'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS votes;
-		
+
 CREATE TABLE votes (
   user_id INTEGER,
   image_id INTEGER,
@@ -35,11 +54,11 @@ CREATE TABLE votes (
 
 -- ---
 -- Table 'image'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS images;
-		
+
 CREATE TABLE images (
   image_id SERIAL,
   user_id INTEGER,
@@ -50,11 +69,11 @@ CREATE TABLE images (
 
 -- ---
 -- Table 'clothing_types'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `clothing_types`;
-		
+
 CREATE TABLE clothing_types (
   type_id serial,
   description varchar(200),
@@ -62,7 +81,7 @@ CREATE TABLE clothing_types (
 );
 
 -- ---
--- Foreign Keys 
+-- Foreign Keys
 -- ---
 
 ALTER TABLE votes ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
