@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var formidable = require('formidable');
 var util = require('util');
 var fs   = require('fs-extra');
+var AWS = require('aws-sdk');
+
 //
 //route to your index.html
 //

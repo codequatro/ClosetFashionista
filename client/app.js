@@ -53,6 +53,12 @@ angular.module('myApp', [
           }
         })
 
+        .state('s3test', {
+          url: '/s3test',
+          templateUrl: 'views/s3test.html',
+          controller: 'S3Ctrl'
+        })
+
 })
 .service('Authorization', function($state, $window) {
 
