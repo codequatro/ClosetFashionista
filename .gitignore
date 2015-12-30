@@ -1,4 +1,5 @@
 node_modules/
 bower_components/
 /client/src/config.json
+/client/src/s3test.js
 .DS_Store
