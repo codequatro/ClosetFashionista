@@ -118,6 +118,31 @@ angular.module('myApp', [
         return resp.data;
       })
     };
+
+    /***************AUTHORIZATION***********************/
+    register.signup = function(user) {
+      return $http({
+        method: 'POST',
+        url: '/signup',
+        data: user
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    register.signin = function(user){
+      return $http({
+        method: 'POST',
+        url: '/signin',
+        data: user
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+    /***************AUTHORIZATION***********************/
+
     /*****************VOTING ON IMAGE*******************/
     register.randomImage = function(){
       return $http({
@@ -142,29 +167,7 @@ angular.module('myApp', [
     }
     /*****************VOTING ON IMAGE*******************/
 
-    register.signup = function(user) {
-      return $http({
-        method: 'POST',
-        url: '/signup',
-        data: user
-      })
-      .then(function(resp){
-        return resp.data;
-      })
-    };
-
-    register.signin = function(user){
-      return $http({
-        method: 'POST',
-        url: '/signin',
-        data: user
-      })
-      .then(function(resp){
-        return resp.data;
-      })
-    };
-
-    //GET all of the images for a particular user
+    /*************GET CLOSET IMAGES********************/
     register.getCloset = function(user){
       return $http({
         method: 'POST',
@@ -175,6 +178,7 @@ angular.module('myApp', [
         return resp.data;
       })
     };
+    /*************GET CLOSET IMAGES********************/
 
     register.isAuth = function() {
       return !!$window.localStorage.getItem('username');
@@ -184,7 +188,6 @@ angular.module('myApp', [
       register: register
     }
   })
-
 
 ; // end of app.js
 

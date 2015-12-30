@@ -150,6 +150,10 @@ routes.get('/randomimage', function (req, res){
 
 routes.post('/closet', function (req, res){
   var username = req.body.username;
+
+  //create an object to send back to client
+  var closetItems = {};
+
   pg.connect(connectString, function (err, client, done) {
     if(err){
       console.error('error connecting to the DB:', err);
@@ -160,23 +164,33 @@ routes.post('/closet', function (req, res){
           console.error('error on lookup of user_id', err)
         }
         else {
-          var userId = result.rows[0].user_id
-          client.query('SELECT image_name FROM images i, users u where i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
+          var userId = result.rows[0].user_id;
+          //get all of the current users images
+          client.query('SELECT image_name FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
             if(err){
               console.error('error fetching closet images: ', err);
             }
             else{
-              res.status(200).json({images: result.rows});
+              closetItems.pics = result.rows;
 
-              //returns an array of objects. Need to grab image_name from each object
-              console.log('these are the users images', result.rows);
-              done();
-            }
-          });
+                //grab all of the votes for each user pic
+                client.query('SELECT images.image_name, votes.vote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+                    if(err){
+                      console.error('error fetching votes', err);
+                    }
+                    else{
+                      closetItems.votes = result.rows;
+                      console.log('closet items', closetItems);
+                      res.status(200).json(closetItems);
+                      done();
+                    }
+                });
+              }
+          });//second client query
         }
-      })
+      });//first client query
     }
-  });
+  }); //pg.connect
 });
 
 routes.post('/vote', function (req, res){
