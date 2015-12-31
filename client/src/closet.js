@@ -35,7 +35,6 @@ angular.module('myApp')
             }
           }//end first for loop
         }
-        console.log('scope pics later on', $scope.pics);
         /*************this needs to be moved into the factory******************/
       }); //end .then
     };
