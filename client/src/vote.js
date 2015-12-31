@@ -17,10 +17,11 @@ angular.module('myApp')
     $scope.username = $window.localStorage.getItem('username');
 
     $scope.vote = function(){
-    	console.log('$scope.imageId', $scope.imageId);
+    	console.log('$scope.imageId', $scope.imageId, 'current vote', $scope.hotOrNot);
     	Register.register.vote($scope.hotOrNot, $scope.username, $scope.imageId)
     	.then(function(data){
     		$scope.updated = true;
+            $scope.getImage();
     	})
     };
 
