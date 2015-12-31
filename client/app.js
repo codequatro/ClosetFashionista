@@ -66,16 +66,9 @@ angular.module('myApp', [
     this.authorized = true;
   } else {
     this.authorized = false;
-    this.memorizedState = null;
   }
 
-  var
-  clear = function(){
-    this.authorized = false;
-    this.memorizedState = null;
-  },
-
-  go = function(fallback){
+  var go = function(fallback){
     this.authorized = true;
     var targetState = this.memorizedState ? this.memorizedState : fallback;
     $state.go(targetState);
@@ -83,8 +76,6 @@ angular.module('myApp', [
 
   return {
     authorized: this.authorized,
-    memorizedState: this.memorizedState,
-    clear: clear,
     go: go
   };
 })
@@ -111,19 +102,6 @@ angular.module('myApp', [
 
     register.currentUser =  $window.localStorage.getItem('username') || '' ;
     register.users = [];
-
-    register.updateProfile = function(userObj){
-      // register.users.push(userObj);
-      // console.log(register);
-      return $http({
-        method: 'POST',
-        url: '/updateprofile',
-        data: userObj
-      })
-      .then(function(resp){
-        return resp.data;
-      })
-    };
 
     /***************AUTHORIZATION***********************/
     register.signup = function(user) {
@@ -185,10 +163,6 @@ angular.module('myApp', [
       })
     };
     /*************GET CLOSET IMAGES********************/
-
-    register.isAuth = function() {
-      return !!$window.localStorage.getItem('username');
-    };
 
     return {
       register: register
