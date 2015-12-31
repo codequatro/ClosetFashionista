@@ -2,7 +2,7 @@
 
 angular.module('myApp')
   .controller('VoteCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
-    $scope.header = 'I am ready to vote on ugly fools';
+    $scope.header = 'Are you ready to vote on ugly fools?';
     $scope.updated = false;
     $scope.hotOrNot = 0;
 

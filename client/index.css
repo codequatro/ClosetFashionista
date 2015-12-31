@@ -87,3 +87,8 @@ h1{
   width: 20px;
   height: 20px;
 }
+
+.voteButton {
+  max-height: 40px;
+  max-width: 40px;
+}

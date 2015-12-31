@@ -144,7 +144,7 @@ routes.get('/randomimage', function (req, res){
   });
 });
 
-
+//get all the user's photos
 routes.post('/closet', function (req, res){
   var username = req.body.username;
 
