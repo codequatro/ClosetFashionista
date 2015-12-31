@@ -1,12 +1,18 @@
 <div class='vote' ng-init="getImage()"> <!-- controller assigned via router -->
 
 
-  <h1>{{header}}</h1>
+	<h1>Hello {{username}}</h1>
+  <br>
+  <h2>{{header}}</h2>
   <a ><img class='image vote' ng-src="{{imageUrl}}"></a>
   <form class="vote" ng-submit="vote()">
-	  <h1>Hello {{username}}</h1>
-	  Hot Or Not:<input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="hotOrNot" /><br />
-	  <button class="button">Vote</button><br /><br />
+    <input type="image" class="voteButton" src='http://3.bp.blogspot.com/-HSPp0ZCZDVU/U-krsBKK2oI/AAAAAAAABv0/DMYOT49tSvo/s1600/facebook+like+logo.png' ng-click="hotOrNot=1" />
+
+    <!-- this line just puts a few tabs between the thumb icons -->
+    <span>&nbsp;&nbsp;&nbsp;</span>
+
+    <input type="image" class="voteButton" src="https://paulbernal.files.wordpress.com/2013/01/thumbs-down.jpg" value="down" ng-click="hotOrNot=0" />
+    <br />
 	  <div ng-if="updated">Update Succesful</div>
   </form>
 </div>
