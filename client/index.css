@@ -52,5 +52,38 @@ h1{
 
 .closetPic {
   max-width: 500px;
+  max-height: 500px;
 }
 
+.card {
+  /*overflow: hidden;*/
+  position: relative;
+  /*width: 23%;*/
+  display: inline-block;
+  margin: 0 2px;
+  position: relative;
+  border: 3px solid #000;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.percentage {
+  /*color: #000;*/
+  font-size: 14px;
+  font-weight: 700;
+  margin: auto;
+  bottom: 50px;
+  line-height: 60px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #000;
+  border-bottom: 5px solid #000;
+  text-align: center;
+}
+
+.fire {
+  width: 20px;
+  height: 20px;
+}

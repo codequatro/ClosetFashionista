@@ -20,16 +20,13 @@ routes.use(express.static(assetFolder));
 // User route SIGNIN
 // need better error handling for bad username
 routes.post('/signin', function (req, res){
-  console.log('singin index.js', req.body.username, req.body.password)
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
-  console.log('connectStr dev vs prod: ',connectString)
   pg.connect(connectString, function (err, client, done){
     if(err){
       console.error(err);
     }
     client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
-      console.log('result', result);
       if(result.rows.length === 0){
         res.status(401).json({answer: 'invalid username'});
       }
@@ -87,7 +84,6 @@ routes.post('/postimage', function (req, res){
 
   form.on('field', function(name, value) {
     /*Get username to associate username with picture*/
-    console.log('value from form.on field', value);
     var username = value;
 
     form.on('end', function(fields, files) {
@@ -122,7 +118,6 @@ routes.post('/postimage', function (req, res){
                     console.error(err);
                   }else {
                     done();
-                    console.log('wrote to database', result);
                   }
                 })
               }
@@ -141,7 +136,6 @@ routes.get('/randomimage', function (req, res){
     }
     else {
       client.query('SELECT image_name, image_id FROM images ORDER BY RANDOM() LIMIT 1', function(err, image){
-        console.log('this is the image', image);
         res.status(200).json({image_name: image.rows[0].image_name, image_id: image.rows[0].image_id});
         // res.sendFile(Path.resolve('./client/uploads/' + image.rows[0].image_name ));
         done();
@@ -183,7 +177,6 @@ routes.post('/closet', function (req, res){
                     }
                     else{
                       closetItems.votes = result.rows;
-                      console.log('closet items', closetItems);
                       res.status(200).json(closetItems);
                       done();
                     }
@@ -260,8 +253,8 @@ if(process.env.NODE_ENV !== 'test') {
 }
 
 // pg connection
-pg.connect(process.env.DATABASE_URL || 'postgres://localhost:5432/closet', function(err, client){
-  if (err) throw err;
-  console.log('Connected to closet!');
+// pg.connect(process.env.DATABASE_URL || 'postgres://localhost:5432/closet', function(err, client){
+//   if (err) throw err;
+//   console.log('Connected to closet!');
 
-});
+// });

@@ -5,6 +5,7 @@ angular.module('myApp')
     $scope.header = 'You will find your closet here';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
+    // $scope.fire = 'https://s-media-cache-ak0.pinimg.com/236x/4a/8b/c7/4a8bc790db90babc2d5346f07e516ddb.jpg';
 
     $scope.getCloset = function(){
 
@@ -34,7 +35,6 @@ angular.module('myApp')
             }
           }//end first for loop
         }
-        console.log('scope pics later on', $scope.pics);
         /*************this needs to be moved into the factory******************/
       }); //end .then
     };
