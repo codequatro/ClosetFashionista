@@ -6,7 +6,6 @@ angular.module('myApp')
   .controller('MainCtrl', ['$scope','$window', function($scope, $window) {
   	$scope.imageUrl = url;
     $scope.signout = function() {
-     console.log('signing out!')
      $window.localStorage.removeItem("authtoken")
      $window.localStorage.removeItem(username)
    }

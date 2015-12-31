@@ -17,8 +17,7 @@ var AWS = require('aws-sdk');
 var assetFolder = Path.resolve(__dirname, '../client/');
 routes.use(express.static(assetFolder));
 
-// User route SIGNIN
-// need better error handling for bad username
+/* User route SIGNIN */
 routes.post('/signin', function (req, res){
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
@@ -47,7 +46,7 @@ routes.post('/signin', function (req, res){
 })
 
 
-/*User route SIGNUP*/
+/* User route SIGNUP */
 routes.post('/signup', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
@@ -57,7 +56,6 @@ routes.post('/signup', function (req, res){
     }
     client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
       if(err){
-        console.log('database error on signup')
         console.error(err);
       } else {
         res.status(201).json({username: username}) // removed token as was undefined for signup
@@ -85,7 +83,6 @@ routes.post('/postimage', function (req, res){
   form.on('field', function(name, value) {
     /*Get username to associate username with picture*/
     var username = value;
-
     form.on('end', function(fields, files) {
 
       /* Temporary location of our uploaded file */

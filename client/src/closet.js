@@ -10,6 +10,7 @@ angular.module('myApp')
     $scope.getCloset = function(){
 
       //Call the factory method which gets a users images and votes for those images
+
       Register.register.getCloset($scope.username)
       .then(function(data){
 
@@ -33,10 +34,10 @@ angular.module('myApp')
                   $scope.pics[j].total += 1;
                 }
             }
-          }//end first for loop
+          }
         }
         /*************this needs to be moved into the factory******************/
-      }); //end .then
+      });
     };
 
   }]);

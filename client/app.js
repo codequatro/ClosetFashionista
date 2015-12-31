@@ -91,15 +91,10 @@ angular.module('myApp', [
 .run( function($rootScope, $state, Authorization) {
     // register listener to watch route changes
     $rootScope.$on( '$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-      // console.log('state is changing!', toState)
       if (toState.data !== undefined) {
-
         if (Authorization.authorized) {
-
           $state.go(toState.name)
-
         } else {
-
           $state.go(toState.data.redirectTo);
     }
   }
@@ -113,8 +108,6 @@ angular.module('myApp', [
     register.users = [];
 
     register.updateProfile = function(userObj){
-      // register.users.push(userObj);
-      // console.log(register);
       return $http({
         method: 'POST',
         url: '/updateprofile',
@@ -161,7 +154,6 @@ angular.module('myApp', [
     }
 
     register.vote = function(hotOrNot, username, imageId){
-      console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
         url: '/vote',
