@@ -176,7 +176,7 @@ routes.post('/closet', function (req, res){
         else {
           var userId = result.rows[0].user_id;
           //get all of the current users images
-          client.query('SELECT image_name FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
+          client.query('SELECT image_name, image_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
             if(err){
               console.error('error fetching closet images: ', err);
             }
@@ -201,6 +201,42 @@ routes.post('/closet', function (req, res){
     }
   }); //pg.connect
 });
+
+//remove image from closet
+routes.post('/removeimage', function (req, res){
+  var imageId = req.body.imageId;
+  var imageName = req.body.imageName;
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('DELETE FROM votes WHERE image_id = $1', [imageId], function(err, result){
+        if(err){
+          console.error('error deleting image from closet', err)
+        }
+        else {
+          client.query('DELETE FROM images WHERE image_id = $1', [imageId], function(err, result){
+            if(err){
+              console.error('error deleting image from closet', err)
+            }
+            else {
+              fs.unlink('./client/uploads/' + imageName, function(err){
+                if(err){
+                  console.error(err);
+                }
+                else{
+                  res.status(200).json({result: result.rows});
+                  done();
+                }
+              })
+            }
+          });//first client query
+        }
+      });//first client query
+    }
+  }); //pg.connect
+})
 
 routes.post('/vote', function (req, res){
   var username = req.body.username;
