@@ -83,6 +83,13 @@ h1{
   text-align: center;
 }
 
+.remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+}
+
 .fire {
   width: 20px;
   height: 20px;

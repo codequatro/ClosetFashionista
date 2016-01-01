@@ -165,6 +165,16 @@ console.log(this.authorized)
       })
     };
     /*************GET CLOSET IMAGES********************/
+    register.removeImage = function(imageId, imageName){
+      return $http({
+        method: 'POST',
+        url: '/removeimage',
+        data: {imageId: imageId, imageName: imageName}
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
 
     return {
       register: register

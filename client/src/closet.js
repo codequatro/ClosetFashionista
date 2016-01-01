@@ -39,4 +39,14 @@ angular.module('myApp')
       }); //end .then
     };
 
+    $scope.removeImage = function(imageId, imageName){
+      console.log('inside of remove image function');
+      console.log('current image ID', imageId);
+      console.log('current image NAME', imageName);
+      Register.register.removeImage(imageId, imageName)
+      .then(function(data){
+        console.log(data);
+      })
+    };
+
   }]);
