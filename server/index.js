@@ -129,17 +129,30 @@ routes.post('/postimage', function (req, res){
   }); //form.on 'field'
 });
 
-routes.get('/randomimage', function (req, res){
+routes.post('/randomimage', function (req, res){
+  var username = req.body.username;
   pg.connect(connectString, function (err, client, done) {
     if(err){
       console.error('error connecting to the DB:', err);
     }
     else {
-      client.query('SELECT image_name, image_id FROM images ORDER BY RANDOM() LIMIT 1', function(err, image){
-        res.status(200).json({image_name: image.rows[0].image_name, image_id: image.rows[0].image_id});
-        // res.sendFile(Path.resolve('./client/uploads/' + image.rows[0].image_name ));
-        done();
-      });
+      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+        if(err){
+          console.error('error on lookup of user_id', err)
+        }
+        else {
+          var userId = result.rows[0].user_id;
+          client.query('SELECT image_name, image_id FROM images WHERE images.user_id <> $1 AND images.image_id NOT IN (SELECT image_id FROM votes WHERE user_id = $1) ORDER BY RANDOM() LIMIT 1' ,[userId], function(err, image){
+            if(image.rows.length === 0){
+              res.status(200).json({image_name: 'pablo.png', image_id: -1});
+            }
+            else{
+              res.status(200).json({image_name: './uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
+            }
+            done();
+          });
+        }
+      })
     }
   });
 });

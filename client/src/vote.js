@@ -5,11 +5,12 @@ angular.module('myApp')
     $scope.header = 'Are you ready to vote on ugly fools?';
     $scope.updated = false;
     $scope.hotOrNot = 0;
+    $scope.username = $window.localStorage.getItem('username');
 
     $scope.getImage = function(){
-    	Register.register.randomImage()
+    	Register.register.randomImage($scope.username)
     	.then(function(data){
-    		$scope.imageUrl = '../uploads/' + data.image_name;
+    		$scope.imageUrl = data.image_name;
     		$scope.imageId = data.image_id;
     	})
     };
