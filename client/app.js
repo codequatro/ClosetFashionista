@@ -129,10 +129,11 @@ console.log(this.authorized)
     /***************AUTHORIZATION***********************/
 
     /*****************VOTING ON IMAGE*******************/
-    register.randomImage = function(){
+    register.randomImage = function(username){
       return $http({
-        method: 'GET',
-        url: '/randomimage'
+        method: 'POST',
+        url: '/randomimage',
+        data: {username: username}
       })
       .then(function(resp){
         return resp.data;
