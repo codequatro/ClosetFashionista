@@ -93,7 +93,7 @@ routes.post('/postimage', function (req, res){
       /* The file name of the uploaded file */
       var file_name = this.openedFiles[0].name;
       /* Location where we want to copy the uploaded file */
-      var new_location = '../client/uploads/';
+      var new_location = './client/uploads/';
 
       fs.copy(temp_path, new_location + file_name, function(err) {
         if (err) {
