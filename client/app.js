@@ -61,14 +61,14 @@ angular.module('myApp', [
 
 })
 .service('Authorization', function($state, $window) {
-  console.log(this.authorized)
+
   if (!!$window.localStorage.authtoken) {
     this.authorized = true;
 
   } else {
     this.authorized = false;
   }
-console.log(this.authorized)
+
   var go = function(fallback){
     this.authorized = true;
     var targetState = this.memorizedState ? this.memorizedState : fallback;
