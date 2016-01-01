@@ -24,19 +24,7 @@
 
 -- END
 -- $do$
--- ---
--- Table 'User'
---
--- ---
 
-DROP TABLE IF EXISTS User;
-
-CREATE TABLE users (
-  user_id SERIAL,
-  username varchar(30),
-  password varchar(30),
-  PRIMARY KEY (user_id)
-);
 
 -- ---
 -- Table 'Votes'
@@ -68,11 +56,25 @@ CREATE TABLE images (
 );
 
 -- ---
+-- Table 'User'
+--
+-- ---
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  user_id SERIAL,
+  username varchar(30),
+  password varchar(30),
+  PRIMARY KEY (user_id)
+);
+
+-- ---
 -- Table 'clothing_types'
 --
 -- ---
 
-DROP TABLE IF EXISTS `clothing_types`;
+DROP TABLE IF EXISTS clothing_types;
 
 CREATE TABLE clothing_types (
   type_id serial,
@@ -102,20 +104,11 @@ ALTER TABLE images ADD FOREIGN KEY (type_id) REFERENCES clothing_types (type_id)
 -- Test Data
 -- ---
 
--- INSERT INTO users (user_id,username,password) VALUES
--- ('','','');
--- INSERT INTO Votes (user_id,image_id,vote) VALUES
+insert into users (username, password) values ('festus', '123');
+
+-- INSERT INTO votes (user_id,image_id,vote) VALUES
 -- ('','','');
 -- INSERT INTO image (image_id,user_id,image,type_id) VALUES
 -- ('','','','');
 -- INSERT INTO clothing_types (type_id,description) VALUES
 -- ('','');
-insert into users (username, password) values ('me', '123');
--- INSERT INTO users (user_id,username,password) VALUES
--- ('','','');
-INSERT INTO Votes (user_id,image_id,vote) VALUES
-('','','');
-INSERT INTO image (image_id,user_id,image,type_id) VALUES
-('','','','');
-INSERT INTO clothing_types (type_id,description) VALUES
-('','');
