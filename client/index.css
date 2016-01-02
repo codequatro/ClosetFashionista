@@ -99,3 +99,8 @@ h1{
   max-height: 40px;
   max-width: 40px;
 }
+
+#something {
+  max-height: 25px;
+  max-width: 25px;
+}
