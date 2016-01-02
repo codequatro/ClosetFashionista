@@ -61,6 +61,10 @@ angular.module('myApp', [
 
 })
 .service('Authorization', function($state, $window) {
+  // This service is a simple version checking for local authtoken
+  // and using a state change listener to check on each transistion
+  // see .run below for that test
+  // It should be tied into a more robust auth check
 
   if (!!$window.localStorage.authtoken) {
     this.authorized = true;
@@ -69,29 +73,22 @@ angular.module('myApp', [
     this.authorized = false;
   }
 
-  var go = function(fallback){
-    this.authorized = true;
-    var targetState = this.memorizedState ? this.memorizedState : fallback;
-    $state.go(targetState);
-  };
-
   return {
-    authorized: this.authorized,
-    go: go
+    authorized: this.authorized
   };
 })
 .run( function($rootScope, $state, Authorization) {
     // register listener to watch route changes
     $rootScope.$on( '$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-      // console.log('state is changing!', toState)
+
       if (toState.data !== undefined) {
 
         if (Authorization.authorized) {
-
+          console.log('authorized, going to state', toState.name)
           $state.go(toState.name)
 
         } else {
-
+          console.log('unauthorized, redirecting to: ' , toState.data.redirectTo)
           $state.go(toState.data.redirectTo);
     }
   }

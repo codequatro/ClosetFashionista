@@ -6,6 +6,7 @@ angular.module('myApp')
 
   // AWS.config.loadFromPath('./config.json');
 
+
   var bucket = new AWS.S3({params: {Bucket: 'cqphotos'}});
   console.log(AWS.config)
   // console.log('connected to bucket: ', bucket);
