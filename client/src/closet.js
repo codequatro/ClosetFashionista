@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('ClosetCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
+  .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', function($scope,$http,$window,$state, Register) {
     $scope.header = 'You will find your closet here';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
@@ -51,8 +51,6 @@ angular.module('myApp')
     };
 
     $scope.customFilter = function (pic) {
-      console.log('pic.type_id', pic.type_id);
-      console.log('$scope.search', $scope.search);
       if (pic.type_id === parseInt($scope.search)) {
         return true;
       } 
@@ -63,5 +61,9 @@ angular.module('myApp')
         return false;
       }
     }; 
+
+    $scope.reloadPage = function(){
+      $state.go($state.current, {}, {reload: true});
+    };
 
   }]);

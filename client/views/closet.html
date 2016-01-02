@@ -20,7 +20,6 @@
   <br>
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
-  <!-- <input class='search' type='search' ng-model='search' placeholder='Search' results='0'> -->
   <select class="type" name="search" ng-model="search">
     <option ng-selected="true" value="-1">All</option>
     <option value="1">tops</option>
@@ -30,7 +29,7 @@
   </select>
   <div class="card" ng-repeat="pic in pics | filter:customFilter">
     <pic-info info="pic"></pic-info>
-    <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name)">delete</div>
+    <button class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">delete</button>
   </div>
 
 </div>
