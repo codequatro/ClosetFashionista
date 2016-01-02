@@ -178,7 +178,7 @@ routes.post('/closet', function (req, res){
         else {
           var userId = result.rows[0].user_id;
           //get all of the current users images
-          client.query('SELECT image_name, image_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
+          client.query('SELECT image_name, image_id, type_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
             if(err){
               console.error('error fetching closet images: ', err);
             }

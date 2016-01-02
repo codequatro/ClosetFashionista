@@ -5,6 +5,7 @@ angular.module('myApp')
     $scope.header = 'You will find your closet here';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
+    $scope.search = "-1";
     // $scope.fire = 'https://s-media-cache-ak0.pinimg.com/236x/4a/8b/c7/4a8bc790db90babc2d5346f07e516ddb.jpg';
 
     $scope.getCloset = function(){
@@ -48,5 +49,19 @@ angular.module('myApp')
         console.log(data);
       })
     };
+
+    $scope.customFilter = function (pic) {
+      console.log('pic.type_id', pic.type_id);
+      console.log('$scope.search', $scope.search);
+      if (pic.type_id === parseInt($scope.search)) {
+        return true;
+      } 
+      else if (parseInt($scope.search) === -1) {
+        return true;
+      } 
+      else {
+        return false;
+      }
+    }; 
 
   }]);
