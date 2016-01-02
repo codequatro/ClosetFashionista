@@ -1,4 +1,6 @@
 <img class="closetPic" ng-src="../uploads/{{info.image_name}}">
-<p class="percentage">{{info.yes/info.total * 100 | number:1}}%</p>
-<div class="remove" ng-click="removeImage()">delete</div>
-<!-- <img class="fire" ng-src="{{fire}}"> -->
+<p class="percentage">
+	{{info.yes/info.total * 100 || 0 | number:1}}%
+	<img class="fire" src="fire.jpg">
+</p>
+
