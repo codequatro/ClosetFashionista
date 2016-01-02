@@ -91,14 +91,12 @@ ALTER TABLE votes ADD FOREIGN KEY (image_id) REFERENCES images (image_id);
 ALTER TABLE images ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE images ADD FOREIGN KEY (type_id) REFERENCES clothing_types (type_id);
 
--- ---
--- Table Properties
--- ---
+-- DEFAULT CLOTHING clothing_types
 
--- ALTER TABLE `User` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Votes` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `image` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `clothing_types` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+insert into clothing_types (type_id, description) values (1, 'tops');
+insert into clothing_types (type_id, description) values (2, 'bottoms');
+insert into clothing_types (type_id, description) values (3, 'shoes');
+insert into clothing_types (type_id, description) values (4, 'outfit');
 
 -- ---
 -- Test Data
