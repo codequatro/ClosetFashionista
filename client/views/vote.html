@@ -5,14 +5,14 @@
   <br>
   <h2>{{header}}</h2>
   <a ><img class='image vote' ng-src="{{imageUrl}}"></a>
-  <form class="vote" ng-submit="vote()" ng-if="imageId !== -1">
-    <input type="image" class="voteButton" src='http://3.bp.blogspot.com/-HSPp0ZCZDVU/U-krsBKK2oI/AAAAAAAABv0/DMYOT49tSvo/s1600/facebook+like+logo.png' ng-click="hotOrNot=1" />
+  <form class="vote" ng-if="imageId !== -1">
+    <input type="image" class="voteButton" src='thumb-up.png' ng-click="vote(1)" />
 
     <!-- this line just puts a few tabs between the thumb icons -->
     <span>&nbsp;&nbsp;&nbsp;</span>
 
-    <input type="image" class="voteButton" src="https://paulbernal.files.wordpress.com/2013/01/thumbs-down.jpg" value="down" ng-click="hotOrNot=0" />
+    <input type="image" class="voteButton" src="../thumb-down.jpg" value="down" ng-click="vote(0)" />
     <br />
-	  <div ng-if="updated">Update Succesful</div>
+	  <!-- <div ng-if="updated">Update Succesful</div> -->
   </form>
 </div>

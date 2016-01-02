@@ -4,7 +4,7 @@ angular.module('myApp')
   .controller('VoteCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
     $scope.header = 'Are you ready to vote on ugly fools?';
     $scope.updated = false;
-    $scope.hotOrNot = 0;
+    // $scope.hotOrNot;
     $scope.username = $window.localStorage.getItem('username');
 
     $scope.getImage = function(){
@@ -17,9 +17,9 @@ angular.module('myApp')
 
     $scope.username = $window.localStorage.getItem('username');
 
-    $scope.vote = function(){
-    	console.log('$scope.imageId', $scope.imageId, 'current vote', $scope.hotOrNot);
-    	Register.register.vote($scope.hotOrNot, $scope.username, $scope.imageId)
+    $scope.vote = function(voteValue){
+    	console.log('$scope.imageId', $scope.imageId, 'current vote', voteValue);
+    	Register.register.vote(voteValue, $scope.username, $scope.imageId)
     	.then(function(data){
     		$scope.updated = true;
             $scope.getImage();
