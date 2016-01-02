@@ -80,18 +80,20 @@ angular.module('myApp', [
 .run( function($rootScope, $state, Authorization) {
     // register listener to watch route changes
     $rootScope.$on( '$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-
+      console.log('toState.data required?', toState.data)
       if (toState.data !== undefined) {
 
         if (Authorization.authorized) {
-          console.log('authorized, going to state', toState.name)
+          console.log('authorized',Authorization.authorized,' going to state', toState.name)
           $state.go(toState.name)
 
         } else {
           console.log('unauthorized, redirecting to: ' , toState.data.redirectTo)
           $state.go(toState.data.redirectTo);
-    }
-  }
+        }
+      } else {
+        $state.go(toState.name)
+      }
     });
   })
 

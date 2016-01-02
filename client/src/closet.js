@@ -2,7 +2,7 @@
 
 angular.module('myApp')
   .controller('ClosetCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
-    $scope.header = 'You will find your closet here';
+    $scope.header = 'Welcome to your closet!';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
     $scope.search = "-1";
