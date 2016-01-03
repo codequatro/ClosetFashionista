@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('ClosetCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
+  .controller('ClosetCtrl', ['$scope','$http', '$window','Register', 'Authorization', function($scope, $http, $window, Register, Authorization) {
     $scope.header = 'Welcome to your closet!';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
@@ -55,13 +55,17 @@ angular.module('myApp')
       console.log('$scope.search', $scope.search);
       if (pic.type_id === parseInt($scope.search)) {
         return true;
-      } 
+      }
       else if (parseInt($scope.search) === -1) {
         return true;
-      } 
+      }
       else {
         return false;
       }
-    }; 
+    };
+
+    if(Authorization.authorized) {
+        $scope.getCloset();
+    }
 
   }]);
