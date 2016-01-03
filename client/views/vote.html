@@ -1,6 +1,6 @@
 <div class='vote'> <!-- controller assigned via router -->
 
-	<h1>Hello {{username}}</h1>
+	<h1>hello {{username}}</h1>
   <br>
   <h2>{{header}}</h2>
   <a ><img class='image vote' ng-src="{{imageUrl}}"></a>
@@ -13,6 +13,7 @@
     <input type="image" class="voteButton" src="../thumb-down.jpg" value="down" ng-click="vote(0)" />
     <br />
     <!-- <div ng-if="updated">Update Succesful</div> -->
+	  <div ng-if="updated">update succesful</div>
   </form>
 
 </div>

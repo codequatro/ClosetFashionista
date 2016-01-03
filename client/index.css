@@ -1,7 +1,20 @@
+/*splash page:*/
+/*body {
+   background-image: url(http://s16.postimg.org/m4gec7xw5/background3.jpg);
+   background-position: center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   background-color: #464646;
+   text-align: center;
+   padding-top: 120px;
+}*/
+
 h1{
   display: inline;
-	color: #2380E2;
-	font-family: sans-serif;
+	/*color: #2380E2;*/
+	font-family: Helvetica;
+  font-variant: small-caps;
 }
 
 .title {
@@ -9,27 +22,35 @@ h1{
 }
 
 .btn {
-  background: #639FDE;
-  border-radius: 28px;
-  font-family: sans-serif;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
+  /*background: black;*/
+  /*border-radius: 28px;*/
+  font-family: Helvetica;
+  color: black;
+  font-size: 15px;
+  padding: 10px;
+  font-variant: small-caps;
+  /*text-decoration: none;*/
   text-align: center;
+  /*padding-top: 50px;*/
 
 }
 
 .navbar {
-  margin: 30px 0px;
+  /*margin: 30px 0px;*/
+  background-color: white;
+  height: 100px;
+  opacity: 75%;
+
+
 }
 
 .navbar .btn {
 
+
 }
 
 .btn:hover{
-  background-color: #2380E2;
+  color: gray;
 }
 
 
