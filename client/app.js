@@ -36,21 +36,13 @@ angular.module('myApp', [
         .state('vote', {
           url: '/vote',
           templateUrl: 'views/vote.html',
-          controller: 'VoteCtrl',
-          data: {
-            authorization: true,
-            redirectTo: 'signin'
-          }
+          controller: 'VoteCtrl'
         })
 
         .state('closet', {
           url: '/closet',
           templateUrl: 'views/closet.html',
-          controller: 'ClosetCtrl',
-          data: {
-            authorization: true,
-            redirectTo: 'signin'
-          }
+          controller: 'ClosetCtrl'
         })
 
         .state('s3test', {
@@ -77,21 +69,16 @@ angular.module('myApp', [
     authorized: this.authorized
   };
 })
-.run( function($rootScope, $state, Authorization) {
+.run( function($rootScope, $location, $state, Authorization) {
     // register listener to watch route changes
-    $rootScope.$on( '$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on( '$locationChangeStart', function(event, next, toState) {
 
-      if (toState.data !== undefined) {
+     if(Authorization.authorized === false) {
+       if(next.match('vote') || next.match('closet')){
+        $location.path('/signin');
+       }
+     }
 
-        if (Authorization.authorized) {
-          console.log('authorized, going to state', toState.name)
-          $state.go(toState.name)
-
-        } else {
-          console.log('unauthorized, redirecting to: ' , toState.data.redirectTo)
-          $state.go(toState.data.redirectTo);
-    }
-  }
     });
   })
 

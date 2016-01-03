@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('AuthCtrl', ['$scope', '$window', '$location', 'Register', 'Authorization', function($scope, $window, $location, Register, Authorization) {
+  .controller('AuthCtrl', ['$state', '$scope', '$window', '$location', 'Register', 'Authorization', function($state, $scope, $window, $location, Register, Authorization) {
     // $scope.header = 'this will be the auth page';
 
     $scope.user = {}
@@ -19,7 +19,7 @@ angular.module('myApp')
         Authorization.authorized = true
         $window.localStorage.setItem('authtoken', data.token)
         $window.localStorage.setItem('username', data.username)
-        $location.path('/closet')
+        $state.go('closet')
       })
     }
 
@@ -40,11 +40,5 @@ angular.module('myApp')
       $window.localStorage.removeItem('authtoken')
       $window.localStorage.removeItem('username')
     }
-
-    // $scope.reset = function() {
-    //   $scope.user = angular.copy($scope.master)
-    // }
-
-    // $scope.reset();
 
   }]);

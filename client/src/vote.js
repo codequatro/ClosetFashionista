@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('VoteCtrl', ['$scope','$http', '$window','Register', function($scope,$http,$window,Register) {
+  .controller('VoteCtrl', ['$scope','$http', '$window','Register', 'Authorization', function($scope, $http, $window, Register , Authorization) {
     $scope.header = 'Are you ready to vote on ugly fools?';
     $scope.updated = false;
     // $scope.hotOrNot;
@@ -26,5 +26,9 @@ angular.module('myApp')
     	})
     };
 
+    // initialize page with image if auth is good
+    if(Authorization.authorized) {
+        $scope.getImage();
+    }
 
   }]);

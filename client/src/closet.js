@@ -53,14 +53,18 @@ angular.module('myApp')
     $scope.customFilter = function (pic) {
       if (pic.type_id === parseInt($scope.search)) {
         return true;
-      } 
+      }
       else if (parseInt($scope.search) === -1) {
         return true;
-      } 
+      }
       else {
         return false;
       }
-    }; 
+    };
+    // initialize page with closet images if auth is good
+    if(Authorization.authorized) {
+        $scope.getCloset();
+    }
 
     $scope.reloadPage = function(){
       $state.go($state.current, {}, {reload: true});
