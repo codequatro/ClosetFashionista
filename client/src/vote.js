@@ -26,6 +26,7 @@ angular.module('myApp')
     	})
     };
 
+    // initialize page with image if auth is good
     if(Authorization.authorized) {
         $scope.getImage();
     }

@@ -63,7 +63,7 @@ angular.module('myApp')
         return false;
       }
     };
-
+    // initialize page with closet images if auth is good
     if(Authorization.authorized) {
         $scope.getCloset();
     }

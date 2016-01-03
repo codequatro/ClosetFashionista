@@ -41,10 +41,4 @@ angular.module('myApp')
       $window.localStorage.removeItem('username')
     }
 
-    // $scope.reset = function() {
-    //   $scope.user = angular.copy($scope.master)
-    // }
-
-    // $scope.reset();
-
   }]);
