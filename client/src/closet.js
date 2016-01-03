@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('ClosetCtrl', ['$scope','$http', '$window','Register', 'Authorization', function($scope, $http, $window, Register, Authorization) {
-    $scope.header = 'Welcome to your closet!';
+  .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', function($scope,$http,$window,$state, Register) {
+    $scope.header = 'You will find your closet here';
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
     $scope.search = "-1";
