@@ -4,17 +4,17 @@
     <meta charset="utf-8">
   </head>
 
-  <body ng-app="myApp">
+  <body ng-app="myApp" ng-controller="MainCtrl">
 
     <h1 class="title"><a ui-sref='home'>Closet Fashionista</a></h1>
 
-    <div class='navbar'  ng-controller="NavCtrl">
-        <a class='btn out' ng-if="loggedIn === false" ui-sref='signin'>SignIn</a>
-        <a class='btn out' ng-if="loggedIn === false" ui-sref='signup'>SignUp</a>
-        <a class='btn in' ng-if="loggedIn === true" ui-sref='signout'>SignOut</a>
-        <a class='btn in' ng-if="loggedIn === true" ui-sref='vote'>Vote</a>
-        <a class='btn in' ng-if="loggedIn === true" ui-sref='closet'>Closet</a>
-        <a >{{loggedIn}}</a>
+    <div class='navbar'>
+        <a ng-if="isAuth === false" class='btn out'  ui-sref='signin'>SignIn</a>
+        <a class='btn out' ng-if="isAuth === false" ui-sref='signup'>SignUp</a>
+        <a class='btn in' ng-if="isAuth === true" ui-sref='signout'>SignOut</a>
+        <a class='btn in' ng-if="isAuth === true" ui-sref='vote'>Vote</a>
+        <a class='btn in' ng-if="isAuth === true" ui-sref='closet'>Closet</a>
+        <a >{{isAuth}}</a>
     </div>
 
     <div class="container">

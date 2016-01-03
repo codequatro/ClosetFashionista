@@ -13,5 +13,5 @@ angular.module('myApp')
       $window.localStorage.removeItem(username)
     }
 
-   $scope.isAuth=!window.localStorage.authtoken;
+   $scope.isAuth=!!window.localStorage.authtoken;
   }]);
