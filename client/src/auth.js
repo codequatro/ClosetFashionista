@@ -19,7 +19,9 @@ angular.module('myApp')
         Authorization.authorized = true
         $window.localStorage.setItem('authtoken', data.token)
         $window.localStorage.setItem('username', data.username)
+
         $state.go('closet')
+
       })
     }
 
@@ -39,6 +41,7 @@ angular.module('myApp')
       Authorization.authorized = false
       $window.localStorage.removeItem('authtoken')
       $window.localStorage.removeItem('username')
+
     }
 
   }]);
