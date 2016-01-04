@@ -6,13 +6,27 @@
        background-size: cover;
        text-align: center;
        padding-top: 120px;
+       /*max-width: 50%;*/
      }
 
 h1 {
   text-align: center;
   display: inline;
-	color: white;
+	color: black;
 	font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+  bottom: 50px;
+}
+
+h3 {
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+}
+
+h2 {
+  color: black;
+  font-family: 'Playfair Display', serif;
   font-variant: small-caps;
 }
 
@@ -106,4 +120,29 @@ a:hover, a:link {
 #something {
   max-height: 25px;
   max-width: 25px;
+}
+
+.closet {
+  text-align: center;
+}
+
+.closetbuttons {
+  display: inline;
+}
+
+.closetform {
+  text-align: left;
+}
+
+.imageupload {
+  display: inline-block;
+}
+
+.clothingfilter {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  float: right;
+  padding-right: 200px;
+  bottom: 60px;
 }
