@@ -123,9 +123,14 @@ a:hover, a:link {
   max-width: 40px;
 }
 
-#something {
+#delete {
   max-height: 25px;
   max-width: 25px;
+}
+
+#delete:hover {
+  max-height: 70px;
+  max-width: 70px;
 }
 
 .closet {

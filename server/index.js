@@ -300,6 +300,9 @@ routes.post('/s3test', function (req, res){
           if(err){
             console.log(err);
           }
+          else{
+            res.status(201).end();
+          }
         });
       }
     }); //fs copy end
