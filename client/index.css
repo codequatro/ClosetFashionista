@@ -1,31 +1,8 @@
 body { 
-  height: 100%; 
-  width: 100%; 
-  margin: 0; 
-}
-
-.all {
-  height: auto;
-  width: auto;
-}
-
-.vote {
-  height: auto;
-  width: auto;
   background-image: url(closet.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; 
 }
-
-.main {
-  background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  text-align: center;
-  padding-top: 120px;
- }
-
 
 h1 {
   text-align: center;
@@ -35,14 +12,12 @@ h1 {
   font-variant: small-caps;
   bottom: 50px;
   padding-left: 10px;
-
 }
 
 h3 {
   color: black;
   font-family: 'Playfair Display', serif;
   font-variant: small-caps;
-
 }
 
 h2 {
@@ -51,12 +26,22 @@ h2 {
   font-variant: small-caps;
 }
 
+.main {
+  background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+  background-repeat: no-repeat;
+  margin:0 auto;
+  padding-top: 500px;
+  width: 50%;
+ }
+
+ .vote {
+  text-align: center;
+  margin:0 auto;
+  width: 50%;
+ }
+
 a:hover, a:link {
   text-decoration: none;
-}
-
-.main {
-  padding-top: 500px;
 }
 
 .navbar .btn {
@@ -67,7 +52,6 @@ a:hover, a:link {
   font-variant: small-caps;
   text-align: center;
   padding-left: 10px;
-
 }
 
 .navbar {
@@ -81,17 +65,7 @@ a:hover, a:link {
 
 .image {
   margin: 50px 15px;
-  max-width: 300px;
-}
-
-.vote {
-  margin-left:auto;
-  margin-right:auto;
   max-width: 500px;
-  max-height: 400px;
-  background-image: url(closet.png);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .closetPic {
@@ -100,9 +74,7 @@ a:hover, a:link {
 }
 
 .card {
-  /*overflow: hidden;*/
   position: relative;
-  /*width: 23%;*/
   display: inline-block;
   margin: 0 2px;
   position: relative;
