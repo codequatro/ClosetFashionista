@@ -4,15 +4,15 @@
 angular.module('myApp')
   .controller('S3Ctrl', ['$scope','$window','Register', function($scope, $window, Register) {
 
-  AWS.config.region = 'us-east-1';
+  // AWS.config.region = 'us-east-1';
 
   // AWS.config.loadFromPath('./config.json');
 
   // AWS.config.update({accessKeyId: 'AKIAJ5L2GGPWMDVDVSMQ', secretAccessKey: '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'});
 
-  var bucket = new AWS.S3({params: {Bucket: 'cqphotos'}});
-  console.log('AWS.config', AWS.config);
-  console.log('bucket', bucket);
+  // var bucket = new AWS.S3({params: {Bucket: 'cqphotos'}});
+  // console.log('AWS.config', AWS.config);
+  // console.log('bucket', bucket);
   // console.log('connected to bucket: ', bucket);
 
   // var fileChooser = document.getElementById('file-chooser');

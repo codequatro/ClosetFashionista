@@ -272,10 +272,13 @@ routes.post('/vote', function (req, res){
 
 /*************************AMAZON STORAGE FOR IMAGES******************************************/
 routes.post('/s3test', function (req, res){
+  console.log('s3 test');
   AWS.config.region = 'us-east-1';
   // AWS.config.update({accessKeyId: 'AKIAJ5L2GGPWMDVDVSMQ', secretAccessKey: '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'});
 
   var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files) {
+  });
 
   form.on('end', function(fields, files) {
     /* Temporary location of our uploaded file */
@@ -284,6 +287,8 @@ routes.post('/s3test', function (req, res){
     var file_name = this.openedFiles[0].name;
     // /* The type of file*/
     // var file_type = this.openedFiles[0].type;
+
+    console.log('file anme', file_name);
 
     fs.readFile(temp_path, function(err, data) {
       if (err) {
@@ -295,7 +300,7 @@ routes.post('/s3test', function (req, res){
           if(err){
             console.log(err);
           }
-        })
+        });
       }
     }); //fs copy end
   }); //form.on 'end' end
