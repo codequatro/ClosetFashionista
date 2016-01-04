@@ -1,42 +1,46 @@
-h1{
+.main {
+       background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+       background-position: center center;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-size: cover;
+       text-align: center;
+       padding-top: 120px;
+     }
+
+h1 {
+  text-align: center;
   display: inline;
-	color: #2380E2;
-	font-family: sans-serif;
+	color: white;
+	font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
 }
 
-.title {
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #639FDE;
-  border-radius: 28px;
-  font-family: sans-serif;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
+a:hover, a:link {
   text-decoration: none;
+}
+
+.main {
+  padding-top: 500px;
+}
+
+.navbar .btn {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  padding: 5px;
+  font-size: 25px;
+  font-variant: small-caps;
   text-align: center;
 
 }
 
 .navbar {
-  margin: 30px 0px;
-}
-
-.navbar .btn {
-
+  height: 75px;
+  background: rgba(0,0,0,0.0);
 }
 
 .btn:hover{
-  background-color: #2380E2;
-}
-
-
-.jumbotron{
-  background-color: #dcdcdc;
-  text-align: center;
-  border-radius: 2px;
+  color: gray;
 }
 
 .image {
@@ -68,7 +72,6 @@ h1{
 }
 
 .percentage {
-  /*color: #000;*/
   font-size: 14px;
   font-weight: 700;
   margin: auto;

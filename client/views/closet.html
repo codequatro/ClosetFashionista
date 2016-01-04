@@ -1,6 +1,7 @@
 <div class='closet' ng-controller="ClosetCtrl">
 
-<h1>{{header}}</h1>
+<!-- <h1>{{header}}</h1> -->
+<h1>welcome to your closet</h1>
 
 
   <form action="/postimage" method="post" enctype="multipart/form-data">
@@ -9,7 +10,7 @@
     <input type="submit" value="Upload File">
     <input type="hidden" name="name" value="{{username}}">
     <select class="type" name="clothingType" required>
-      <option value="">Please select a clothing type</option>
+      <option value="">please select a clothing type</option>
       <option value="1">tops</option>
       <option value="2">bottoms</option>
       <option value="3">shoes</option>
@@ -21,7 +22,7 @@
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
   <select class="type" name="search" ng-model="search">
-    <option ng-selected="true" value="-1">All</option>
+    <option ng-selected="true" value="-1">all</option>
     <option value="1">tops</option>
     <option value="2">bottoms</option>
     <option value="3">shoes</option>
