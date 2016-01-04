@@ -174,6 +174,18 @@ angular.module('myApp', [
         return resp.data;
       })
     };
+    /***************** AWS S3 ****************************/
+    register.s3 = function(params){
+      return $http({
+      method:'POST',
+      url:'/s3test',
+      data: {params: params}
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+    /***************** AWS S3 ****************************/
 
     return {
       register: register
