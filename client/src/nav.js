@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('NavCtrl', ['$state','$scope','$window', 'Authorization', function($state, $scope, $window, Authorization) {
-    $scope.loggedIn=!!window.localStorage.authtoken;
+  .controller('NavCtrl', ['$scope','$window', 'Authorization', function($scope, $window, Authorization) {
+   $scope.nugget='NavController hijack!!'
+   $scope.isAuth=Authorization.authorized;
   }]);

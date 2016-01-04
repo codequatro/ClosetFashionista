@@ -9,47 +9,62 @@ angular.module('myApp', [
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-        .state('home', {
-            url: '/',
-            templateUrl: 'views/main.html',
-            controller: 'MainCtrl'
-        })
 
-        .state('signin', {
-          url:'/signin',
-          templateUrl: 'views/signin.html',
-          controller: 'AuthCtrl'
-        })
+      .state('home', {
+          url: '/',
+          views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/main.html'}
+          }
+      })
 
-        .state('signup', {
-          url:'/signup',
-          templateUrl: 'views/signup.html',
-          controller: 'AuthCtrl'
-        })
+      .state('signin', {
+        url:'/signin',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/signin.html'}
+          }
+      })
 
-        .state('signout', {
-          url:'/signout',
-          templateUrl: 'views/signout.html',
-          controller: 'AuthCtrl'
-        })
+      .state('signup', {
+        url:'/signup',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/signup.html'}
+          }
+      })
 
-        .state('vote', {
-          url: '/vote',
-          templateUrl: 'views/vote.html',
-          controller: 'VoteCtrl'
-        })
+      .state('signout', {
+        url:'/signout',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/signout.html'}
+          }
+      })
 
-        .state('closet', {
-          url: '/closet',
-          templateUrl: 'views/closet.html',
-          controller: 'ClosetCtrl'
-        })
+      .state('vote', {
+        url: '/vote',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/vote.html'}
+          }
+      })
 
-        .state('s3test', {
-          url: '/s3test',
-          templateUrl: 'views/s3test.html',
-          controller: 'S3Ctrl'
-        })
+      .state('closet', {
+        url: '/closet',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/closet.html'}
+          }
+      })
+
+      .state('s3test', {
+        url: '/s3test',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/s3test.html'}
+          }
+      })
 
 })
 .service('Authorization', function($state, $window) {
