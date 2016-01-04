@@ -1,63 +1,46 @@
-/*splash page:*/
-/*body {
-   background-image: url(http://s16.postimg.org/m4gec7xw5/background3.jpg);
-   background-position: center;
-   background-repeat: no-repeat;
-   background-attachment: fixed;
-   background-size: cover;
-   background-color: #464646;
-   text-align: center;
-   padding-top: 120px;
-}*/
+.main {
+       background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+       background-position: center center;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-size: cover;
+       text-align: center;
+       padding-top: 120px;
+     }
 
-h1{
-  display: inline;
-	/*color: #2380E2;*/
-	font-family: Helvetica;
-  font-variant: small-caps;
-}
-
-.title {
-  margin-bottom: 20px;
-}
-
-.btn {
-  /*background: black;*/
-  /*border-radius: 28px;*/
-  font-family: Helvetica;
-  color: black;
-  font-size: 15px;
-  padding: 10px;
-  font-variant: small-caps;
-  /*text-decoration: none;*/
+h1 {
   text-align: center;
-  /*padding-top: 50px;*/
+  display: inline;
+	color: white;
+	font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+}
+
+a:hover, a:link {
+  text-decoration: none;
+}
+
+.main {
+  padding-top: 500px;
+}
+
+.navbar .btn {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  padding: 5px;
+  font-size: 25px;
+  font-variant: small-caps;
+  text-align: center;
 
 }
 
 .navbar {
-  /*margin: 30px 0px;*/
-  background-color: white;
-  height: 100px;
-  opacity: 75%;
-
-
-}
-
-.navbar .btn {
-
-
+  height: 75px;
+  background: rgba(0,0,0,0.0);
 }
 
 .btn:hover{
   color: gray;
-}
-
-
-.jumbotron{
-  background-color: #dcdcdc;
-  text-align: center;
-  border-radius: 2px;
 }
 
 .image {
@@ -89,7 +72,6 @@ h1{
 }
 
 .percentage {
-  /*color: #000;*/
   font-size: 14px;
   font-weight: 700;
   margin: auto;

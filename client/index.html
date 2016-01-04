@@ -6,8 +6,7 @@
 
   <body ng-app="myApp">
 
-    <h1 class="title"><a ui-sref='home'>closet fashionista</a></h1>
-
+    <!-- <h1 class="title"><a ui-sref='home'>closet fashionista</a></h1> -->
     <div class='navbar'  ng-controller="NavCtrl">
         <a class='btn out' ng-if=!loggedIn ui-sref='signin'>sign in</a>
         <a class='btn out' ng-if=!loggedIn ui-sref='signup'>sign up</a>
@@ -15,6 +14,7 @@
         <a class='btn in' ng-if=loggedIn ui-sref='vote'>vote</a>
         <a class='btn in' ng-if=loggedIn ui-sref='closet'>closet</a>
         <a >{{loggedIn}}</a>
+        <h1 class="title"><a ui-sref='home'>closet fashionista</a></h1>
     </div>
 
     <div class="container">
@@ -41,6 +41,7 @@
     <script src="src/s3test.js"></script>
     <script src="directives/picInfo.js"></script>
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
   </footer>
 </html>
 
