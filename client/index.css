@@ -5,9 +5,6 @@ body {
 }
 
 .all {
-/*  background-image: url(closet.png);
-  background-repeat: no-repeat;
-  background-size: cover;*/
   height: auto;
   width: auto;
 }
@@ -84,10 +81,9 @@ a:hover, a:link {
   color: gray;
 }
 
-/*.image {
+.image {
   margin: 50px 15px;
   max-width: 300px;
-<<<<<<< ee426e1d96823757867d786db54bb6d081376926
 }
 
 .vote {
@@ -99,9 +95,6 @@ a:hover, a:link {
   background-repeat: no-repeat;
   background-size: cover;
 }
-=======
-}*/
->>>>>>> background image size
 
 .closetPic {
   max-width: 500px;
