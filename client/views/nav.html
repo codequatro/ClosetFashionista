@@ -1,0 +1,7 @@
+<div class='navbar' ng-controller="NavCtrl">
+  <a class='btn out' ng-show="!isAuth" ui-sref='signin'>SignIn</a>
+  <a class='btn out' ng-show="!isAuth" ui-sref='signup'>SignUp</a>
+  <a class='btn in' ng-show="isAuth" ui-sref='signout'>SignOut</a>
+  <a class='btn in' ng-show="isAuth" ui-sref='vote'>Vote</a>
+  <a class='btn in' ng-show="isAuth" ui-sref='closet'>Closet</a>
+</div>
