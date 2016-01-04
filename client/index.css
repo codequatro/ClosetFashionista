@@ -72,6 +72,9 @@ a:hover, a:link {
   margin-right:auto;
   max-width: 500px;
   max-height: 400px;
+  background-image: url(closet.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .closetPic {
