@@ -7,6 +7,7 @@
        text-align: center;
        padding-top: 120px;
        /*max-width: 50%;*/
+
      }
 
 h1 {
@@ -16,12 +17,15 @@ h1 {
 	font-family: 'Playfair Display', serif;
   font-variant: small-caps;
   bottom: 50px;
+  padding-left: 10px;
+
 }
 
 h3 {
   color: black;
   font-family: 'Playfair Display', serif;
   font-variant: small-caps;
+
 }
 
 h2 {
@@ -45,6 +49,7 @@ a:hover, a:link {
   font-size: 25px;
   font-variant: small-caps;
   text-align: center;
+  padding-left: 10px;
 
 }
 
@@ -136,6 +141,7 @@ a:hover, a:link {
 
 .imageupload {
   display: inline-block;
+  padding-left: 10px;
 }
 
 .clothingfilter {
@@ -145,4 +151,20 @@ a:hover, a:link {
   float: right;
   padding-right: 200px;
   bottom: 60px;
+}
+
+.signin {
+  padding-left: 10px;
+}
+
+.signup {
+  padding-left: 10px;
+}
+
+.already {
+  padding-left: 10px;
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+  font-size: 20px;
 }

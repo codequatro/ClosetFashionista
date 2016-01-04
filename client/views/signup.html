@@ -1,11 +1,11 @@
 <div class='auth' ng-controller="AuthCtrl">
   <form novalidate class='signup'>
-    Username: <input type="text" ng-model="user.username" /><br />
-    Password: <input type="password" ng-model="user.password" /><br />
+    Username: <input type="text" ng-model="user.username" /><br><br>
+    Password: <input type="password" ng-model="user.password" /><br><br>
     <input type="submit" ng-click="signup()" value="SignUp"
   />
   </form>
-
-  <a ui-sref='signin'>already a fashionista? sign in to start voting</a>
+<br>
+  <a ui-sref='signin' class='already'>already a fashionista? sign in to start voting</a>
 
 </div>
