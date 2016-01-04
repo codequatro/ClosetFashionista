@@ -18,14 +18,12 @@ body {
 }
 
 .main {
-       background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
-     /*  background-position: center center;*/
-       background-repeat: no-repeat;
-       background-attachment: fixed;
-       background-size: cover;
-       text-align: center;
-       padding-top: 120px;
-       /*max-width: 50%;*/
+  background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  padding-top: 120px;
  }
 
 
