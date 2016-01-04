@@ -5,3 +5,4 @@ bower_components/
 /client/uploads/*
 .DS_Store
 config.json
+config.js
