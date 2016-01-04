@@ -40,7 +40,7 @@ angular.module('myApp')
       Authorization.authorized = false
       $window.localStorage.removeItem('authtoken')
       $window.localStorage.removeItem('username')
-
+      $state.go('home')
     }
 
   }]);
