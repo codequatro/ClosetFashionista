@@ -274,7 +274,6 @@ routes.post('/vote', function (req, res){
 routes.post('/s3test', function (req, res){
   console.log('s3 test');
   AWS.config.region = 'us-east-1';
-  // AWS.config.update({accessKeyId: 'AKIAJ5L2GGPWMDVDVSMQ', secretAccessKey: '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'});
 
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {

@@ -8,7 +8,6 @@ angular.module('myApp')
 
   // AWS.config.loadFromPath('./config.json');
 
-  // AWS.config.update({accessKeyId: 'AKIAJ5L2GGPWMDVDVSMQ', secretAccessKey: '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'});
 
   // var bucket = new AWS.S3({params: {Bucket: 'cqphotos'}});
   // console.log('AWS.config', AWS.config);
