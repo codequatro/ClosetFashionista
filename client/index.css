@@ -1,3 +1,25 @@
+body { 
+  height: 100%; 
+  width: 100%; 
+  margin: 0; 
+}
+
+.all {
+/*  background-image: url(closet.png);
+  background-repeat: no-repeat;
+  background-size: cover;*/
+  height: auto;
+  width: auto;
+}
+
+.vote {
+  height: auto;
+  width: auto;
+  background-image: url(closet.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .main {
        background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
      /*  background-position: center center;*/
@@ -7,8 +29,8 @@
        text-align: center;
        padding-top: 120px;
        /*max-width: 50%;*/
+ }
 
-     }
 
 h1 {
   text-align: center;
@@ -62,9 +84,10 @@ a:hover, a:link {
   color: gray;
 }
 
-.image {
+/*.image {
   margin: 50px 15px;
   max-width: 300px;
+<<<<<<< ee426e1d96823757867d786db54bb6d081376926
 }
 
 .vote {
@@ -76,6 +99,9 @@ a:hover, a:link {
   background-repeat: no-repeat;
   background-size: cover;
 }
+=======
+}*/
+>>>>>>> background image size
 
 .closetPic {
   max-width: 500px;
