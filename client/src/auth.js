@@ -3,7 +3,6 @@
 angular.module('myApp')
   .controller('AuthCtrl', ['$state', '$scope', '$window', '$location', 'Register', 'Authorization', function($state, $scope, $window, $location, Register, Authorization) {
     // $scope.header = 'this will be the auth page';
-    $scope.nugget = "kfuzz";
     $scope.user = {}
     // $scope.user.username might need to grab local storage for current user
 
