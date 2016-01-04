@@ -162,7 +162,6 @@ routes.post('/randomimage', function (req, res){
 //get all the user's photos
 routes.post('/closet', function (req, res){
   var username = req.body.username;
-
   //create an object to send back to client
   var closetItems = {};
 
@@ -270,6 +269,48 @@ routes.post('/vote', function (req, res){
     }
   });
 });
+
+/*************************AMAZON STORAGE FOR IMAGES******************************************/
+routes.post('/s3test', function (req, res){
+  console.log('s3 test');
+  AWS.config.region = 'us-east-1';
+  // AWS.config.update({accessKeyId: 'AKIAJ5L2GGPWMDVDVSMQ', secretAccessKey: '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'});
+
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files) {
+  });
+
+  form.on('end', function(fields, files) {
+    /* Temporary location of our uploaded file */
+    var temp_path = this.openedFiles[0].path;
+    /* The file name of the uploaded file */
+    var file_name = this.openedFiles[0].name;
+    // /* The type of file*/
+    // var file_type = this.openedFiles[0].type;
+
+    console.log('file anme', file_name);
+
+    fs.readFile(temp_path, function(err, data) {
+      if (err) {
+        console.error(err);
+      }
+      else {
+        var bucket = new AWS.S3({params: {Bucket: 'cqphotos'}});
+        bucket.upload({Key: file_name, Body: data}, function (err, data){
+          if(err){
+            console.log(err);
+          }
+          else{
+            res.status(201).end();
+          }
+        });
+      }
+    }); //fs copy end
+  }); //form.on 'end' end
+});
+
+
+/*************************AMAZON STORAGE FOR IMAGES******************************************/
 
 
 if(process.env.NODE_ENV !== 'test') {
