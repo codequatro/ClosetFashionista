@@ -42,7 +42,7 @@ exports = module.exports = {
 	if(err){
 	  console.error(err);
 	}
-	client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
+	client.query('INSERT INTO users (username, password, firstname, lastname, gender) VALUES ($1, $2, $3, $4, $5)', [username, password, firstname, lastname, gender], function (err, result){
 	  if(err){
 	    console.log('not cool man. database error on signup')
 	    console.error(err);
@@ -79,7 +79,7 @@ exports = module.exports = {
 	          closetItems.pics = result.rows;
 
 	            //grab all of the votes for each user pic
-	            client.query('SELECT images.image_name, votes.vote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+	            client.query('SELECT images.image_name, votes.upvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
 	                if(err){
 	                  console.error('error fetching votes', err);
 	                }

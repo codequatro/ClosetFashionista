@@ -14,6 +14,8 @@
     - Windows:
       createdb -U postgres closet
       psql -U postgres closet < server/schema.sql
+
+  - For Windows, change the postgres password
 */ 
 
 /* 
@@ -30,7 +32,6 @@ var express = require('express');
 var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
-var connectString = process.env.DATABASE_URL || 'postgres://localhost:5432/closet';
 var knex = require('knex');
 var jwt = require('jwt-simple');
 var bodyParser = require('body-parser');
@@ -41,6 +42,11 @@ var AWS = require('aws-sdk');
 var bcrypt = require('bcrypt-nodejs');
 var Q = require('q');
 var cheerio = require('cheerio');
+
+var connectString = process.env.DATABASE_URL ||
+  ( /^win/.test(process.platform) )
+    ? 'postgres://postgres:password@localhost:5432/closet'
+    : connectString;
 
 //
 //route to your index.html
