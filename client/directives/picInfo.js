@@ -5,6 +5,6 @@ angular.module('myApp')
       scope: {
         info: '='
       },
-      templateUrl: '../views/picInfo.html'
+      templateUrl: '../client/views/picInfo.html'
     };
   });

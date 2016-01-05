@@ -13,56 +13,56 @@ angular.module('myApp', [
       .state('home', {
           url: '/',
           views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/main.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/main.html'}
           }
       })
 
       .state('signin', {
         url:'/signin',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signin.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signin.html'}
           }
       })
 
       .state('signup', {
         url:'/signup',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signup.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signup.html'}
           }
       })
 
       .state('signout', {
         url:'/signout',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signout.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signout.html'}
           }
       })
 
       .state('vote', {
         url: '/vote',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/vote.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/vote.html'}
           }
       })
 
       .state('closet', {
         url: '/closet',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/closet.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/closet.html'}
           }
       })
 
       .state('s3test', {
         url: '/s3test',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/s3test.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/s3test.html'}
           }
       })
 
