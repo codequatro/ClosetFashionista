@@ -1,3 +1,19 @@
+/*
+// To create local postgres db (first run only):
+
+  initdb db; createdb closet; psql closet < server/schema.sql
+*/ 
+
+/* 
+// To start postgres server:
+
+  sudo chown -R $USER:users /run/postgresql; postgres -D db
+
+// OR
+
+  sudo chown -R $USER:users /var/run/postgresql; postgres -D db
+*/
+
 var express = require('express');
 var Path = require('path');
 var routes = express.Router();
