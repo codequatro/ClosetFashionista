@@ -38,6 +38,7 @@ exports = module.exports = {
 	var firstname = req.body.firstname;
 	var lastname = req.body.lastname;
 	var gender = req.body.gender;
+	console.log('dat body: ', req.body)
 	pg.connect(connectString, function (err, client, done){
 	if(err){
 	  console.error(err);

@@ -14,15 +14,15 @@ app.use(express.static(__dirname + '/client'));
 
 // Initialize routers.
 var usersRouter = express.Router();
-// var imagesRouter = express.Router();
+var imagesRouter = express.Router();
 
 // Configure routers.
 require('./server/users/usersRoutes.js')(usersRouter);
-// require('./server/images/imagesRoutes.js')(imagesRouter);
+require('./server/images/imagesRoutes.js')(imagesRouter);
 
 // Set up route forwarding.
 app.use('/users/', usersRouter);
-// app.use('/images/', imagesRouter);
+app.use('/', imagesRouter);
 
 // Run the server.
 app.listen(app.get('port'), function(){
