@@ -4,29 +4,35 @@ body {
   background-size: cover; 
 }
 
-h1 {
+h1, h2, h3, h4, h5, a {
   text-align: center;
   display: inline;
 	color: black;
-	font-family: 'Playfair Display', serif;
+	font-family: 'Poiret One', serif;
   font-variant: small-caps;
   bottom: 50px;
   padding-left: 10px;
 }
+.clean {
+  margin: 20px;
+}
 
+.clear {
+  margin-top: 53px;
+}
 .container.header {
   margin-left: 300px;
 }
 
 h3 {
   color: black;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poiret One', serif;
   font-variant: small-caps;
 }
 
 h2 {
   color: black;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poiret One', serif;
   font-variant: small-caps;
 }
 
@@ -54,7 +60,7 @@ a:hover, a:link {
 }
 
 .navbar .btn {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poiret One', serif;
   color: black;
   padding: 5px;
   font-size: 25px;
@@ -172,7 +178,7 @@ a:hover, a:link {
 .already {
   padding-left: 10px;
   color: black;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poiret One', serif;
   font-variant: small-caps;
   font-size: 20px;
 }
