@@ -3,7 +3,7 @@
 
   initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
 
-// Then in another Terminal window:
+// Then in another Terminal window: 
 
   createdb closet; psql closet < server/schema.sql
 */ 
