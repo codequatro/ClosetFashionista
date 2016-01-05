@@ -31,6 +31,7 @@ var fs   = require('fs-extra');
 var AWS = require('aws-sdk');
 var bcrypt = require('bcrypt-nodejs');
 var Q = require('q');
+var cheerio = require('cheerio');
 
 //
 //route to your index.html
