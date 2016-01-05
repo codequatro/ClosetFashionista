@@ -1,24 +1,36 @@
 <!doctype html>
 <html>
+   
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="client/styles/index.css">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/i18n/defaults-*.min.js"></script>
+  
   </head>
 
   <body ng-app="myApp">
+    <nav class='navbar'>
 
-    <h1 class="title"><a ui-sref='home'>closet fashionista</a></h1>
+      
 
-    <div class="container">
-      <div ui-view="nav"></div>
-    </div>
+      <div class="container">
+        <div ui-view="nav"></div>
+      </div>
 
-    <div class="all">
-      <div ui-view="main"></div>
-    </div>
+        <div class='row'>
+          <h1 class="col-md-2 col-centered"><a href="#">Closet Fashionista</a></h1>
+        </div>
 
-  </body>
 
-  <footer>
+      <div class="all">
+        <div ui-view="main"></div>
+      </div>
+    </nav>
+
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.26.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
@@ -36,9 +48,6 @@
     <script src="/client/src/auth.js"></script>
     <script src="/client/src/s3test.js"></script>
     <script src="/client/directives/picInfo.js"></script>
-    <link rel="stylesheet" type="text/css" href="client/styles/index.css">
-    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  </footer>
+  </body>
 </html>
 
