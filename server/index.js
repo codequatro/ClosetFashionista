@@ -41,7 +41,7 @@ routes.use(express.static(assetFolder));
 
 // User route SIGNIN
 // need better error handling for bad username
-routes.post('/signin', function (req, res){
+routes.post('/users/signin', function (req, res){
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
   pg.connect(connectString, function (err, client, done){
@@ -70,7 +70,7 @@ routes.post('/signin', function (req, res){
 
 
 /*User route SIGNUP*/
-routes.post('/signup', function (req, res){
+routes.post('/users/signup', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
   var firstname = req.body.firstname;
@@ -185,7 +185,7 @@ routes.post('/randomimage', function (req, res){
 });
 
 //get all the user's photos
-routes.post('/closet', function (req, res){
+routes.post('/users/closet', function (req, res){
   var username = req.body.username;
   //create an object to send back to client
   var closetItems = {};
