@@ -22,7 +22,7 @@ require('./server/images/imagesRoutes.js')(imagesRouter);
 
 // Set up route forwarding.
 app.use('/users/', usersRouter);
-app.use('/', imagesRouter);
+app.use('/images/', imagesRouter);
 
 // Run the server.
 app.listen(app.get('port'), function(){

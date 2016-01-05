@@ -6,5 +6,6 @@ module.exports = function (app) {
   app.post('/randomimage', imagesController.randomImage);
   app.post('/removeimage', imagesController.removeImage);
   app.post('/vote', imagesController.vote);
+  app.post('/getImageData', imagesController.getImageData);
 
 };

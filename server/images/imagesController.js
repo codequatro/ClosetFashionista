@@ -171,6 +171,10 @@ exports = module.exports = {
 		  })
 		}
 		});
+	},
+
+	getImageData: function (req, res, next) {
+		
 	}
 
 }

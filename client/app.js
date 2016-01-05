@@ -131,7 +131,7 @@ angular.module('myApp', [
     register.randomImage = function(username){
       return $http({
         method: 'POST',
-        url: '/randomimage',
+        url: 'images/randomimage',
         data: {username: username}
       })
       .then(function(resp){
@@ -143,7 +143,7 @@ angular.module('myApp', [
       console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
-        url: '/vote',
+        url: 'images/vote',
         data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
       })
       .then(function(resp){
@@ -167,7 +167,7 @@ angular.module('myApp', [
     register.removeImage = function(imageId, imageName){
       return $http({
         method: 'POST',
-        url: '/removeimage',
+        url: 'images/removeimage',
         data: {imageId: imageId, imageName: imageName}
       })
       .then(function(resp){

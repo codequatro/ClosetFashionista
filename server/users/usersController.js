@@ -38,12 +38,11 @@ exports = module.exports = {
 	var firstname = req.body.firstname;
 	var lastname = req.body.lastname;
 	var gender = req.body.gender;
-	console.log('dat body: ', req.body)
 	pg.connect(connectString, function (err, client, done){
 	if(err){
 	  console.error(err);
 	}
-	client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
+	client.query('INSERT INTO users (username, password, firstname, lastname, gender) VALUES ($1, $2, $3, $4, $5)', [username, password, firstname, lastname, gender], function (err, result){
 	  if(err){
 	    console.log('not cool man. database error on signup')
 	    console.error(err);
