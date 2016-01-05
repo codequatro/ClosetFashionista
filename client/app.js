@@ -43,7 +43,7 @@ angular.module('myApp', [
       })
 
       .state('vote', {
-        url: '/vote',
+        url: '/votes',
         views: {
             "nav": {templateUrl: "client/views/nav.html"},
             "main":{templateUrl: 'client/views/vote.html'}
@@ -90,7 +90,7 @@ angular.module('myApp', [
 
      if(Authorization.authorized === false) {
        if(next.match('vote') || next.match('closet')){
-        $location.path('/signin');
+        $location.path('/signin')
        }
      }
 
