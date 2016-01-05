@@ -29,7 +29,8 @@ var formidable = require('formidable');
 var util = require('util');
 var fs   = require('fs-extra');
 var AWS = require('aws-sdk');
-var bcrypt   = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs');
+var Q = require('q');
 
 //
 //route to your index.html
