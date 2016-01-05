@@ -1,7 +1,11 @@
 /*
 // To create local postgres db (first run only):
 
-  initdb db; createdb closet; psql closet < server/schema.sql
+  initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
+
+// Then in another Terminal window: 
+
+  createdb closet; psql closet < server/schema.sql
 */ 
 
 /* 
