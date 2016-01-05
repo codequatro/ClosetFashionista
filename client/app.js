@@ -107,7 +107,7 @@ angular.module('myApp', [
     register.signup = function(user) {
       return $http({
         method: 'POST',
-        url: '/signup',
+        url: 'users/signup',
         data: user
       })
       .then(function(resp){
@@ -118,7 +118,7 @@ angular.module('myApp', [
     register.signin = function(user){
       return $http({
         method: 'POST',
-        url: '/signin',
+        url: 'users/signin',
         data: user
       })
       .then(function(resp){
@@ -156,7 +156,7 @@ angular.module('myApp', [
     register.getCloset = function(user){
       return $http({
         method: 'POST',
-        url: '/closet',
+        url: 'users/closet',
         data: {username: user}
       })
       .then(function(resp){
