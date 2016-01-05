@@ -185,6 +185,39 @@ exports = module.exports = {
 		});
 	},
 
+	getAllImages: function (req, res, next) {
+		//create an object to send back to client
+		var allImages = {};
+
+		pg.connect(connectString, function (err, client, done) {
+		if(err){
+		  console.error('error connecting to the DB:', err);
+		}
+		else {
+	      //get all images
+	      client.query('SELECT * FROM images', function(err, result){
+	        if(err){
+	          console.error('error fetching all images: ', err);
+	        }
+	        else{
+	          allImages.pics = result.rows;
+	            //grab all of the votes for each user pic
+	            client.query('SELECT images.image_name, votes.upvote, votes.downvote, votes.flag FROM images INNER JOIN votes ON images.image_id = votes.image_id', function(err, result){
+	                if(err){
+	                  console.error('error fetching votes', err);
+	                }
+	                else{
+	                  allImages.votes = result.rows;
+	                  res.status(200).json(allImages);
+	                  done();
+	                }
+	            });
+	          }
+	      })
+		}
+		}); //pg.connect
+	},
+
 	getImageData: function (req, res, next) {
 		
 	}
