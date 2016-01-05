@@ -6,7 +6,7 @@ angular.module('myApp', [
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/closet');
 
     $stateProvider
 
