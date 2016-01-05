@@ -1,21 +1,20 @@
 /*
-// To create local postgres db (first run only):
-
-  initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
+  - To create local postgres db (first run only):
+    - Linux:
+      initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
+    - Mac:
+      initdb db; sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
 
 // Then in another Terminal window: 
-
   createdb closet; psql closet < server/schema.sql
 */ 
 
 /* 
-// To start postgres server:
-
-  sudo chown -R $USER:users /run/postgresql; postgres -D db
-
-// OR
-
-  sudo chown -R $USER:users /var/run/postgresql; postgres -D db
+  - To start postgres server:
+    - Linux:
+    sudo chown -R $USER:users /run/postgresql; postgres -D db
+    - Mac:
+    sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
 */
 
 var express = require('express');
