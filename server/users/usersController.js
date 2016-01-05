@@ -69,6 +69,7 @@ exports = module.exports = {
 	      console.error('error on lookup of user_id', err)
 	    }
 	    else {
+	    	console.log('result:', result)
 	      var userId = result.rows[0].user_id;
 	      //get all of the current users images
 	      client.query('SELECT image_name, image_id, type_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
@@ -79,7 +80,7 @@ exports = module.exports = {
 	          closetItems.pics = result.rows;
 
 	            //grab all of the votes for each user pic
-	            client.query('SELECT images.image_name, votes.vote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+	            client.query('SELECT images.image_name, votes.upvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
 	                if(err){
 	                  console.error('error fetching votes', err);
 	                }
