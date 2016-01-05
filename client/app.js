@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp', [
-    'ui.router'
+    'ui.router', 'webcam'
   ])
 
     .config(function($stateProvider, $urlRouterProvider) {

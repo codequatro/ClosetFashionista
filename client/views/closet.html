@@ -6,12 +6,19 @@
 <div class='closetform'>
   <h3>&nbsp;&nbsp;add to your closet:</h3>
 
+  <webcam on-streaming="onSuccess()" channel="channel"> </webcam>
+
+  <button class="btn btn-large btn-primary" ng-click="makeSnapshot()">Take snapshot!</button>
+
+  
+
   <div class='imageupload'>
     <form action="/postimage" method="post" enctype="multipart/form-data" class= 'closetform'>
         <input type="file" name="upload" multiple="multiple">
         <br><br>
         <input type="submit" value="Upload File" class="pure-button">
         <input type="hidden" name="name" value="{{username}}">
+        <input type="hidden" name="image" value="{{image}}">
         <select class="type" name="clothingType" required>
           <option value="">please select a clothing type</option>
           <option value="1">tops</option>
@@ -37,6 +44,8 @@
 <br>
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
+  <canvas id="snapshot" class="well pull-right"></canvas>
+  
   <div class="card" ng-repeat="pic in pics | filter:customFilter">
     <pic-info info="pic"></pic-info>
     <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">

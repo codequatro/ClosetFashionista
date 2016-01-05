@@ -70,7 +70,7 @@ routes.post('/signup', function (req, res){
 routes.post('/postimage', function (req, res){
 
   var form = new formidable.IncomingForm();
-
+  if(req.body.image){console.log(req.body);}
   form.parse(req, function(err, fields, files) {
 
     //this is not the right way to go about it. url gets weird
@@ -79,7 +79,7 @@ routes.post('/postimage', function (req, res){
     res.redirect('#/closet');
 
     //if you want to look at the form getting sent to the server
-    // res.end(util.inspect({fields: fields, files: files}));
+    //res.end(util.inspect({fields: fields, files: files}));
   });
 
   var myFields = {};
