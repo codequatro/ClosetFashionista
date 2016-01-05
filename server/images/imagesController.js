@@ -144,20 +144,8 @@ exports = module.exports = {
 
 	vote: function(req, res, next) {
 		var username = req.body.username;
-		var voteValue = req.body.hotOrNot;
+		var hotOrNot = req.body.hotOrNot;
 		var imageId = req.body.imageId;
-		var upvote = 0;
-		var downvote = 0;
-		var flag = 0;
-		if (voteValue === 'upvote') {
-			upvote++
-		} else if (voteValue === 'downvote') {
-			downvote++;
-		} else if (voteValue === 'flag') {
-			flag++;
-		} else {
-			console.log('something terrible happened and the zombies are coming!')
-		}
 		console.log('imageId', imageId);
 		pg.connect(connectString, function (err, client, done) {
 		if(err){
@@ -170,7 +158,7 @@ exports = module.exports = {
 		    }
 		    else {
 		      var userId = result.rows[0].user_id
-		      client.query('INSERT INTO votes (user_id, image_id, vote, downvote, flag) VALUES ($1, $2, $3, $4, $5)',[userId, imageId, upvote, downvote, flag], function(err, result){
+		      client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
 		        if(err){
 		          console.error('error inserting vote into votes table: ', err);
 		        }
