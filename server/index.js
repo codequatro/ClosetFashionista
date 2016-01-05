@@ -29,6 +29,7 @@ var formidable = require('formidable');
 var util = require('util');
 var fs   = require('fs-extra');
 var AWS = require('aws-sdk');
+var bcrypt   = require('bcrypt-nodejs');
 
 //
 //route to your index.html
@@ -47,7 +48,7 @@ routes.post('/signin', function (req, res){
     }
     client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
       if(result.rows.length === 0){
-        res.status(401).json({answer: 'invalid username'});
+        res.status(401).json({answer: 'Invalid Username'});
       }
       else
       {
@@ -58,7 +59,7 @@ routes.post('/signin', function (req, res){
           res.status(200).json({token: token, username: username})
           }
         else {
-          res.status(401).json({answer: 'invalid password'})
+          res.status(401).json({answer: 'Invalid Password'})
           }
       }
     })
@@ -70,13 +71,16 @@ routes.post('/signin', function (req, res){
 routes.post('/signup', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
+  var firstname = req.body.firstname;
+  var lastname = req.body.lastname;
+  var gender = req.body.gender;
   pg.connect(connectString, function (err, client, done){
     if(err){
       console.error(err);
     }
     client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
       if(err){
-        console.log('database error on signup')
+        console.log('not cool man. database error on signup')
         console.error(err);
       } else {
         res.status(201).json({username: username}) // removed token as was undefined for signup
