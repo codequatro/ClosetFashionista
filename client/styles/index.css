@@ -14,6 +14,10 @@ h1 {
   padding-left: 10px;
 }
 
+.container.header {
+  margin-left: 300px;
+}
+
 h3 {
   color: black;
   font-family: 'Playfair Display', serif;
@@ -33,7 +37,12 @@ h2 {
   padding-top: 500px;
   width: 50%;
  }
-
+ .container {
+   height: 120px;
+ }
+.navbar-default {
+  height: 10px;
+}
  .vote {
   text-align: center;
   margin:0 auto;
