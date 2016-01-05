@@ -144,7 +144,7 @@ exports = module.exports = {
 
 	vote: function(req, res, next) {
 		var username = req.body.username;
-		var voteValue = req.body.hotOrNot;
+		var voteValue = req.body.voteValue;
 		var imageId = req.body.imageId;
 		var upvote = 0;
 		var downvote = 0;
@@ -170,7 +170,7 @@ exports = module.exports = {
 		    }
 		    else {
 		      var userId = result.rows[0].user_id
-		      client.query('INSERT INTO votes (user_id, image_id, vote, downvote, flag) VALUES ($1, $2, $3, $4, $5)',[userId, imageId, upvote, downvote, flag], function(err, result){
+		      client.query('INSERT INTO votes (user_id, image_id, upvote, downvote, flag) VALUES ($1, $2, $3, $4, $5)',[userId, imageId, upvote, downvote, flag], function(err, result){
 		        if(err){
 		          console.error('error inserting vote into votes table: ', err);
 		        }

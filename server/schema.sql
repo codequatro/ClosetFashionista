@@ -36,9 +36,9 @@ DROP TABLE IF EXISTS votes;
 CREATE TABLE votes (
   user_id INTEGER,
   image_id INTEGER,
-  vote INTEGER,
-  downvotes INTEGER,
-  fakevotes INTEGER,
+  upvote INTEGER,
+  downvote INTEGER,
+  flag INTEGER,
   PRIMARY KEY (user_id, image_id)
 );
 
