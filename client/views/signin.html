@@ -5,6 +5,9 @@
     Password: <input type="password" ng-model="user.password" /><br><br>
     <input type="submit" ng-click="signin()" value="SignIn"/>
   </form>
+  <div class="err signinErr" ng-show="signinErr">
+    {{ signinTxt }}
+  </div>
 
 
   <h2>&nbsp;&nbsp;get authorized</h2>

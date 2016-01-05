@@ -22,6 +22,13 @@ angular.module('myApp')
         $state.go('closet')
 
       })
+      .catch(function (error) {
+        $scope.signinErr = true;
+        $scope.signinTxt = error.data.error ||
+                           error.data.answer ||
+                           'Signin error';
+        console.error('Message: ', $scope.signinTxt);
+      });
     }
 
     $scope.signup = function() {
