@@ -75,6 +75,7 @@ CREATE TABLE users (
   firstname varchar(30),
   lastname varchar(30),
   gender varchar(10),
+  credibilityScore INTEGER,
   PRIMARY KEY (user_id)
 );
 

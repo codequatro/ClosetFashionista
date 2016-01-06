@@ -113,6 +113,10 @@ exports = module.exports = {
 								}
 							}
 						}
+
+						// Update User Credibility Score in Database for Efficiency When Grabbing Score Later
+						client.query('UPDATE users SET credibilityScore = $2 WHERE username = $1', [username, userInfo.userCredibility])
+
 						res.status(200).json(userInfo);
 						done();
 			        }
