@@ -3,7 +3,8 @@
 angular.module('myApp')
   .controller('AuthCtrl', ['$state', '$scope', '$window', '$location', 'Register', 'Authorization', function($state, $scope, $window, $location, Register, Authorization) {
     // $scope.header = 'this will be the auth page';
-    $scope.user = {}
+    $scope.user = {};
+    $scope.showErr = false;
     // $scope.user.username might need to grab local storage for current user
 
     $scope.signin = function(user) {
@@ -13,15 +14,20 @@ angular.module('myApp')
       var user = user || {username: username, password: password}
 
       Register.register.signin(user)
-      .then(function(data){
-        console.log(' signin data from our authjs', data)
-        Authorization.authorized = true
-        $window.localStorage.setItem('authtoken', data.token)
-        $window.localStorage.setItem('username', data.username)
+        .then(function(data){
+          console.log(' signin data from our authjs', data)
+          Authorization.authorized = true
+          $window.localStorage.setItem('authtoken', data.token)
+          $window.localStorage.setItem('username', data.username)
 
-        $state.go('closet')
+          $state.go('home')
 
-      })
+        })
+        .catch(function(error){
+          $scope.err = error.data.answer;
+          console.log($scope.err);
+          $scope.showErr = true;
+        });
     }
 
     $scope.signup = function() {
@@ -38,9 +44,9 @@ angular.module('myApp')
 
     $scope.signout = function() {
       Authorization.authorized = false
-      $window.localStorage.removeItem('authtoken')
-      $window.localStorage.removeItem('username')
-      $state.go('home')
+      $window.localStorage.removeItem('authtoken');
+      $window.localStorage.removeItem('username');
+      $state.go('signin');
     }
 
   }]);

@@ -191,7 +191,7 @@ input::-webkit-input-placeholder{
 
 .vote-prompt-voting-text{
   color: black;
-  font-family: 'Georgia', sans-serif;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .vote-no-images-text{
@@ -203,7 +203,7 @@ input::-webkit-input-placeholder{
 
 .vote-greeting{
   color: black;
-  font-family: 'Didot', serif;
+  font-family: 'Catamaran', serif;
   font-size: 2em;
 }
 

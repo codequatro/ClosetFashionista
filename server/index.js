@@ -28,7 +28,7 @@ routes.post('/signin', function (req, res){
     }
     client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
       if(result.rows.length === 0){
-        res.status(401).json({answer: 'invalid username'});
+        res.status(401).json({answer: 'Username/Password Already Exists!'});
       }
       else
       {
@@ -39,7 +39,7 @@ routes.post('/signin', function (req, res){
           res.status(200).json({token: token, username: username})
           }
         else {
-          res.status(401).json({answer: 'invalid password'})
+          res.status(401).json({answer: 'Incorrect Password!!'})
           }
       }
     })
