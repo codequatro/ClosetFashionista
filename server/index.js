@@ -149,7 +149,7 @@ routes.post('/randomimage', function (req, res){
               res.status(200).json({image_name: 'client/img/pablo.png', image_id: -1});
             }
             else{
-              res.status(200).json({image_name: './uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
+              res.status(200).json({image_name: 'client/uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
             }
             done();
           });
