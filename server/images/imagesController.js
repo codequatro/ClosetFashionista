@@ -252,7 +252,7 @@ exports = module.exports = {
 		}
 			
 		util.getMetaData(url)
-			.then(function(data) {
+			.then(function (data) {
 				var link = {
 					url: link_url,
 					user_id: user_id,
@@ -260,8 +260,17 @@ exports = module.exports = {
 					description: data.description,
           			source: data.site_name,
           			image: (data.image) ? data.image.url : ''
-				}
+				};
+
+				res.status(200).json(link);
 			})
+			.fail(function (err) {
+				if (err.message !== 'Stop promise chain') {
+          		console.log(err);
+          		next(err);
+        }
+			})
+
 	}
 
 }
