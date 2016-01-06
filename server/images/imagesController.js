@@ -99,6 +99,7 @@ exports = module.exports = {
 	},
 
 	postUrl: function(req, res, next) {
+
 	},
 
 	randomImage: function(req, res, next) {
@@ -199,6 +200,9 @@ exports = module.exports = {
 		          console.error('error inserting vote into votes table: ', err);
 		        }
 		        else{
+		        	client.query("SELECT flag FROM votes WHERE image_id = $1", [imageId], function(err, result){
+		        		console.log(result)
+		        	})
 		          res.status(201).json({result: result.rows});
 		          done();
 		        }
