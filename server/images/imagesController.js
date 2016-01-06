@@ -276,10 +276,6 @@ exports = module.exports = {
 		var url = req.body.url;
 		var user_id = req.body.user_id;
 
-		if( ! util.isValidUrl(url) ) {
-			return next(new Error('Not a valid URL'));
-		}
-
 		if( ! util.isSafeUrl(url) ) {
 			res.status(403).send({error: 'Malicious site'})
 		}
