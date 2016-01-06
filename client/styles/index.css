@@ -11,6 +11,7 @@ a {
   display: inline;
 	font-family: 'Catamaran', serif;
 }
+
 .sign-in-up-title {
  font-family: 'Catamaran', serif; 
 }
@@ -19,9 +20,26 @@ input {
   font-family: "Catamaran", serif;
 }
 .btn {
-  font-family: 'Catamaran', serif;
+  font-family: 'Catamaran', seri
+}
+.form-div {
+  width: 100%;
+  height: 500px;
+  margin: -50px 0 0 0;
 }
 
+.message-error {
+  height: 35px;
+  width: 280px;
+  background-color: #d63049;
+  color: white;
+  border-radius: 2px;
+  font-family: 'Catamaran', cursive;
+  text-align: center;
+  line-height: 35px;
+  font-size: 1.3em;
+  margin: 14px 0px;
+}
 .clean {
   margin: 20px;
 }
@@ -29,7 +47,11 @@ input {
 .clear {
   margin-top: 53px;
 }
-
+.header-logo {
+  height: 190px;
+  width: 62%;
+  margin: auto;
+}
 .main {
   background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
   background-repeat: no-repeat;
@@ -37,8 +59,6 @@ input {
   padding-top: 500px;
   width: 50%;
  }
-
-
 
 .nav {
   margin-right: 40px;
@@ -134,8 +154,9 @@ a:hover, a:link {
 
 .logo {
   width: 97%;
-  margin: -420px 0px -475px 0px;
+  margin: -350px 0 0 0;
 }
+
 
 .closetbuttons {
   display: inline;
@@ -196,7 +217,7 @@ input::-webkit-input-placeholder{
 
 .vote-no-images-text{
   color: black;
-  font-family: Gill Sans, sans-serif;
+  font-family: 'Catamaran', sans-serif;
   color: purple;
   font-size: 2em;
 }
