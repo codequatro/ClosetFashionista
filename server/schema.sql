@@ -39,6 +39,7 @@ CREATE TABLE votes (
   upvote INTEGER,
   downvote INTEGER,
   flag INTEGER,
+  gender varchar(10),
   PRIMARY KEY (user_id, image_id)
 );
 
@@ -74,6 +75,7 @@ CREATE TABLE users (
   firstname varchar(30),
   lastname varchar(30),
   gender varchar(10),
+  credibilityScore INTEGER,
   PRIMARY KEY (user_id)
 );
 
@@ -122,7 +124,7 @@ insert into clothing_types (type_id, description) values (4, 'outfit');
 -- Test Data
 -- ---
 
-insert into users (username, password) values ('Tarly', '1234');
+insert into users (username, password, firstname, lastname, gender) values ('Tarly', '1234', 'Tarly', 'Fass', 'male');
 
 -- INSERT INTO votes (user_id,image_id,vote) VALUES
 -- ('','','');
