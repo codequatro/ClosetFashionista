@@ -39,7 +39,7 @@ CREATE TABLE votes (
   upvote INTEGER,
   downvote INTEGER,
   flag INTEGER,
-  gender INTEGER,
+  gender varchar(10),
   PRIMARY KEY (user_id, image_id)
 );
 

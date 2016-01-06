@@ -24,7 +24,7 @@ angular.module('myApp')
             $scope.lastname = data.lastname;
             $scope.gender = data.gender;
             $scope.userCredibility = data.userCredibility;
-        }
+        })
     };
 
     $scope.getImage = function(){
