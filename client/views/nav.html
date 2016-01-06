@@ -24,11 +24,14 @@
 			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
 			<h2>Second Modal</h2>
 			<form name="postImage" ng-submit='postImage(link)' novalidate>
-				<img ng-src='{{ image_Url }}' />
+				<img ng-src='{{ image }}' />
 				<p>{{ image_name }}</p>
 				<p>{{ link_Url }}</p>
+				<p>{{ source }}</p>
 			</form>
 		</div>
 		</div>
 
 </div>
+
+
