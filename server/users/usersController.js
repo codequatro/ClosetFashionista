@@ -50,6 +50,27 @@ exports = module.exports = {
 	})
   },
 
+  updateUserInfo: function(req, res, next) {
+  	var userID = req.body.userID;
+  	var username = req.body.username;
+	var firstname = req.body.firstname;
+	var lastname = req.body.lastname;
+	client.query('UPDATE users SET username = $2, firstname = $3, lastname = $4, WHERE user_id = $1', [userID, username, firstname, lastname])
+	client.query('SELECT username, firstname, lastname FROM users WHERE user_id = $1', [userID], function (err, result){
+		if(err) {
+	    	console.error('error on lookup of user_id: ', err)
+	    } else {
+			var userInfo = {
+				username: username,
+				firstname: firstname,
+				lastname: lastname
+			};
+			res.status(200).json(userInfo);
+			done();
+	    }
+	})
+  },
+
   getUserInfo: function(req, res, next) {
 	var username = req.body.username;
 	//create an object to send back to client
@@ -62,7 +83,7 @@ exports = module.exports = {
 	else {
 	  client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
 	    if(err) {
-	      console.error('error on lookup of user_id', err)
+	      console.error('error on lookup of user_id: ', err)
 	    }
 	    else {
 			var userId = result.rows[0].user_id;
@@ -81,7 +102,7 @@ exports = module.exports = {
 			    //grab all of the votes for each user pic
 			    client.query('SELECT images.image_name, images.image_id, votes.gender, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
 			        if(err) {
-			        	console.error('error fetching votes', err);
+			        	console.error('error fetching votes: ', err);
 			    	} else {
 						userInfo.votes = result.rows;
 						userInfo.userCredibility = 0;
