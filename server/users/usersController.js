@@ -24,7 +24,7 @@ exports = module.exports = {
 				    var password = result.rows[0].password;
 				    if(attemptedPassword === password) {
 				      var token = jwt.encode(result.rows[0].password, 'secret');
-				      res.status(200).json({ token: token, username: username });
+				      res.status(200).json({ token: token, username: username, userID: user_id });
 				    } else {
 				      res.status(401).json({ answer: 'Invalid Password' });
 				    }
@@ -48,7 +48,7 @@ exports = module.exports = {
 				  if(err) {
 				    console.log('not cool man. database error on signup: ', err)
 				  } else {
-				    res.status(201).json({ username: username }) // removed token as was undefined for signup
+				    res.status(201).json({ username: username, userID: user_id }) // removed token as was undefined for signup
 				    done();
 				  }
 				})	
