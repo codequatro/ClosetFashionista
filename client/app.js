@@ -139,12 +139,12 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(voteValue, username, imageId, gender){
+    register.vote = function(voteValue, username, imageId){
       console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
         url: 'images/vote',
-        data: {voteValue: voteValue, username: username, imageId: imageId, gender: gender}
+        data: {voteValue: voteValue, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;
@@ -154,8 +154,17 @@ angular.module('myApp', [
 
     /*****************GET ALL IMAGES*******************/
 
+    register.getAllImages = function() {
+      return $http({
+        method: 'GET',
+        url: 'images/getAllImages'
+      })
+      .then(function(data) {
+        return data; 
+      })
+    };
+
      register.getImageData = function(link) {
-      console.log('here')
       return $http({
         method: 'GET', 
         url: 'images/getAllImages',
@@ -166,11 +175,11 @@ angular.module('myApp', [
       })
     };
 
-    register.postImage = function(link) {
+    register.postImage = function(data) {
       return $http({
         method: 'POST',
         url: 'images/postimage',
-        data: link
+        data: data
       }).then(function(res) {
         return res.data; 
       })
@@ -216,4 +225,6 @@ angular.module('myApp', [
   })
 
 ; // end of app.js
+
+
 
