@@ -219,14 +219,12 @@ exports = module.exports = {
 	        if(err) {
 	       		console.error('error fetching all images: ', err);
 	        } else {
-	        	console.log(result)
 	          allImages.pics = result.rows;
 	            //grab all of the votes for each user pic
-	            client.query('SELECT images.image_name, votes.upvote, votes.downvote, votes.flag FROM images INNER JOIN votes ON images.image_id = votes.image_id', function(err, result){
+	            client.query('SELECT images.image_name, images.image_id, votes.gender, votes.upvote, votes.downvote, votes.flag FROM images INNER JOIN votes ON images.image_id = votes.image_id', function(err, result){
 	                if(err) {
 	                	console.error('error fetching votes', err);
 	                } else {
-	                  	allImages.votes = result.rows;
 						// Calculate votes for each pictures and user credibility			          
 						for (var i = 0; i < result.rows.length; i++) {
 							if (result.rows[i].upvote === 1) {
@@ -253,6 +251,13 @@ exports = module.exports = {
 								}
 							}
 						}
+						allImages.pics.sort(function(a, b){
+							var upvotesA = a.upvotes;
+							var upvotesB = b.upvotes;
+					    	if(upvotesA > upvotesB) return -1;
+					    	if(upvotesA < upvotesB) return 1;
+					    	return 0;
+						})
 						res.status(200).json(allImages);
 						done();
 	                }
