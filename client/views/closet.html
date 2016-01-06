@@ -1,12 +1,12 @@
-<div class='closet container' ng-controller="ClosetCtrl">
+<div class='closet container col-md-12' ng-controller="ClosetCtrl">
 
 <h1>welcome to your closet</h1>
 
-<div class='closetform container'>
-  <h3>add to your closet:</h3>
+<div class='closetform row'>
+  <!-- <h3>add to your closet:</h3> -->
 
-  <div class='imageupload'>
-    <form action="/postimage" method="post" enctype="multipart/form-data" class= 'closetform'>
+  <div class='col-md-4  imageupload'>
+    <form action="/postimage" method="post" enctype="multipart/form-data" class='closetform'>
         <input type="file" name="upload" multiple="multiple">
         <br><br>
         <input type="submit" value="Upload File" class="pure-button">
@@ -21,7 +21,7 @@
       </form>
     </div>
 
-    <div class='clothingfilter'>
+    <div class='container col-md-12 col-md-offset-4 clothingfilter'>
       <h3>filter your closet:</h3>
        <select class="filtermenu" name="search" ng-model="search">
           <option ng-selected="true" value="-1">all</option>

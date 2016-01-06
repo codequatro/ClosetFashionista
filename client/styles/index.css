@@ -21,9 +21,6 @@ input {
 .btn {
   font-family: 'Catamaran', serif;
 }
-.container.header {
-  margin-left: 300px;
-}
 
 .clean {
   margin: 20px;
@@ -41,9 +38,7 @@ input {
   width: 50%;
  }
 
-.container {
-   height: 120px;
- }
+
 .nav {
   margin-right: 40px;
   font-size: 1.2em;
