@@ -54,49 +54,54 @@ exports = module.exports = {
 	})
   },
 
-  closet: function(req, res, next) {
+  getUserInfo: function(req, res, next) {
 	var username = req.body.username;
 	//create an object to send back to client
-	var closetItems = {};
+	var userInfo = {};
 
 	pg.connect(connectString, function (err, client, done) {
 	if(err){
 	  console.error('error connecting to the DB:', err);
 	}
 	else {
-	  client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+	  client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
 	    if(err){
 	      console.error('error on lookup of user_id', err)
 	    }
 	    else {
-	      var userId = result.rows[0].user_id;
-	      //get all of the current users images
-	      client.query('SELECT image_name, image_id, type_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
-	        if(err){
-	          console.error('error fetching closet images: ', err);
-	        }
-	        else{
-	          closetItems.pics = result.rows;
+			var userId = result.rows[0].user_id;
+			userInfo.userID = result.rows[0].user_id;
+			userInfo.username = result.rows[0].username;
+			userInfo.firstname = result.rows[0].firstname;
+			userInfo.lastname = result.rows[0].lastname;
+			userInfo.gender = result.rows[0].gender;
+			//get all of the current users images
+			client.query('SELECT image_name, image_id, type_id FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
+			if(err){
+			  console.error('error fetching closet images: ', err);
+			}
+			else{
+			  userInfo.pics = result.rows;
 
-	            //grab all of the votes for each user pic
-	            client.query('SELECT images.image_name, votes.upvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
-	                if(err){
-	                  console.error('error fetching votes', err);
-	                }
-	                else{
-	                  closetItems.votes = result.rows;
-	                  res.status(200).json(closetItems);
-	                  done();
-	                }
-	            });
-	          }
-	      });//second client query
+			    //grab all of the votes for each user pic
+			    client.query('SELECT images.image_name, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+			        if(err){
+			          console.error('error fetching votes', err);
+			        }
+			        else{
+			          userInfo.votes = result.rows;
+			          res.status(200).json(userInfo);
+			          done();
+			        }
+			    });
+			  }
+			});// end of user images query
 	    }
-	  });//first client query
+	  });//end of userInfo query
 	}
 	}); //pg.connect
   	
-  }
+  },
 
 
 
