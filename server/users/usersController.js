@@ -150,4 +150,16 @@ exports = module.exports = {
 	}); //pg.connect
   },
 
+  getAllUsers: function(req, res, next) {
+	client.query('SELECT user_id, username, firstname, lastname, gender, credibilityScore FROM users', [], function (err, result){
+		if(err) {
+	    	console.error('error on lookup of top users: ', err)
+	    } else {
+			allUsers = result.rows;
+			res.status(200).json(allUsers);
+			done();
+	    }
+	})	
+  }
+
 }
