@@ -27,6 +27,175 @@ h2 {
 }
 
 .main {
+  /*background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);*/
+  background-repeat: no-repeat;
+  margin:0 auto;
+  padding-top: 500px;
+  width: 50%;
+ }
+
+ .vote {
+  text-align: center;
+  margin:0 auto;
+  width: 50%;
+ }
+
+a:hover, a:link {
+  text-decoration: none;
+}
+
+.navbar .btn {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  padding: 5px;
+  font-size: 25px;
+  font-variant: small-caps;
+  text-align: center;
+  padding-left: 10px;
+}
+
+.navbar {
+  height: 75px;
+  background: rgba(0,0,0,0.0);
+}
+
+.btn:hover{
+  color: gray;
+}
+
+.image {
+  margin: 50px 15px;
+  max-width: 500px;
+}
+
+.closetPic {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+  position: relative;
+  border: 3px solid #000;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.percentage {
+  font-size: 14px;
+  font-weight: 700;
+  margin: auto;
+  bottom: 50px;
+  line-height: 60px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #000;
+  border-bottom: 5px solid #000;
+  text-align: center;
+}
+
+.remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+}
+
+.fire {
+  width: 20px;
+  height: 20px;
+}
+
+.voteButton {
+  max-height: 40px;
+  max-width: 40px;
+  margin-right: 20px;
+}
+
+#delete {
+  max-height: 25px;
+  max-width: 25px;
+}
+
+#delete:hover {
+  max-height: 70px;
+  max-width: 70px;
+}
+
+.closet {
+  text-align: center;
+}
+
+.closetbuttons {
+  display: inline;
+}
+
+.closetform {
+  text-align: left;
+}
+
+.imageupload {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.clothingfilter {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  float: right;
+  padding-right: 200px;
+  bottom: 60px;
+}
+
+.signin {
+  padding-left: 10px;
+}
+
+.signup {
+  padding-left: 10px;
+}
+
+.already {
+  padding-left: 10px;
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+  font-size: 20px;
+}
+body { 
+  background-image: url(closet.png);
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+h1 {
+  text-align: center;
+  display: inline;
+	color: black;
+	font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+  bottom: 50px;
+  padding-left: 10px;
+}
+
+h3 {
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+}
+
+h2 {
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+}
+
+.main {
   background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
   background-repeat: no-repeat;
   margin:0 auto;
