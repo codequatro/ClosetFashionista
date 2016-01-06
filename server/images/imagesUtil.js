@@ -5,6 +5,22 @@ var Q = require('q');
 var querystring = require('querystring');
 var urlModule = require('url');
 
+const SAFE_BROWSING_API = 'https://sb-ssl.google.com/safebrowsing/api/lookup';
+
+// API key for Google Safe Browsing
+const SAFE_BROWSING_KEY = 'AIzaSyAeqpm0ri9bnL0MGPwUYN9PtwtFFw_766s';
+
+// Base string for the url to Google's Safe Browsing API.
+var safeBrowsingUrl = 'https://sb-ssl.google.com/safebrowsing/api/lookup?' +
+	querystring.stringify({
+		client: 'eureka-1178',
+  	key: 'AIzaSyAeqpm0ri9bnL0MGPwUYN9PtwtFFw_766s',
+  	appver: '1.0.0',
+  	pver: '3.1'
+	}
+);
+
+// Regexp object to test whether a string is a valid url.
 var rValidUrl = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
 
 var shorthandProperties = {
@@ -12,9 +28,9 @@ var shorthandProperties = {
 	"video": "video:url",
 	"audio": "audio:url"
 }
-//check if URL is valid
+
 exports.isValidUrl = function(url) {
-	return url.match(rValidUrl);
+  return url.match(rValidUrl);
 }
 
 // Asynchronously screen a url through Google's Safe Browsing api.
@@ -47,21 +63,22 @@ exports.isSafeUrl = function(url) {
 // https://www.npmjs.com/package/open-graph
 
 // Get open-graph data for a url.
-exports.getMetaData = function() {
-	var deferred = Q.defer();
+exports.getMetaData = function(url, options){
+  var deferred = Q.defer();
+  console.log('Getting meta data for %s', url);
 
-	exports.getHTML(url)
-		.then(function(html) {
-			var data = exports.parseMetaData(html, options);
-			data = exports.formatMetaData(data, html);
-			deferred.resolve(data);
-		})
-		.fail(function(err) {
-			console.log('Failed to get meta data for %s\n', url, err);
-			deferred.reject(err);
-		})
+  exports.getHTML(url)
+  	.then(function(html){
+	    var data = exports.parseMetaData(html, options);
+	    data = exports.formatMetaData(data, html);
+	    deferred.resolve(data);
+	  })
+  	.fail(function(err) {
+  		console.log('Failed to get meta data for %s\n', url, err);
+      deferred.reject(err);
+    })
 
-	return deferred.promise;
+  return deferred.promise;
 }
 
 // Return the response from a GET request.
@@ -257,3 +274,9 @@ exports.formatMetaData = function(data, html) {
 
 	return data;
 }
+
+// Tests:
+// Should be good:
+// exports.isSafeUrl('http://google.com/');
+// Should be bad:
+// exports.isSafeUrl('http://ianfette.org/');

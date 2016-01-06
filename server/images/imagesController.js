@@ -272,11 +272,11 @@ exports = module.exports = {
 		}); //pg.connect
 	},
 
-	getImageData: function (req, res, next) {
+	collectUrlData: function (req, res, next) {
 		var url = req.body.url;
 		var user_id = req.body.user_id;
 
-		if( ! util.isValid(url) ) {
+		if( ! util.isValidUrl(url) ) {
 			return next(new Error('Not a valid URL'));
 		}
 
@@ -287,7 +287,7 @@ exports = module.exports = {
 		util.getMetaData(url)
 			.then(function (data) {
 				var link = {
-					url: link_url,
+					link_url: url,
 					user_id: user_id,
 					image_name: data.title,
 					description: data.description,
