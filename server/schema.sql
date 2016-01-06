@@ -55,7 +55,7 @@ CREATE TABLE images (
   user_id INTEGER,
   type_id INTEGER,
   image_name varchar(200),
-  image_url TEXT,
+  image TEXT,
   link_url TEXT,
   source varchar(50),
   PRIMARY KEY (image_id)
