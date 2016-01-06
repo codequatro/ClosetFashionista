@@ -13,5 +13,25 @@ angular.module('myApp')
       $window.localStorage.removeItem(username)
     }
 
+    // $scope.getImageData = function(link) {
+    // 	$http({
+    // 		method: 'GET', 
+    // 		url: 'images/getImageData',
+    // 		data: link
+    // 	}).then(function(res) {
+    // 		console.log('success')
+    // 	})
+
+
+    // }
+
+    
+
+    // $scope.getAllImages = function() {
+    // 	$http({
+    // 		method:
+    // 	})
+    // }
+
    $scope.isAuth=Authorization.authorized;
   }]);

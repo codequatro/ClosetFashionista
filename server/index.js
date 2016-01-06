@@ -1,8 +1,37 @@
+/*
+  - To create local postgres db (first run only):
+    - Linux:
+      initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
+    - Mac:
+      initdb db; sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
+    - Windows:
+      initdb db
+      postgres -D db
+
+  - Then in another Terminal window: 
+    - Unix:
+      createdb closet; psql closet < server/schema.sql
+    - Windows:
+      createdb -U postgres closet
+      psql -U postgres closet < server/schema.sql
+
+  - For Windows, change the postgres password
+*/ 
+
+/* 
+  - To start postgres server:
+    - Linux:
+      sudo chown -R $USER:users /run/postgresql; postgres -D db
+    - Mac:
+      sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
+    - Windows:
+      postgres -D db
+*/
+
 var express = require('express');
 var Path = require('path');
 var routes = express.Router();
 var pg = require('pg');
-var connectString = process.env.DATABASE_URL || 'postgres://localhost:5432/closet';
 var knex = require('knex');
 var jwt = require('jwt-simple');
 var bodyParser = require('body-parser');
@@ -10,6 +39,14 @@ var formidable = require('formidable');
 var util = require('util');
 var fs   = require('fs-extra');
 var AWS = require('aws-sdk');
+var bcrypt = require('bcrypt-nodejs');
+var Q = require('q');
+var cheerio = require('cheerio');
+
+var connectString = process.env.DATABASE_URL ||
+  ( /^win/.test(process.platform) )
+    ? 'postgres://postgres:password@localhost:5432/closet'
+    : connectString;
 
 //
 //route to your index.html
@@ -19,7 +56,7 @@ routes.use(express.static(assetFolder));
 
 // User route SIGNIN
 // need better error handling for bad username
-routes.post('/signin', function (req, res){
+routes.post('/users/signin', function (req, res){
   var attemptedUsername = req.body.username;
   var attemptedPassword = req.body.password;
   pg.connect(connectString, function (err, client, done){
@@ -28,7 +65,7 @@ routes.post('/signin', function (req, res){
     }
     client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
       if(result.rows.length === 0){
-        res.status(401).json({answer: 'invalid username'});
+        res.status(401).json({answer: 'Invalid Username'});
       }
       else
       {
@@ -39,7 +76,7 @@ routes.post('/signin', function (req, res){
           res.status(200).json({token: token, username: username})
           }
         else {
-          res.status(401).json({answer: 'invalid password'})
+          res.status(401).json({answer: 'Invalid Password'})
           }
       }
     })
@@ -48,16 +85,19 @@ routes.post('/signin', function (req, res){
 
 
 /*User route SIGNUP*/
-routes.post('/signup', function (req, res){
+routes.post('/users/signup', function (req, res){
   var username = req.body.username;
   var password = req.body.password;
+  var firstname = req.body.firstname;
+  var lastname = req.body.lastname;
+  var gender = req.body.gender;
   pg.connect(connectString, function (err, client, done){
     if(err){
       console.error(err);
     }
     client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
       if(err){
-        console.log('database error on signup')
+        console.log('not cool man. database error on signup')
         console.error(err);
       } else {
         res.status(201).json({username: username}) // removed token as was undefined for signup
@@ -160,7 +200,7 @@ routes.post('/randomimage', function (req, res){
 });
 
 //get all the user's photos
-routes.post('/closet', function (req, res){
+routes.post('/users/closet', function (req, res){
   var username = req.body.username;
   //create an object to send back to client
   var closetItems = {};

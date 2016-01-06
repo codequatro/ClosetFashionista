@@ -22,13 +22,23 @@ angular.module('myApp')
         $state.go('closet')
 
       })
+      .catch(function (error) {
+        $scope.signinErr = true;
+        $scope.signinTxt = error.data.error ||
+                           error.data.answer ||
+                           'Signin error';
+        console.error('Message: ', $scope.signinTxt);
+      });
     }
 
     $scope.signup = function() {
       var username = $scope.user.username;
       var password = $scope.user.password;
+      var firstname = $scope.user.firstname;
+      var lastname = $scope.user.lastname;
+      var gender = $scope.user.gender;
 
-      var user = {username: username, password: password}
+      var user = {username: username, password: password, firstname: firstname, lastname: lastname, gender: gender}
 
       Register.register.signup(user)
       .then(function(data){

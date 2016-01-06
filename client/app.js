@@ -6,7 +6,7 @@ angular.module('myApp', [
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/closet');
 
     $stateProvider
 
@@ -107,7 +107,7 @@ angular.module('myApp', [
     register.signup = function(user) {
       return $http({
         method: 'POST',
-        url: '/signup',
+        url: 'users/signup',
         data: user
       })
       .then(function(resp){
@@ -118,7 +118,7 @@ angular.module('myApp', [
     register.signin = function(user){
       return $http({
         method: 'POST',
-        url: '/signin',
+        url: 'users/signin',
         data: user
       })
       .then(function(resp){
@@ -131,7 +131,7 @@ angular.module('myApp', [
     register.randomImage = function(username){
       return $http({
         method: 'POST',
-        url: '/randomimage',
+        url: 'images/randomimage',
         data: {username: username}
       })
       .then(function(resp){
@@ -139,12 +139,12 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(hotOrNot, username, imageId){
+    register.vote = function(voteValue, username, imageId){
       console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
-        url: '/vote',
-        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
+        url: 'images/vote',
+        data: {voteValue: voteValue, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;
@@ -152,11 +152,34 @@ angular.module('myApp', [
     }
     /*****************VOTING ON IMAGE*******************/
 
+    /*****************GET ALL IMAGES*******************/
+
+     register.getImageData = function(link) {
+      console.log('here')
+      return $http({
+        method: 'GET', 
+        url: 'images/getAllImages',
+        data: link
+      }).then(function(res) {
+        console.log('success', res);
+        return res.data;
+      })
+    };
+
+    register.postImage = function(link) {
+      return $http({
+        method: 'POST',
+        url: 'images/postimage',
+        data: link
+      }).then(function(res) {
+        return res.data; 
+      })
+    }
     /*************GET CLOSET IMAGES********************/
     register.getCloset = function(user){
       return $http({
         method: 'POST',
-        url: '/closet',
+        url: 'users/closet',
         data: {username: user}
       })
       .then(function(resp){
@@ -167,7 +190,7 @@ angular.module('myApp', [
     register.removeImage = function(imageId, imageName){
       return $http({
         method: 'POST',
-        url: '/removeimage',
+        url: 'images/removeimage',
         data: {imageId: imageId, imageName: imageName}
       })
       .then(function(resp){
