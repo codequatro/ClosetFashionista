@@ -70,9 +70,9 @@ routes.post('/signup', function (req, res){
 routes.post('/postimage', function (req, res){
 
   var form = new formidable.IncomingForm();
-  if(req.body.image){console.log(req.body);}
+  //console.log(req.body);
   form.parse(req, function(err, fields, files) {
-
+    console.log("files", fields);
     //this is not the right way to go about it. url gets weird
     //NEED TO FIX
 
@@ -85,7 +85,7 @@ routes.post('/postimage', function (req, res){
   var myFields = {};
   form.on('field', function(field, value){
     myFields[field] = value;
-    console.log('fields in form.on', myFields);
+    //console.log('fields in form.on', myFields);
   });
 
   form.on('end', function(fields, files) {

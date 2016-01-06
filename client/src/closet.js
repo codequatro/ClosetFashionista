@@ -6,8 +6,6 @@ angular.module('myApp')
     $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
     $scope.search = "-1";
-    $scope.video, $scope.image;
-    $scope.channel = {};
 
     $scope.getCloset = function(){
 
@@ -53,55 +51,25 @@ angular.module('myApp')
     $scope.customFilter = function (pic) {
       if (pic.type_id === parseInt($scope.search)) {
         return true;
-      }
-      else if (parseInt($scope.search) === -1) {
+      }else if (parseInt($scope.search) === -1) {
         return true;
-      }
-      else {
+      }else {
         return false;
       }
     };
 
-    
-    $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
-    $scope.myChannel = {};
 
-    $scope.onSuccess = function () {
-        // The video element contains the captured camera data
-        $scope.video = $scope.channel.video;
-        $scope.$apply(function() {
-            $scope.patOpts.w = $scope.video.width;
-            $scope.patOpts.h = $scope.video.height;
-            $scope.showDemos = true;
-        });
-    };
+    $scope.showCamera = function(){
+      $window.init()
+      $scope.webcam = true;
+    }
 
+    $scope.takePhoto = function(){
+      $window.capture();
+      $scope.webcamLink = true;
+      $scope.image = $window.captured;
+    }
 
-    $scope.makeSnapshot = function makeSnapshot() {
-        if ($scope.video) {
-            var patCanvas = document.querySelector('#snapshot');
-            if (!patCanvas) return;
-
-            patCanvas.width = $scope.video.width;
-            patCanvas.height = $scope.video.height;
-            var ctxPat = patCanvas.getContext('2d');
-
-            var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
-            ctxPat.putImageData(idata, 0, 0);
-
-            $scope.image = patCanvas.toDataURL();
-            console.log($scope.image);
-        }
-    };
-
-    var getVideoData = function getVideoData(x, y, w, h) {
-        var hiddenCanvas = document.createElement('canvas');
-        hiddenCanvas.width = $scope.video.width;
-        hiddenCanvas.height = $scope.video.height;
-        var ctx = hiddenCanvas.getContext('2d');
-        ctx.drawImage($scope.video, 0, 0, $scope.video.width, $scope.video.height);
-        return ctx.getImageData(x, y, w, h);
-    };
 
 
     // initialize page with closet images if auth is good
