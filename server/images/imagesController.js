@@ -11,6 +11,7 @@ var fs   = require('fs-extra');
 var AWS = require('aws-sdk');
 var bcrypt = require('bcrypt-nodejs');
 var cheerio = require('cheerio');
+var util = require('./imagesUtil.js');
 
 var fsCopy = Q.nbind(fs.copy, fs);
 
