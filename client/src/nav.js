@@ -4,6 +4,9 @@ angular.module('myApp')
   .controller('NavCtrl', ['$scope','$window', 'Authorization', 'Register', function($scope, $window, Authorization, Register) {
    $scope.isAuth=Authorization.authorized;
 
+   // data storage
+   // $scope.userID = $window.localStorage.getItem('userID');
+
    	$scope.firstModalShow = true;
 	$scope.changeFirstModal = function() {
 		$scope.firstModalShow = $scope.firstModalShow === false ? true : false;
@@ -15,11 +18,13 @@ angular.module('myApp')
 	};
 
 	$scope.getImageData = function(link) {
-    	Register.register.getImageData(link)
+    	Register.register.getImageData({ url: link, user_id: $scope.userID })
     	.then(function(data) {
-    		$scope.image_name = data.pics[0].image_name;
-    		$scope.image_Url = data.pics[0].image_Url;
-    		$scope.link_Url = data.pics[0].link_Url;
+    		$scope.image_name = data.image_name;
+    		$scope.image = data.image;
+    		$scope.link_url = data.link_url;
+    		$scope.source = data.source;
+    		$scope.user_id = data.user_id;
     		$scope.changeFirstModal();
     		$scope.changeSecondModal();
     		console.log('getImageData', data)

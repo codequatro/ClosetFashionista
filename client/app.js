@@ -166,8 +166,8 @@ angular.module('myApp', [
 
      register.getImageData = function(link) {
       return $http({
-        method: 'GET', 
-        url: 'images/getAllImages',
+        method: 'POST', 
+        url: 'images/getImageData',
         data: link
       }).then(function(res) {
         console.log('success', res);

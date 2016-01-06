@@ -9,7 +9,7 @@ module.exports = function (app) {
 	app.post('/postimage', imagesController.postImage);
 	app.post('/randomimage', imagesController.randomImage);
 	app.post('/removeimage', imagesController.removeImage);
-	app.post('/vote', imagesController.vote);
 	app.post('/getImageData', imagesController.collectUrlData);
+	app.post('/vote', imagesController.vote);
 
 };
