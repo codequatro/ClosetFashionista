@@ -121,6 +121,11 @@ a:hover, a:link {
   text-align: center;
 }
 
+.logo {
+  width: 97%;
+  margin: -420px 0px -475px 0px;
+}
+
 .closetbuttons {
   display: inline;
 }
