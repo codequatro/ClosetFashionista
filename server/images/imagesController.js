@@ -95,6 +95,9 @@ exports = module.exports = {
 		
 	},
 
+	postUrl: function(req, res, next) {
+	}
+
 	randomImage: function(req, res, next) {
 		var username = req.body.username;
 		pg.connect(connectString, function (err, client, done) {
@@ -237,7 +240,28 @@ exports = module.exports = {
 	},
 
 	getImageData: function (req, res, next) {
-		
+		var url = req.body.url;
+		var user_id = req.body.user_id;
+
+		if( ! util.isValid(url) ) {
+			return next(new Error('Not a valid URL'));
+		}
+
+		if( ! util.isSafeUrl(url) ) {
+			res.status(403).send({error: 'Malicious site'})
+		}
+			
+		util.getMetaData(url)
+			.then(function(data) {
+				var link = {
+					url: link_url,
+					user_id: user_id,
+					image_name: data.title,
+					description: data.description,
+          			source: data.site_name,
+          			image: (data.image) ? data.image.url : ''
+				}
+			})
 	}
 
 }
