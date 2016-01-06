@@ -3,31 +3,31 @@ body {
   background-repeat: no-repeat;
   background-size: cover; 
 }
-
-h1 {
+a {
+  font-family: "Catamaran", serif;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   text-align: center;
   display: inline;
-	color: black;
-	font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
-  bottom: 50px;
-  padding-left: 10px;
+	font-family: 'Catamaran', serif;
+}
+.sign-in-up-title {
+ font-family: 'Catamaran', serif; 
 }
 
-.container.header {
-  margin-left: 300px;
+input {
+  font-family: "Catamaran", serif;
+}
+.btn {
+  font-family: 'Catamaran', serif;
 }
 
-h3 {
-  color: black;
-  font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
+.clean {
+  margin: 20px;
 }
 
-h2 {
-  color: black;
-  font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
+.clear {
+  margin-top: 53px;
 }
 
 .main {
@@ -38,6 +38,13 @@ h2 {
   width: 50%;
  }
 
+
+
+.nav {
+  margin-right: 40px;
+  font-size: 1.2em;
+}
+
 .container {
    height: 120px;
 }
@@ -45,6 +52,7 @@ h2 {
 .navbar-default {
   height: 10px;
 }
+
 
 .vote {
   text-align: center;
@@ -56,24 +64,6 @@ a:hover, a:link {
   text-decoration: none;
 }
 
-.navbar .btn {
-  font-family: 'Playfair Display', serif;
-  color: black;
-  padding: 5px;
-  font-size: 25px;
-  font-variant: small-caps;
-  text-align: center;
-  padding-left: 10px;
-}
-
-.navbar {
-  height: 75px;
-  background: rgba(0,0,0,0.0);
-}
-
-.btn:hover{
-  color: gray;
-}
 
 .image {
   margin: 50px 15px;
@@ -142,6 +132,11 @@ a:hover, a:link {
   text-align: center;
 }
 
+.logo {
+  width: 97%;
+  margin: -420px 0px -475px 0px;
+}
+
 .closetbuttons {
   display: inline;
 }
@@ -164,21 +159,18 @@ a:hover, a:link {
   bottom: 60px;
 }
 
-.signin {
-  padding-left: 10px;
-}
-
-.signup {
-  padding-left: 10px;
-}
-
 .already {
   padding-left: 10px;
   color: black;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Catamaran', serif;
   font-variant: small-caps;
   font-size: 20px;
 }
+
+
+input::-webkit-input-placeholder{
+   font-family: 'Catamaran', serif; 
+ }
 
 .vote {
   background-image: url('../img/voteThinker.jpg');

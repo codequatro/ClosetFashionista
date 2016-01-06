@@ -4,34 +4,30 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="client/styles/index.css">
-    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One|Dosis|Catamaran:400,200,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
-    <!-- 404 Not Found -->
-    <!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/i18n/defaults-*.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+   
   
+
   </head>
 
   <body ng-app="myApp">
-    <nav class='navbar'>
 
+        <nav class="navbar navbar-right">
+          <!-- <a class='navbar-brand-left navbar-brand' href="#"><img src="/img/logo.svg"></a> -->
+          <div ui-view="nav"></div>
+        </nav>
+    
+    
+         
+          
       
-
-      <div class="container">
-        <div ui-view="nav"></div>
-      </div>
-
-        <div class='row'>
-          <h1 class="col-md-2 col-centered"><a href="#">Closet Fashionista</a></h1>
-        </div>
 
 
       <div class="all">
         <div ui-view="main"></div>
       </div>
-    </nav>
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.26.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
