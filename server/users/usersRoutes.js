@@ -4,6 +4,7 @@ module.exports = function (app) {
   
 	// 'GET' requests
 	app.get('/allUsers', usersController.getAllUsers);
+	app.get('/topUsers', usersController.getTopUsers);
 
 	// 'POST' requests
 	app.post('/signin', usersController.signin);
