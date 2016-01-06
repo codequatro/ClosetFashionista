@@ -124,7 +124,7 @@ insert into clothing_types (type_id, description) values (4, 'outfit');
 -- Test Data
 -- ---
 
-insert into users (username, password) values ('Tarly', '1234');
+insert into users (username, password, firstname, lastname, gender) values ('Tarly', '1234', 'Tarly', 'Fass', 'male');
 
 -- INSERT INTO votes (user_id,image_id,vote) VALUES
 -- ('','','');
