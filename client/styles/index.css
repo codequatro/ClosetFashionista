@@ -34,12 +34,6 @@ h2 {
   width: 50%;
  }
 
- .vote {
-  text-align: center;
-  margin:0 auto;
-  width: 50%;
- }
-
 a:hover, a:link {
   text-decoration: none;
 }
@@ -166,4 +160,48 @@ a:hover, a:link {
   font-family: 'Playfair Display', serif;
   font-variant: small-caps;
   font-size: 20px;
+}
+
+.vote {
+  background-image: url('../img/voteThinker.jpg');
+  height: 1200px;
+}
+
+.vote-container{
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.vote-text-container{
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.vote-prompt-voting-text{
+  color: black;
+  font-family: 'Georgia', sans-serif;
+}
+
+.vote-no-images-text{
+  color: black;
+  font-family: Gill Sans, sans-serif;
+  color: purple;
+  font-size: 2em;
+}
+
+.vote-greeting{
+  color: black;
+  font-family: 'Didot', serif;
+  font-size: 2em;
+}
+
+.vote-image {
+  margin: 10px 0px 0px 0px;
+  /*margin-top: 10px;*/
+  -webkit-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  max-width: 500px;
+  border: 6px solid black;
 }

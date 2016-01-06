@@ -50,7 +50,7 @@ angular.module('myApp')
       })
     };
 
-    $scope.customFilter = function (pic) {
+    $scope.customPicTypeFilter = function (pic) {
       if (pic.type_id === parseInt($scope.search)) {
         return true;
       }
