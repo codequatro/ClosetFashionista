@@ -3,7 +3,7 @@
 angular.module('myApp')
   .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', 'Authorization', function($scope,$http,$window,$state, Register, Authorization) {
     $scope.header = 'You will find your closet here';
-    $scope.imageUrl = url;
+    // $scope.imageUrl = url;
     $scope.search = "-1";
     // $scope.fire = 'https://s-media-cache-ak0.pinimg.com/236x/4a/8b/c7/4a8bc790db90babc2d5346f07e516ddb.jpg';
 
