@@ -5,6 +5,7 @@ angular.module('myApp')
    $scope.isAuth=Authorization.authorized;
 
    // data storage
+  $scope.username = $window.localStorage.getItem('username');
 	$scope.userID = $window.localStorage.getItem('user_id');
 	$scope.image_name = undefined;
 	$scope.image = undefined;
