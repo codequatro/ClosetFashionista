@@ -159,10 +159,32 @@ exports = module.exports = {
 		pg.connect(connectString, function (err, client, done) {
 			client.query('SELECT user_id, username, firstname, lastname, gender, credibilityScore FROM users', [], function (err, result){
 				if(err) {
-			    	console.error('error on lookup of top users: ', err)
+			    	console.error('error on lookup of all users: ', err)
 			    } else {
 					allUsers = result.rows;
 					res.status(200).json(allUsers);
+					done();
+			    }
+			})	
+		}) // pg.connect end
+	},
+
+	getTopUsers: function(req, res, next) {
+		pg.connect(connectString, function (err, client, done) {
+			client.query('SELECT user_id, username, firstname, lastname, gender, credibilityScore FROM users', [], function (err, result){
+				if(err) {
+			    	console.error('error on lookup of top users: ', err)
+			    } else {
+					topUsers = result.rows;
+					// sort users by highest credibility score
+					topUsers.sort(function(a, b){
+						var scoreA = a.credibilityscore;
+						var scoreB = b.credibilityscore;
+					    if(scoreA > scoreB) return -1;
+					    if(scoreA < scoreB) return 1;
+					    return 0;
+					})
+					res.status(200).json(topUsers);
 					done();
 			    }
 			})	
