@@ -11,10 +11,10 @@ angular.module('myApp')
 
     // Temporary Data Storage
     $scope.username = $window.localStorage.getItem('username');
-    $scope.firstname = undefined; // will be set when 'getCloset' is run
-    $scope.lastname = undefined; // will be set when 'getCloset' is run
-    $scope.gender = undefined; // will be set when 'getCloset' is run
-    $scope.userCredibility = undefined; // will be set when 'getCloset' is run
+    $scope.firstname = undefined; // will be set when 'getUserInfo' is run
+    $scope.lastname = undefined; // will be set when 'getUserInfo' is run
+    $scope.gender = undefined; // will be set when 'getUserInfo' is run
+    $scope.userCredibility = undefined; // will be set when 'getUserInfo' is run
 
 
     $scope.getUserInfo = function(){
