@@ -13,7 +13,7 @@ angular.module('myApp')
       //Call the factory method which gets a users images and votes for those images
       Register.register.getCloset($scope.username)
       .then(function(data){
-
+        console.log(data)
         /*************this needs to be moved into the factory******************/
         $scope.pics = data.pics;  //data.pics is an array of the users images
         //for each picture, we have an inner for loop that checks every vote to see if it belongs to the current picture
