@@ -185,7 +185,7 @@ routes.post('/closet', function (req, res){
               closetItems.pics = result.rows;
 
                 //grab all of the votes for each user pic
-                client.query('SELECT images.image_name, votes.vote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+                client.query('SELECT images.image_name, votes.rating FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
                     if(err){
                       console.error('error fetching votes', err);
                     }
@@ -241,7 +241,7 @@ routes.post('/removeimage', function (req, res){
 
 routes.post('/vote', function (req, res){
   var username = req.body.username;
-  var hotOrNot = req.body.hotOrNot;
+  var rating = req.body.rating;
   var imageId = req.body.imageId;
   console.log('imageId', imageId);
   pg.connect(connectString, function (err, client, done) {
@@ -255,7 +255,7 @@ routes.post('/vote', function (req, res){
         }
         else {
           var userId = result.rows[0].user_id
-          client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
+          client.query('INSERT INTO votes (user_id, image_id, rating) VALUES ($1, $2, $3)',[userId, imageId, rating], function(err, result){
             if(err){
               console.error('error inserting vote into votes table: ', err);
             }

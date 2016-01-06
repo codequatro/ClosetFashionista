@@ -23,16 +23,18 @@ angular.module('myApp')
             //loop through every vote that belongs to one of the user's pictures
             for(var i = 0; i<data.votes.length; i++){
               var row = data.votes[i]; //data.votes is an array of objects, so this grabs the individual object
-              var vote = row["vote"]; //value is either a 1 for 'up' or 0 for 'down' vote
+              var rating = row["rating"]; //value is either a 1 for 'up' or 0 for 'down' vote
               var imageName = row["image_name"];
               if($scope.pics[j].image_name === imageName){
-                if(vote === 1){
-                  $scope.pics[j].yes += 1;
-                  $scope.pics[j].total += 1;
-                }
-                else{
-                  $scope.pics[j].total += 1;
-                }
+                // if(vote === 1){
+                //   $scope.pics[j].yes += 1;
+                //   $scope.pics[j].total += 1;
+                // }
+                // else{
+                //   $scope.pics[j].total += 1;
+                // }
+                scope.pics[j].stars += rating;
+                scope.pics[j].total += 1;
             }
           }//end first for loop
         }
