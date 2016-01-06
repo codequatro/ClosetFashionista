@@ -7,6 +7,13 @@
   <a class='btn' ui-sref='vote'>Want to Vote?  Start HERE!</a>
 </div> -->
 
+<div class='all_images' ng-repeat='image in images'>
+	<img ng-src='{{image.url}}'>
+	<h2 class='item_title'> {{ image.title }}</h2>
+	<h3 class='item_source'> {{ image.source }}</h3>
+	<h4 class='item_url'> {{ image.url }} </h4>
+</div>
 
 </div>
+
 

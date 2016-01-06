@@ -152,6 +152,29 @@ angular.module('myApp', [
     }
     /*****************VOTING ON IMAGE*******************/
 
+    /*****************GET ALL IMAGES*******************/
+
+     register.getImageData = function(link) {
+      console.log('here')
+      return $http({
+        method: 'GET', 
+        url: 'images/getAllImages',
+        data: link
+      }).then(function(res) {
+        console.log('success', res);
+        return res.data;
+      })
+    };
+
+    register.postImage = function(link) {
+      return $http({
+        method: 'POST',
+        url: 'images/postimage',
+        data: link
+      }).then(function(res) {
+        return res.data; 
+      })
+    }
     /*************GET CLOSET IMAGES********************/
     register.getCloset = function(user){
       return $http({
