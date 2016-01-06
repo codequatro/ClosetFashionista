@@ -4,31 +4,28 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="client/styles/index.css">
-    <link href='https://fonts.googleapis.com/css?family=Poiret+One|Dosis|Catamaran:400,200' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One|Dosis|Catamaran:400,200,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    
-   
-  
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
   </head>
 
   <body ng-app="myApp">
-    <nav class='navbar'>
 
-      
-      <div class="container">
-        <div ui-view="nav"></div>
-      </div>
 
-        <div class='row'>
-          <h1 class="col-md-2 col-centered"><a href="#">Closet Fashionista</a></h1>
+        <nav class="navbar navbar-right">
+          <div ui-view="nav"></div>
+        </nav>
+    
+        <div class='col-md-12'>
+          <div class="col-md-4 col-md-offset-4">  
+            <h1 class=""><a href="#">&nbsp&nbsp&nbsp&nbsp&nbspCloset Fashionista</a></h1>
+          </div>
         </div>
 
 
       <div class="all">
         <div ui-view="main"></div>
       </div>
-    </nav>
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.26.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
@@ -40,7 +37,6 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/ng-camera/webcamjs/webcam.js"></script>
     <script src="/bower_components/ng-camera/dist/ng-camera.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/client/app.js"></script>
     <script src="/client/src/nav.js"></script>
     <script src="/client/src/main.js"></script>

@@ -3,37 +3,34 @@ body {
   background-repeat: no-repeat;
   background-size: cover; 
 }
-
-h1, h2, h3, h4, h5, a {
+a {
+  font-family: "Catamaran", serif;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   text-align: center;
   display: inline;
-	color: black;
-	font-family: 'Poiret One', serif;
-  font-variant: small-caps;
-  bottom: 50px;
-  padding-left: 10px;
+	font-family: 'Catamaran', serif;
 }
+.sign-in-up-title {
+ font-family: 'Catamaran', serif; 
+}
+
+input {
+  font-family: "Catamaran", serif;
+}
+.btn {
+  font-family: 'Catamaran', serif;
+}
+.container.header {
+  margin-left: 300px;
+}
+
 .clean {
   margin: 20px;
 }
 
 .clear {
   margin-top: 53px;
-}
-.container.header {
-  margin-left: 300px;
-}
-
-h3 {
-  color: black;
-  font-family: 'Poiret One', serif;
-  font-variant: small-caps;
-}
-
-h2 {
-  color: black;
-  font-family: 'Poiret One', serif;
-  font-variant: small-caps;
 }
 
 .main {
@@ -43,13 +40,15 @@ h2 {
   padding-top: 500px;
   width: 50%;
  }
- .container {
+
+.container {
    height: 120px;
  }
-.navbar-default {
-  height: 10px;
+.nav {
+  margin-right: 40px;
+  font-size: 1.2em;
 }
- .vote {
+.vote {
   text-align: center;
   margin:0 auto;
   width: 50%;
@@ -59,24 +58,6 @@ a:hover, a:link {
   text-decoration: none;
 }
 
-.navbar .btn {
-  font-family: 'Poiret One', serif;
-  color: black;
-  padding: 5px;
-  font-size: 25px;
-  font-variant: small-caps;
-  text-align: center;
-  padding-left: 10px;
-}
-
-.navbar {
-  height: 75px;
-  background: rgba(0,0,0,0.0);
-}
-
-.btn:hover{
-  color: gray;
-}
 
 .image {
   margin: 50px 15px;
@@ -167,18 +148,14 @@ a:hover, a:link {
   bottom: 60px;
 }
 
-.signin {
-  padding-left: 10px;
-}
-
-.signup {
-  padding-left: 10px;
-}
-
 .already {
   padding-left: 10px;
   color: black;
-  font-family: 'Poiret One', serif;
+  font-family: 'Catamaran', serif;
   font-variant: small-caps;
   font-size: 20px;
+}
+
+input::-webkit-input-placeholder{
+   font-family: 'Catamaran', serif; 
 }
