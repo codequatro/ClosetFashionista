@@ -210,27 +210,51 @@ exports = module.exports = {
 		var allImages = {};
 
 		pg.connect(connectString, function (err, client, done) {
-		if(err){
+		if(err) {
 		  console.error('error connecting to the DB:', err);
 		}
 		else {
 	      //get all images
 	      client.query('SELECT * FROM images', function(err, result){
-	        if(err){
-	          console.error('error fetching all images: ', err);
-	        }
-	        else{
+	        if(err) {
+	       		console.error('error fetching all images: ', err);
+	        } else {
 	        	console.log(result)
 	          allImages.pics = result.rows;
 	            //grab all of the votes for each user pic
 	            client.query('SELECT images.image_name, votes.upvote, votes.downvote, votes.flag FROM images INNER JOIN votes ON images.image_id = votes.image_id', function(err, result){
-	                if(err){
-	                  console.error('error fetching votes', err);
-	                }
-	                else{
-	                  allImages.votes = result.rows;
-	                  res.status(200).json(allImages);
-	                  done();
+	                if(err) {
+	                	console.error('error fetching votes', err);
+	                } else {
+	                  	allImages.votes = result.rows;
+						// Calculate votes for each pictures and user credibility			          
+						for (var i = 0; i < result.rows.length; i++) {
+							if (result.rows[i].upvote === 1) {
+								for (var x = 0; x < allImages.pics.length; x++) {
+							  		if (!allImages.pics[x].upvotes) allImages.pics[x].upvotes = 0;
+							  		if (result.rows[i].image_id === allImages.pics[x].image_id) {
+							  			allImages.pics[x].upvotes++;
+							  			if (!allImages.pics[x].genderData) allImages.pics[x].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+									  		if (result.rows[i].gender === 'male') allImages.pics[x].genderData.male.upvotes++
+									  		if (result.rows[i].gender === 'female') allImages.pics[x].genderData.female.upvotes++
+									  		if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') allImages.pics[x].genderData.other.upvotes++
+							  		}
+							  	}
+							} else if (result.rows[i].downvote === 1) {
+								for (var y = 0; y < allImages.pics.length; y++) {
+									if (!allImages.pics[y].downvotes) allImages.pics[y].downvotes = 0;
+				  					if (result.rows[i].image_id === allImages.pics[y].image_id) {
+				  						allImages.pics[y].downvotes++;
+				  						if (!allImages.pics[y].genderData) allImages.pics[y].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+									  	if (result.rows[i].gender === 'male') allImages.pics[y].genderData.male.downvotes++
+									  	if (result.rows[i].gender === 'female') allImages.pics[y].genderData.female.downvotes++
+									  	if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') allImages.pics[y].genderData.other.downvotes++
+				  					}
+								}
+							}
+						}
+						res.status(200).json(allImages);
+						done();
 	                }
 	            });
 	          }
