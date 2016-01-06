@@ -4,10 +4,10 @@ angular.module('myApp')
 .controller('VoteCtrl', ['$scope','$http', '$window','Register', 'Authorization', function($scope, $http, $window, Register , Authorization) {
 $scope.updated = false;
 $scope.username = $window.localStorage.getItem('username');
-$scope.rating = null;
+$scope.rating = {};
 
 $scope.vote = function(){
-  Register.register.vote($scope.rating, $scope.username, $scope.imageId)
+  Register.register.vote(parseInt($scope.rating.value), $scope.username, $scope.imageId)
   .then(function(data){
     $scope.updated = true;
         $scope.getImage();

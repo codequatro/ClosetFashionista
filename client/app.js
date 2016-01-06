@@ -141,6 +141,7 @@ angular.module('myApp', [
 
     register.vote = function(rating, username, imageId){
       console.log('Factory Image ID', imageId);
+      console.log(rating);
       return $http({
         method: 'POST',
         url: '/vote',

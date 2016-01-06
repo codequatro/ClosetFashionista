@@ -244,6 +244,7 @@ routes.post('/vote', function (req, res){
   var rating = req.body.rating;
   var imageId = req.body.imageId;
   console.log('imageId', imageId);
+  console.log('rating', rating);
   pg.connect(connectString, function (err, client, done) {
     if(err){
       console.error('error connecting to the DB:', err);
@@ -260,6 +261,7 @@ routes.post('/vote', function (req, res){
               console.error('error inserting vote into votes table: ', err);
             }
             else{
+              console.log('inserted');
               res.status(201).json({result: result.rows});
               done();
             }
