@@ -1,7 +1,11 @@
 var Q = require('q');
 var jwt = require('jwt-simple');
 var pg = require('pg');
-var connectString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/closet';
+
+var connectString = process.env.DATABASE_URL ||
+  ( /^win/.test(process.platform) )
+    ? 'postgres://postgres:password@localhost:5432/closet'
+    : 'postgres://localhost:5432/closet';
 
 exports = module.exports = {
 
