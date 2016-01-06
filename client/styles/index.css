@@ -1,0 +1,218 @@
+body { 
+  background-image: url(../img/closet.png);
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+a {
+  font-family: "Catamaran", serif;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  display: inline;
+	font-family: 'Catamaran', serif;
+}
+.sign-in-up-title {
+ font-family: 'Catamaran', serif; 
+}
+
+input {
+  font-family: "Catamaran", serif;
+}
+.btn {
+  font-family: 'Catamaran', serif;
+}
+
+.clean {
+  margin: 20px;
+}
+
+.clear {
+  margin-top: 53px;
+}
+
+.main {
+  background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+  background-repeat: no-repeat;
+  margin:0 auto;
+  padding-top: 500px;
+  width: 50%;
+ }
+
+
+
+.nav {
+  margin-right: 40px;
+  font-size: 1.2em;
+}
+
+.container {
+   height: 120px;
+}
+
+.navbar-default {
+  height: 10px;
+}
+
+
+.vote {
+  text-align: center;
+  margin:0 auto;
+  width: 50%;
+}
+
+a:hover, a:link {
+  text-decoration: none;
+}
+
+
+.image {
+  margin: 50px 15px;
+  max-width: 500px;
+}
+
+.closetPic {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+  position: relative;
+  border: 3px solid #000;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.percentage {
+  font-size: 14px;
+  font-weight: 700;
+  margin: auto;
+  bottom: 50px;
+  line-height: 60px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #000;
+  border-bottom: 5px solid #000;
+  text-align: center;
+}
+
+.remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+}
+
+.fire {
+  width: 20px;
+  height: 20px;
+}
+
+.voteButton {
+  max-height: 40px;
+  max-width: 40px;
+  margin-right: 20px;
+}
+
+#delete {
+  max-height: 25px;
+  max-width: 25px;
+}
+
+#delete:hover {
+  max-height: 70px;
+  max-width: 70px;
+}
+
+.closet {
+  text-align: center;
+}
+
+.logo {
+  width: 97%;
+  margin: -420px 0px -475px 0px;
+}
+
+.closetbuttons {
+  display: inline;
+}
+
+.closetform {
+  text-align: left;
+}
+
+.imageupload {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.clothingfilter {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  float: right;
+  padding-right: 200px;
+  bottom: 60px;
+}
+
+.already {
+  padding-left: 10px;
+  color: black;
+  font-family: 'Catamaran', serif;
+  font-variant: small-caps;
+  font-size: 20px;
+}
+
+
+input::-webkit-input-placeholder{
+   font-family: 'Catamaran', serif; 
+ }
+
+.vote {
+  background-image: url('../img/voteThinker.jpg');
+  height: 1200px;
+  width: 100%;
+}
+
+.vote-container{
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.vote-text-container{
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.vote-prompt-voting-text{
+  color: black;
+  font-family: 'Georgia', sans-serif;
+}
+
+.vote-no-images-text{
+  color: black;
+  font-family: Gill Sans, sans-serif;
+  color: purple;
+  font-size: 2em;
+}
+
+.vote-greeting{
+  color: black;
+  font-family: 'Didot', serif;
+  font-size: 2em;
+}
+
+.vote-image {
+  margin: 10px 0px 0px 0px;
+  /*margin-top: 10px;*/
+  -webkit-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  max-width: 500px;
+  border: 6px solid black;
+}

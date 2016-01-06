@@ -14,7 +14,7 @@ var AWS = require('aws-sdk');
 //
 //route to your index.html
 //
-var assetFolder = Path.resolve(__dirname, '../client/');
+var assetFolder = Path.resolve(__dirname, '../');
 routes.use(express.static(assetFolder));
 
 // User route SIGNIN
@@ -73,7 +73,7 @@ routes.post('/postimage', function (req, res){
 
   form.parse(req, function(err, fields, files) {
 
-    //this is not the right way to go about it. url gets wierd
+    //this is not the right way to go about it. url gets weird
     //NEED TO FIX
 
     res.redirect('#/closet');
@@ -146,10 +146,10 @@ routes.post('/randomimage', function (req, res){
           var userId = result.rows[0].user_id;
           client.query('SELECT image_name, image_id FROM images WHERE images.user_id <> $1 AND images.image_id NOT IN (SELECT image_id FROM votes WHERE user_id = $1) ORDER BY RANDOM() LIMIT 1' ,[userId], function(err, image){
             if(image.rows.length === 0){
-              res.status(200).json({image_name: 'pablo.png', image_id: -1});
+              res.status(200).json({image_name: 'client/img/emptyCloset.jpg', image_id: -1});
             }
             else{
-              res.status(200).json({image_name: './uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
+              res.status(200).json({image_name: 'client/uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
             }
             done();
           });
@@ -319,7 +319,7 @@ if(process.env.NODE_ENV !== 'test') {
   // NOTE: Make sure this route is always LAST.
   //
   routes.get('/*', function(req, res){
-    res.sendFile( assetFolder + '/index.html' )
+    res.sendFile( assetFolder + '/client/index.html' )
   })
 
   //
