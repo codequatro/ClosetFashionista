@@ -114,6 +114,15 @@ a:hover, a:link {
   max-height: 40px;
   max-width: 40px;
   margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1)
+}
+
+.voteButton:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2)
 }
 
 #delete {

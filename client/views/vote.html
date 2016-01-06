@@ -6,9 +6,9 @@
   <a ><img class='image' ng-src="{{imageUrl}}"></a>
 
   <form ng-if="imageId !== -1">
-    <input type="image" class="voteButton" src='thumb-up.png' ng-click="vote('upvote')" />
-
-    <input type="image" class="voteButton" src="../thumb-down.jpg" value="down" ng-click="vote('downvote')" />
+    <input type="image" class="voteButton" src='../assets/thumbs_up.png' ng-click="vote('upvote')" />
+    <input type="image" class="voteButton" src="../assets/thumbs_down.png" value="down" ng-click="vote('downvote')" />
+    <input type="image" class="voteButton" src="../assets/flag.png" value="down" ng-click="vote('flag')" />
     <br />
     <!-- <div ng-if="updated">Update Succesful</div> -->
 	  <div ng-if="updated">update succesful</div>
