@@ -25,7 +25,6 @@ angular.module('myApp')
         })
         .catch(function(error){
           $scope.err = error.data.answer;
-          console.log($scope.err);
           $scope.showErr = true;
         });
     }
@@ -40,6 +39,10 @@ angular.module('myApp')
       .then(function(data){
         $scope.signin(user)
       })
+      .catch(function(error){
+        $scope.err = error.data.answer;
+        $scope.showErr = true;
+      });
     }
 
     $scope.signout = function() {

@@ -55,15 +55,23 @@ routes.post('/signup', function (req, res){
     if(err){
       console.error(err);
     }
-    client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
-      if(err){
-        console.log('database error on signup')
-        console.error(err);
-      } else {
-        res.status(201).json({username: username}) // removed token as was undefined for signup
-        done();
+    client.query('SELECT * FROM users WHERE username', [username], function(err){
+      if(username){
+        res.status(401).json({answer: 'Username already exists!'});
+      }else{
+
+        client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
+          if(err){
+            console.log('database error on signup')
+            console.error(err);
+          } else {
+            res.status(201).json({username: username}) // removed token as was undefined for signup
+            done();   
+          }
+        })
+
       }
-    })
+    });
   })
 });
 

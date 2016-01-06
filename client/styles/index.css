@@ -12,6 +12,10 @@ a {
 	font-family: 'Catamaran', serif;
 }
 
+.nav-pad {
+  padding-right: 140px;
+}
+
 .sign-in-up-title {
  font-family: 'Catamaran', serif; 
 }
@@ -27,7 +31,10 @@ input {
   height: 500px;
   margin: -50px 0 0 0;
 }
-
+.nav-brand-logo {
+  height: 50px;
+  width: 124px;
+}
 .message-error {
   height: 35px;
   width: 280px;

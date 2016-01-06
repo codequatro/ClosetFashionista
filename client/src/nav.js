@@ -2,5 +2,5 @@
 
 angular.module('myApp')
   .controller('NavCtrl', ['$scope','$window', 'Authorization', function($scope, $window, Authorization) {
-   $scope.isAuth=Authorization.authorized;
+   $scope.isAuth = Authorization.authorized;
   }]);
