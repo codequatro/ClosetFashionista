@@ -17,7 +17,36 @@ exports.isValidUrl = function(url) {
 	return url.match(rValidUrl);
 }
 
-//
+// Asynchronously screen a url through Google's Safe Browsing api.
+// In the fulfillment value of the Promise,
+//   return a boolean indicating whether the site is safe.
+exports.isSafeUrl = function(url) {
+  var deferred = Q.defer();
+  var testUrl = safeBrowsingUrl + '&url=' + url;
+
+  console.log("Checking %s for malicious content", url);
+
+  exports.get(testUrl)
+  	.then(function(res) {
+  		switch ( parseInt(res) ) {
+  			case 400, 401, 503:
+  				deferred.reject( new Error('Invalid url') );
+  				break;
+  			default:
+  				deferred.resolve( (res.body !== 'malware') )
+  		}
+  	})
+  	.fail(function(error) {
+  		deferred.reject(error);
+  	})
+
+	return deferred.promise;
+}
+
+// The rest of the exported functions were refactored from:
+// https://www.npmjs.com/package/open-graph
+
+// Get open-graph data for a url.
 exports.getMetaData = function() {
 	var deferred = Q.defer();
 
