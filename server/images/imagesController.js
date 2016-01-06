@@ -12,6 +12,7 @@ var AWS = require('aws-sdk');
 var bcrypt = require('bcrypt-nodejs');
 var cheerio = require('cheerio');
 
+var fsCopy = Q.nbind(fs.copy, fs);
 
 exports = module.exports = {
 
@@ -60,8 +61,6 @@ exports = module.exports = {
 			/* Location where we want to copy the uploaded file */
 			var new_location = './client/uploads/';
 
-			var fsCopy = Q.nbind(fs.copy, fs);
-
 			var clientQuery;
 			var done;
 
@@ -70,12 +69,6 @@ exports = module.exports = {
 	    	.then(function(connection) {
 	    		done = connection.done;
 	    		clientQuery = Q.nbind(connection.client.query, connection.client);
-		      // if(err){
-		      //   throw new Error('error connecting to the DB:', err);
-		      // }
-
-		      // console.log('username', username);
-		    	// var clientQuery = Q.nbind(client.query, client);
 
 		      return clientQuery(`
 		      	SELECT user_id FROM users
@@ -97,37 +90,6 @@ exports = module.exports = {
 	        console.log('fsCopy err');
         	console.error(err);
         }); //fs copy end
-
-			// fs.copy(temp_path, new_location + file_name, function(err) {
-			//   if (err) {
-			//     console.error(err);
-			//   }
-			//   else {
-			//     pg.connect(connectString, function (err, client, done){
-			//       if(err){
-			//         console.error('error connecting to the DB:', err);
-			//       }
-			//       // console.log('username', username);
-			//       client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-			//         var user_id = result.rows[0].user_id;
-			//         if(err){
-			//           console.error('error on lookup of user id:', err)
-			//         }
-			//         else
-			//         {
-			//           // console.log('select user result', result);
-			//           client.query('INSERT INTO images (image_name, user_id, type_id) VALUES ($1, $2, $3)', [file_name, user_id, clothing_type], function (err, result){
-			//             if(err){
-			//               console.error(err);
-			//             }else {
-			//               done();
-			//             }
-			//           })
-			//         }
-			//       });
-			//     })
-			//   }
-			// }); //fs copy end
 		}) //form.on 'end' end
 		
 	},
