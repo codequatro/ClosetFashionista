@@ -18,6 +18,7 @@ angular.module('myApp')
         Authorization.authorized = true
         $window.localStorage.setItem('authtoken', data.token)
         $window.localStorage.setItem('username', data.username)
+        $window.localStorage.setItem('userID', data.userID);
 
         $state.go('closet')
 
@@ -32,16 +33,8 @@ angular.module('myApp')
     }
 
     $scope.signup = function() {
-      var username = $scope.user.username;
-      var password = $scope.user.password;
-      var firstname = $scope.user.firstname;
-      var lastname = $scope.user.lastname;
-      var gender = $scope.user.gender;
-
-      var user = {username: username, password: password, firstname: firstname, lastname: lastname, gender: gender}
-
-      Register.register.signup(user)
-      .then(function(data){
+      Register.register.signup($scope.user)
+      .then(function(user){
         $scope.signin(user)
       })
     }
