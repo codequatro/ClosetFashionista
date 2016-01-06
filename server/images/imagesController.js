@@ -144,11 +144,7 @@ exports = module.exports = {
 
 	vote: function(req, res, next) {
 		var username = req.body.username;
-<<<<<<< HEAD
-		var hotOrNot = req.body.hotOrNot;
-=======
 		var voteValue = req.body.voteValue;
->>>>>>> master
 		var imageId = req.body.imageId;
 		console.log('imageId', imageId);
 		pg.connect(connectString, function (err, client, done) {
@@ -162,11 +158,7 @@ exports = module.exports = {
 		    }
 		    else {
 		      var userId = result.rows[0].user_id
-<<<<<<< HEAD
-		      client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
-=======
 		      client.query('INSERT INTO votes (user_id, image_id, upvote, downvote, flag) VALUES ($1, $2, $3, $4, $5)',[userId, imageId, upvote, downvote, flag], function(err, result){
->>>>>>> master
 		        if(err){
 		          console.error('error inserting vote into votes table: ', err);
 		        }
@@ -181,9 +173,6 @@ exports = module.exports = {
 		});
 	},
 
-<<<<<<< HEAD
-	
-=======
 	getAllImages: function (req, res, next) {
 		//create an object to send back to client
 		var allImages = {};
@@ -220,6 +209,5 @@ exports = module.exports = {
 	getImageData: function (req, res, next) {
 		
 	}
->>>>>>> master
 
 }
