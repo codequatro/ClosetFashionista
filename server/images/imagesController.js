@@ -12,27 +12,43 @@ var AWS = require('aws-sdk');
 var bcrypt = require('bcrypt-nodejs');
 var cheerio = require('cheerio');
 
+var fsCopy = Q.nbind(fs.copy, fs);
 
 exports = module.exports = {
+
+	pgConnect: function() {
+		var deferred = Q.defer();
+    pg.connect(connectString, function (err, client, done){
+      if(err){
+        deffered.reject(new Error('error connecting to the DB:', err) );
+      } else {
+      	deferred.resolve({
+      		client: client,
+      		done: done
+      	})
+      }
+    })
+    return deferred.promise;
+	},
 
 	postImage: function(req, res, next) {
 		var form = new formidable.IncomingForm();
 
 		form.parse(req, function(err, fields, files) {
+			//this is not the right way to go about it. url gets wierd
+			//NEED TO FIX
 
-		//this is not the right way to go about it. url gets wierd
-		//NEED TO FIX
+			res.redirect('back');
 
-		res.redirect('back');
-
-		//if you want to look at the form getting sent to the server
-		// res.end(util.inspect({fields: fields, files: files}));
+			//if you want to look at the form getting sent to the server
+			// res.end(util.inspect({fields: fields, files: files}));
 		});
 
 		var myFields = {};
+
 		form.on('field', function(field, value){
-		myFields[field] = value;
-		console.log('fields in form.on', myFields);
+			myFields[field] = value;
+			console.log('fields in form.on', myFields);
 		});
 
 		form.on('end', function(fields, files) {
@@ -45,36 +61,35 @@ exports = module.exports = {
 			/* Location where we want to copy the uploaded file */
 			var new_location = './client/uploads/';
 
-			fs.copy(temp_path, new_location + file_name, function(err) {
-			  if (err) {
-			    console.error(err);
-			  }
-			  else {
-			    pg.connect(connectString, function (err, client, done){
-			      if(err){
-			        console.error('error connecting to the DB:', err);
-			      }
-			      // console.log('username', username);
-			      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-			        var user_id = result.rows[0].user_id;
-			        if(err){
-			          console.error('error on lookup of user id:', err)
-			        }
-			        else
-			        {
-			          // console.log('select user result', result);
-			          client.query('INSERT INTO images (image_name, user_id, type_id) VALUES ($1, $2, $3)', [file_name, user_id, clothing_type], function (err, result){
-			            if(err){
-			              console.error(err);
-			            }else {
-			              done();
-			            }
-			          })
-			        }
-			      });
-			    })
-			  }
-			}); //fs copy end
+			var clientQuery;
+			var done;
+
+			fsCopy( temp_path, new_location + file_name )
+				.then(exports.pgConnect)
+	    	.then(function(connection) {
+	    		done = connection.done;
+	    		clientQuery = Q.nbind(connection.client.query, connection.client);
+
+		      return clientQuery(`
+		      	SELECT user_id FROM users
+		      		 WHERE username = $1`,
+		      	[username]
+		      );
+		    })
+      	.then(function(result) {
+        	var user_id = result.rows[0].user_id;
+          // console.log('select user result', result);
+          return clientQuery(`
+          	INSERT INTO images (image_name, user_id, type_id)
+          		VALUES ($1, $2, $3)`,
+          	 [file_name, user_id, clothing_type]
+          );
+      	})
+	      .then(done)
+		    .fail(function(err) {
+	        console.log('fsCopy err');
+        	console.error(err);
+        }); //fs copy end
 		}) //form.on 'end' end
 		
 	},
@@ -157,6 +172,8 @@ exports = module.exports = {
 			downvote++;
 		} else if (voteValue === 'flag') {
 			flag++;
+		} else {
+			console.log('something terrible happened and the zombies are coming!')
 		}
 		console.log('imageId', imageId);
 		pg.connect(connectString, function (err, client, done) {
@@ -223,3 +240,67 @@ exports = module.exports = {
 	}
 
 }
+
+// postImage: function(req, res, next) {
+// 		var form = new formidable.IncomingForm();
+
+// 		form.parse(req, function(err, fields, files) {
+
+// 		//this is not the right way to go about it. url gets wierd
+// 		//NEED TO FIX
+
+// 		res.redirect('back');
+
+// 		//if you want to look at the form getting sent to the server
+// 		// res.end(util.inspect({fields: fields, files: files}));
+// 		});
+
+// 		var myFields = {};
+// 		form.on('field', function(field, value){
+// 		myFields[field] = value;
+// 		console.log('fields in form.on', myFields);
+// 		});
+
+// 		form.on('end', function(fields, files) {
+// 			var username = myFields.name;
+// 			var clothing_type = myFields.clothingType;
+// 			/* Temporary location of our uploaded file */
+// 			var temp_path = this.openedFiles[0].path;
+// 			/* The file name of the uploaded file */
+// 			var file_name = this.openedFiles[0].name;
+// 			/* Location where we want to copy the uploaded file */
+// 			var new_location = './client/uploads/';
+
+// 			fs.copy(temp_path, new_location + file_name, function(err) {
+// 			  if (err) {
+// 			    console.error(err);
+// 			  }
+// 			  else {
+// 			    pg.connect(connectString, function (err, client, done){
+// 			      if(err){
+// 			        console.error('error connecting to the DB:', err);
+// 			      }
+// 			      // console.log('username', username);
+// 			      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+// 			        var user_id = result.rows[0].user_id;
+// 			        if(err){
+// 			          console.error('error on lookup of user id:', err)
+// 			        }
+// 			        else
+// 			        {
+// 			          // console.log('select user result', result);
+// 			          client.query('INSERT INTO images (image_name, user_id, type_id) VALUES ($1, $2, $3)', [file_name, user_id, clothing_type], function (err, result){
+// 			            if(err){
+// 			              console.error(err);
+// 			            }else {
+// 			              done();
+// 			            }
+// 			          })
+// 			        }
+// 			      });
+// 			    })
+// 			  }
+// 			}); //fs copy end
+// 		}) //form.on 'end' end
+		
+// 	},
