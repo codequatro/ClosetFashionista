@@ -96,7 +96,7 @@ exports = module.exports = {
 	},
 
 	postUrl: function(req, res, next) {
-	}
+	},
 
 	randomImage: function(req, res, next) {
 		var username = req.body.username;
