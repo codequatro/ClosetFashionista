@@ -5,7 +5,11 @@ angular.module('myApp')
    $scope.isAuth=Authorization.authorized;
 
    // data storage
-   // $scope.userID = $window.localStorage.getItem('userID');
+	$scope.userID = $window.localStorage.getItem('user_id');
+	$scope.image_name = undefined;
+	$scope.image = undefined;
+	$scope.link_url = undefined;
+	$scope.source = undefined;
 
    	$scope.firstModalShow = true;
 	$scope.changeFirstModal = function() {
@@ -24,7 +28,6 @@ angular.module('myApp')
     		$scope.image = data.image;
     		$scope.link_url = data.link_url;
     		$scope.source = data.source;
-    		$scope.user_id = data.user_id;
     		$scope.changeFirstModal();
     		$scope.changeSecondModal();
     		console.log('getImageData', data)
