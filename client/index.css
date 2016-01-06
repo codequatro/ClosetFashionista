@@ -26,6 +26,10 @@ h2 {
   font-variant: small-caps;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .main {
   /*background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);*/
   background-repeat: no-repeat;

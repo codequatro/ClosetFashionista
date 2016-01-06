@@ -2,19 +2,6 @@
 
     <div id='navbar-left'>
 
-    <div class="modal-background" ng-click="changeModal()" ng-show="secondModalShow"></div>
-    <div class="add-link-modal" ng-show="secondModalShow" ng-model='link'>
-            <div id='secondModal'>
-            <i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
-            <h2>Second Modal</h2>
-            <form name="postImage" ng-submit='postImage(link)' novalidate>
-                <img ng-src='{{ image }}' />
-                <p>{{ image_name }}</p>
-                <p>{{ link_Url }}</p>
-                <p>{{ source }}</p>
-            </form>
-        </div>
-        </div>
         <a class='btn out' ng-show="!isAuth" ui-sref='signin'>sign in</a>
         <a class='btn out' ng-show="!isAuth" ui-sref='signup'>sign up</a>
         <a class='btn in' ng-show="isAuth" ui-sref='signout'>sign out</a>
@@ -23,8 +10,8 @@
     
     </div>
 
-    <div id="navbar-right" ng-show="username">
-      {{ username }}
+    <div id="navbar-right" ng-show="username" ui-sref="closet">
+      <a>{{ username }}</a>
     </div>
 
 	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
