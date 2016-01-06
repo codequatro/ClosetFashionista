@@ -79,7 +79,7 @@ exports = module.exports = {
 			else{
 			  userInfo.pics = result.rows;
 			    //grab all of the votes for each user pic
-			    client.query('SELECT images.image_name, images.image_id, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+			    client.query('SELECT images.image_name, images.image_id, votes.gender, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
 			        if(err) {
 			        	console.error('error fetching votes', err);
 			    	} else {
@@ -88,16 +88,28 @@ exports = module.exports = {
 						// Calculate votes for each pictures and user credibility			          
 						for (var i = 0; i < result.rows.length; i++) {
 							if (result.rows[i].upvote === 1) {
-							userInfo.userCredibility++;
-							for (var x = 0; x < userInfo.pics.length; x++) {
-						  		if (!userInfo.pics[x].upvotes) userInfo.pics[x].upvotes = 0;
-						  		if (result.rows[i].image_id === userInfo.pics[x].image_id) userInfo.pics[x].upvotes++;
-						  	}
+								userInfo.userCredibility++;
+								for (var x = 0; x < userInfo.pics.length; x++) {
+							  		if (!userInfo.pics[x].upvotes) userInfo.pics[x].upvotes = 0;
+							  		if (result.rows[i].image_id === userInfo.pics[x].image_id) {
+							  			userInfo.pics[x].upvotes++;
+							  			if (!userInfo.pics[x].genderData) userInfo.pics[x].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+								  		if (result.rows[i].gender === 'male') userInfo.pics[x].genderData.male.upvotes++
+								  		if (result.rows[i].gender === 'female') userInfo.pics[x].genderData.female.upvotes++
+								  		if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[x].genderData.other.upvotes++
+							  		}
+							  	}
 							} else if (result.rows[i].downvote === 1) {
 								userInfo.userCredibility--;
 								for (var y = 0; y < userInfo.pics.length; y++) {
 									if (!userInfo.pics[y].downvotes) userInfo.pics[y].downvotes = 0;
-									if (result.rows[i].image_id === userInfo.pics[y].image_id) userInfo.pics[y].downvotes++;
+				  					if (result.rows[i].image_id === userInfo.pics[y].image_id) {
+							  			userInfo.pics[y].downvotes++;
+							  			if (!userInfo.pics[y].genderData) userInfo.pics[y].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+								  		if (result.rows[i].gender === 'male') userInfo.pics[y].genderData.male.downvotes++
+								  		if (result.rows[i].gender === 'female') userInfo.pics[y].genderData.female.downvotes++
+								  		if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[y].genderData.other.downvotes++
+							  		}
 								}
 							}
 						}
