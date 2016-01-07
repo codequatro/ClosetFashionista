@@ -2,16 +2,7 @@
     .module('myApp')
     .directive('starRating', starRating);
 
-  function RatingController() {
-    this.rating1 = 5;
-    this.rating2 = 2;
-    this.isReadonly = true;
-    this.rateFunction = function(rating) {
-      console.log('Rating selected: ' + rating);
-    };
-  }
-
-  function starRating() {
+  function starRating($timeout) {
     return {
       restrict: 'EA',
       template:
@@ -35,13 +26,17 @@
           for (var i = 0; i < scope.max; i++) {
             console.log('scope', scope);
             scope.stars.push({
-              filled: i < scope.ratingValue
+              filled: i < Math.round(scope.ratingValue)
             });
           }
         };
         scope.toggle = function(index) {
+          console.log('clicked');
+          console.log(index);
           if (scope.readonly == undefined || scope.readonly === false){
-            scope.rating = index + 1;
+            console.log(scope);
+            scope.ratingValue = index + 1;
+            updateStars();
             scope.onRatingSelect({
               rating: index + 1
             });
@@ -52,6 +47,7 @@
             updateStars();
           }
         });
+        updateStars();
       }
     };
   }

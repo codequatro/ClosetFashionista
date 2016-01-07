@@ -37,9 +37,8 @@ CREATE TABLE votes (
   user_id INTEGER,
   image_id INTEGER,
   rating INTEGER,
-  comment varchar(300),
-  commenter_id INTEGER,
-  PRIMARY KEY (user_id, image_id, commenter_id)
+  message varchar(300),
+  PRIMARY KEY (user_id, image_id)
 );
 
 -- ---
@@ -90,7 +89,6 @@ CREATE TABLE clothing_types (
 
 ALTER TABLE votes ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE votes ADD FOREIGN KEY (image_id) REFERENCES images (image_id);
-ALTER TABLE votes ADD FOREIGN KEY (commenter_id) REFERENCES users (user_id);
 ALTER TABLE images ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE images ADD FOREIGN KEY (type_id) REFERENCES clothing_types (type_id);
 
