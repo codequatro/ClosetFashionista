@@ -1,12 +1,12 @@
 <div class='auth' ng-controller="AuthCtrl">
   <form novalidate class='signup'>
-  	First Name: <input type='text' ng-model='user.firstname' /><br><br>
-  	Last Name: <input type='text' ng-model='user.lastname' /><br><br>
-    Username: <input type="text" ng-model="user.username" /><br><br>
-    Password: <input type="password" ng-model="user.password" /><br><br>
+  	First Name: <input class="auth-input" type='text' ng-model='user.firstname' /><br><br>
+  	Last Name: <input class="auth-input" type='text' ng-model='user.lastname' /><br><br>
+    Username: <input class="auth-input" type="text" ng-model="user.username" /><br><br>
+    Password: <input class="auth-input" type="password" ng-model="user.password" /><br><br>
     Female: <input type='radio' ng-model='user.gender' value='female' /> Male: <input type='radio' ng-model='user.gender' value='male' /><br><br>
 
-    <input type="submit" ng-click="signup()" value="Sign Up"
+    <input class="auth-button" type="submit" ng-click="signup()" value="Sign Up"
   />
   </form>
 <br>
