@@ -14,16 +14,10 @@
 
   <body ng-app="myApp">
 
-        <nav class="navbar navbar-right">
-          <!-- <a class='navbar-brand-left navbar-brand' href="#"><img src="/img/logo.svg"></a> -->
-          <div ui-view="nav"></div>
-        </nav>
-    
-    
-         
-          
-      
-
+      <nav class="navbar nav-pad navbar-fixed" ng-controller='NavCtrl'>
+        <div ng-show='isAuth' class='navbar-brand navbar-left'><a href="#"><img class='nav-brand-logo' src="client/img/logo-header.svg"></a></div>
+        <div ui-view="nav"></div>
+      </nav>
 
       <div class="all">
         <div ui-view="main"></div>
@@ -49,5 +43,6 @@
     <script src="/client/directives/star.js"></script>
     <script src="/client/directives/camera.js"></script>
   </body>
+
 </html>
 

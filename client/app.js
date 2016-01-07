@@ -10,11 +10,11 @@ angular.module('myApp', [
 
     $stateProvider
 
-      .state('home', {
-          url: '/',
-          views: {
+       .state('home', {
+        url: '/',
+        views: {
             "nav": {templateUrl: "client/views/nav.html"},
-            "main":{templateUrl: 'client/views/main.html'}
+            "main": {templateUrl: 'client/views/closet.html'}
           }
       })
 
@@ -47,14 +47,6 @@ angular.module('myApp', [
         views: {
             "nav": {templateUrl: "client/views/nav.html"},
             "main":{templateUrl: 'client/views/vote.html'}
-          }
-      })
-
-      .state('closet', {
-        url: '/closet',
-        views: {
-            "nav": {templateUrl: "client/views/nav.html"},
-            "main":{templateUrl: 'client/views/closet.html'}
           }
       })
 

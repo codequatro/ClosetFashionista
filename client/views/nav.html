@@ -1,9 +1,7 @@
-
-<ul class='nav nav-pills' ng-controller="NavCtrl">
+<ul class='nav nav-pills navbar-right' ng-controller="NavCtrl">
 	  <li role='presentation' class='' ng-show="!isAuth" ui-sref='signin'><a href="">Sign in</a></li>
 	  <li role='presentation' class='' ng-show="!isAuth" ui-sref='signup'><a href="">Sign up</a></li>
 	  <li role='presentation' class='' ng-show="isAuth" ui-sref='signout'><a href="">Sign out</a></li>
 	  <li role='presentation' class='' ng-show="isAuth" ui-sref='vote'><a href="">Votes</a></li>
-	  <li role='presentation' class='' ng-show="isAuth" ui-sref='closet'><a href="">Closet</a></li>
-  
+	  <li role='presentation' class='' ng-show="isAuth" ui-sref='home'><a href="">Closet</a></li>
 </ul>

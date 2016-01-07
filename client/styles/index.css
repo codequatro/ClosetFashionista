@@ -1,6 +1,7 @@
 body { 
   background-image: url(../img/closet.png);
   background-repeat: no-repeat;
+  font-family: 'Catamaran', serif;
   background-size: cover; 
 }
 a {
@@ -11,6 +12,11 @@ a {
   display: inline;
 	font-family: 'Catamaran', serif;
 }
+
+.nav-pad {
+  padding-right: 140px;
+}
+
 .sign-in-up-title {
  font-family: 'Catamaran', serif; 
 }
@@ -19,9 +25,29 @@ input {
   font-family: "Catamaran", serif;
 }
 .btn {
-  font-family: 'Catamaran', serif;
+  font-family: 'Catamaran', seri
 }
-
+.form-div {
+  width: 100%;
+  height: 500px;
+  margin: -50px 0 0 0;
+}
+.nav-brand-logo {
+  height: 50px;
+  width: 124px;
+}
+.message-error {
+  height: 35px;
+  width: 280px;
+  background-color: #d63049;
+  color: white;
+  border-radius: 2px;
+  font-family: 'Catamaran', cursive;
+  text-align: center;
+  line-height: 35px;
+  font-size: 1.3em;
+  margin: 14px 0px;
+}
 .clean {
   margin: 20px;
 }
@@ -29,7 +55,11 @@ input {
 .clear {
   margin-top: 53px;
 }
-
+.header-logo {
+  height: 190px;
+  width: 62%;
+  margin: auto;
+}
 .main {
   background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
   background-repeat: no-repeat;
@@ -140,8 +170,9 @@ a:hover, a:link {
 
 .logo {
   width: 97%;
-  margin: -420px 0px -475px 0px;
+  margin: -350px 0 0 0;
 }
+
 
 .closetbuttons {
   display: inline;
@@ -196,22 +227,27 @@ input::-webkit-input-placeholder{
 
 .vote-prompt-voting-text{
   color: black;
-  font-family: 'Georgia', sans-serif;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .vote-no-images-text{
   color: black;
-  font-family: Gill Sans, sans-serif;
+  font-family: 'Catamaran', sans-serif;
   color: purple;
   font-size: 2em;
 }
 
 .vote-greeting{
   color: black;
-  font-family: 'Didot', serif;
+  font-family: 'Catamaran', serif;
   font-size: 2em;
 }
-
+.footer-class {
+  text-align: right;
+  font-family: 'Catamaran', serif;
+  font-size: 1.2em;
+  margin-right: 30px;
+}
 .vote-image {
   display: block;
   margin: 10px auto 0px auto;
@@ -258,9 +294,81 @@ input::-webkit-input-placeholder{
   width: 50%;
 }
 
-.singleOutfitCommentsDiv{
+.singleOutfitCommentsDiv {
   float: right;
   height: 100%;
   width: 50%;
   background-color: white;
+  margin: auto;
+}
+
+
+
+.detailBox {
+  width: 390px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin-right: 110px;
+}
+
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+  width:30px;
+  margin-right:5px;
+  height:100%;
+  float:left;
+}
+.commenterImage img {
+  width:100%;
+  border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
 }
