@@ -78,6 +78,8 @@ angular.module('myApp')
       }); 
     }
 
-    $scope.getBasicUserInfo();
+    if(Authorization.authorized) {
+      $scope.getBasicUserInfo();
+    }
 
   }]);
