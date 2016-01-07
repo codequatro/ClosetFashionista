@@ -1,13 +1,13 @@
 <div class='closet' ng-controller="ClosetCtrl">
 
-<h1>welcome to your closet</h1>
+<h1>welcome to {{ username }}'s closet</h1>
 <br><br>
 
 <div class='closetform'>
   <h3>&nbsp;&nbsp;add to your closet:</h3>
 
   <div class='imageupload'>
-    <form action="/postimage" method="post" enctype="multipart/form-data" class= 'closetform'>
+    <form action="/images/postimage" method="post" enctype="multipart/form-data" class= 'closetform'>
         <input type="file" name="upload" multiple="multiple">
         <br><br>
         <input type="submit" value="Upload File" class="pure-button">
@@ -37,11 +37,11 @@
 <br>
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
-  <div class="card" ng-repeat="pic in pics | filter:customFilter">
-    <pic-info info="pic"></pic-info>
-    <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">
+  <div class="card" ng-repeat="pic in pics">
+    <img ng-src='{{ pic.image }}' />
+   <!--  <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">
       <img id="delete" src="delete-icon.jpg"/>
-    </div>
+    </div> -->
   </div>
 
 </div>

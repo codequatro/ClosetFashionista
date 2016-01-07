@@ -1,12 +1,17 @@
 <div class='auth' ng-controller="AuthCtrl">
 
   <form novalidate class='signin'>
-    Username: <input type="text" ng-model="user.username" /><br><br>
-    Password: <input type="password" ng-model="user.password" /><br><br>
-    <input type="submit" ng-click="signin()" value="SignIn"/>
+  	<br>
+  	<h1>Closet Fashionista</h1>
+  	<br>
+  	<br>
+    <input class="auth-input" type="text" ng-model="user.username" placeholder="Username"/>
+    <input class="auth-input" type="password" ng-model="user.password" placeholder="Password"/>
+    <input class="auth-button" type="submit" ng-click="signin()" value="Sign In"/>
+    <div class="auth-redirect">New here? <a ng-href="#/signup">Sign Up</a></div>
   </form>
-
-
-  <h2>&nbsp;&nbsp;get authorized</h2>
+  <div class="err signinErr" ng-show="signinErr">
+    {{ signinTxt }}
+  </div>
 
 </div>

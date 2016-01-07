@@ -6,7 +6,7 @@ angular.module('myApp', [
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/closet');
 
     $stateProvider
 
@@ -21,7 +21,6 @@ angular.module('myApp', [
       .state('signin', {
         url:'/signin',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
             "main":{templateUrl: 'views/signin.html'}
           }
       })
@@ -29,7 +28,6 @@ angular.module('myApp', [
       .state('signup', {
         url:'/signup',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
             "main":{templateUrl: 'views/signup.html'}
           }
       })
@@ -55,6 +53,22 @@ angular.module('myApp', [
         views: {
             "nav": {templateUrl: "views/nav.html"},
             "main":{templateUrl: 'views/closet.html'}
+          }
+      })
+
+      .state('profile', {
+        url: '/profile/:username',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/closet.html'}
+          }
+      })
+
+      .state('topUsers', {
+        url: '/topUsers',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/topUsers.html'}
           }
       })
 
@@ -101,13 +115,14 @@ angular.module('myApp', [
     var register = {};  // local storage for users and current user
 
     register.currentUser =  $window.localStorage.getItem('username') || '' ;
+    register.currentUserID = $window.localStorage.getItem('userID') || '';
     register.users = [];
 
     /***************AUTHORIZATION***********************/
     register.signup = function(user) {
       return $http({
         method: 'POST',
-        url: '/signup',
+        url: 'users/signup',
         data: user
       })
       .then(function(resp){
@@ -118,7 +133,7 @@ angular.module('myApp', [
     register.signin = function(user){
       return $http({
         method: 'POST',
-        url: '/signin',
+        url: 'users/signin',
         data: user
       })
       .then(function(resp){
@@ -131,7 +146,7 @@ angular.module('myApp', [
     register.randomImage = function(username){
       return $http({
         method: 'POST',
-        url: '/randomimage',
+        url: 'images/randomimage',
         data: {username: username}
       })
       .then(function(resp){
@@ -139,12 +154,12 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(hotOrNot, username, imageId){
+    register.vote = function(voteValue, username, imageId){
       console.log('Factory Image ID', imageId);
       return $http({
         method: 'POST',
-        url: '/vote',
-        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
+        url: 'images/vote',
+        data: {voteValue: voteValue, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;
@@ -152,14 +167,62 @@ angular.module('myApp', [
     }
     /*****************VOTING ON IMAGE*******************/
 
-    /*************GET CLOSET IMAGES********************/
-    register.getCloset = function(user){
+    /*****************GET ALL IMAGES*******************/
+
+    register.getAllImages = function() {
+      return $http({
+        method: 'GET',
+        url: 'images/getAllImages'
+      })
+      .then(function(data) {
+        console.log(data)
+        return data; 
+      })
+    };
+
+     register.getImageData = function(link) {
+      return $http({
+        method: 'POST', 
+        url: 'images/getImageData',
+        data: link
+      }).then(function(res) {
+        console.log('success', res);
+        return res.data;
+      })
+    };
+
+    register.postImage = function(data) {
       return $http({
         method: 'POST',
-        url: '/closet',
+        url: 'images/postUrl',
+        data: data
+      }).then(function(res) {
+        return res.data; 
+      })
+    }
+    /*************GET CLOSET IMAGES********************/
+    register.getCloset = function(user){
+      console.log('getCloset', user)
+      return $http({
+        method: 'POST',
+        url: 'users/closet',
         data: {username: user}
       })
       .then(function(resp){
+        console.log(resp)
+        return resp.data;
+      })
+    };
+    /*************GET CLOSET IMAGES********************/
+    register.getBasicUserInfo = function(user){
+      console.log('getBasicUserInfo', user)
+      return $http({
+        method: 'POST',
+        url: 'users/getBasicUserInfo',
+        data: {username: user}
+      })
+      .then(function(resp){
+        console.log('basic info response: ', resp)
         return resp.data;
       })
     };
@@ -167,8 +230,19 @@ angular.module('myApp', [
     register.removeImage = function(imageId, imageName){
       return $http({
         method: 'POST',
-        url: '/removeimage',
+        url: 'images/removeimage',
         data: {imageId: imageId, imageName: imageName}
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+    /*************GET TOP USERS********************/
+    register.getTopUsers = function(user){
+      return $http({
+        method: 'GET',
+        url: 'users/topUsers',
+        data: user
       })
       .then(function(resp){
         return resp.data;
@@ -193,4 +267,6 @@ angular.module('myApp', [
   })
 
 ; // end of app.js
+
+
 

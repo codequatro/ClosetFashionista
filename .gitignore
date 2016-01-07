@@ -3,6 +3,8 @@ bower_components/
 /client/src/config.json
 /client/src/s3test.js
 /client/uploads/*
+client/uploads
 .DS_Store
 config.json
 config.js
+db/**

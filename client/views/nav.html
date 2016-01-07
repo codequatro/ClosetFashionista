@@ -1,7 +1,60 @@
 <div class='navbar' ng-controller="NavCtrl">
-  <a class='btn out' ng-show="!isAuth" ui-sref='signin'>sign in</a>
-  <a class='btn out' ng-show="!isAuth" ui-sref='signup'>sign up</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='signout'>sign out</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='vote'>vote</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='closet'>closet</a>
+
+	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
+	<div class="add-link-modal firstModal" ng-show="firstModalShow">
+			<div id='firstModal'>
+            <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="m10 6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4h-28m6.83 8l7.17 7.17 7.17-7.17 2.83 2.83-7.17 7.17 7.17 7.17-2.83 2.83-7.17-7.17-7.17 7.17-2.83-2.83 7.17-7.17-7.17-7.17 2.83-2.83"/></svg>
+			<h2>Share Your Story</h2>
+			<form name="addLink" ng-submit='getImageData(newLink)' novalidate>
+				<input type='text' name="urlText" placeholder="Paste URL..." ng-model="newLink"><br>
+				<input type="submit" value="Submit Link">
+			</form>
+		</div>
+	</div>
+	
+
+	<div class="modal-background" ng-click="changeModal()" ng-show="secondModalShow"></div>
+	<div class="add-link-modal" ng-show="secondModalShow" ng-model='link'>
+			<div id='secondModal'>
+			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
+			<h2>Second Modal</h2>
+			<form name="post" ng-submit='postImage()' novalidate>
+				<img ng-src='{{ image }}' />
+				<p>{{ image_name }}</p>
+				<p>{{ link_Url }}</p>
+				<p>{{ source }}</p>
+				<input type="submit" value="Submit Link">
+			</form>
+		</div>
+	</div>
+
+    <div id='navbar-left'>
+
+        <a class='btn out' ng-show="!isAuth" ui-sref='signin'>Sign In</a>
+        <a class='btn out' ng-show="!isAuth" ui-sref='signup'>Sign Up</a>
+        <a class='btn in' ng-show="isAuth" ui-sref='signout'>Sign Out</a>
+        <a class='btn in' ng-show="isAuth" ui-sref='vote'>Vote</a>
+        <a class='btn in' ng-show="isAuth" ui-sref='closet'>Closet</a>
+        <a class='btn in' ng-show="isAuth" ui-sref='home'>Home</a>
+    
+    </div>
+
+    <div id="navbar-right" ng-show="username" ui-sref="closet">
+      <a>{{firstname}} {{lastname}}</a>
+    </div>
+
+    <div class="nav-actions">
+        <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="m10 6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4h-28m6.83 8l7.17 7.17 7.17-7.17 2.83 2.83-7.17 7.17 7.17 7.17-2.83 2.83-7.17-7.17-7.17 7.17-2.83-2.83 7.17-7.17-7.17-7.17 2.83-2.83"/></svg>
+		<div class="nav-dropdown-link" ng-show="!{{username}}">
+			<div class="nav-dropdown-link-username" ng-click="showNavDropdownContent()">
+				<p>{{firstname}} {{lastname}}</p>
+			</div>
+			<div class="nav-dropdown" ng-show="showNavDropdown">
+				<a ng-href="#/profile/{{user_id}}"><li><i class="fa fa-user"></i>Profile</li></a>
+				<li ng-click="signout()"><i class="fa fa-sign-out"></i>Log Out</li>
+			</div>
+		</div>
+	</div>
 </div>
+
+
