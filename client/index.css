@@ -201,7 +201,7 @@ a:hover, a:link {
   text-align: center;
 }
 
-.add-link-modal div i {
+.add-link-modal div i, .x-button {
   float: right;
   cursor: pointer;
 }
@@ -231,7 +231,7 @@ a:hover, a:link {
   height: 700px;
 }
 
-.thumb {
+svg {
   width: 2em;
   height: 2em;
 }
