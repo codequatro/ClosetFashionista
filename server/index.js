@@ -109,6 +109,12 @@ routes.post('/postimage', function (req, res){
       var temp_path = this.openedFiles[0].path;
       /* The file name of the uploaded file */
       var file_name = this.openedFiles[0].name;
+      console.log(file_name);
+      var getExt = /(?:\.([^.]+))?$/;
+      var ext = getExt.exec(file_name)[1]; 
+      file_name = file_name.replace(ext,""); 
+      file_name = file_name + Math.floor(Math.random()*9999999999) + "." + ext;
+      //console.log("name", file_name, "rand", Math.floor(Math.random()*9999999999), "ext", ext);
     }
 
     /* Location where we want to copy the uploaded file */
@@ -119,6 +125,7 @@ routes.post('/postimage', function (req, res){
         fs.writeFile(new_location + file_name, decodedImage, function(err) {
           if (err) console.error(err);
           else {
+            console.log(file_name);
             saveToDB();
           }
         });
@@ -283,6 +290,37 @@ routes.post('/vote', function (req, res){
           client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
             if(err){
               console.error('error inserting vote into votes table: ', err);
+            }
+            else{
+              res.status(201).json({result: result.rows});
+              done();
+            }
+          });
+        }
+      })
+    }
+  });
+});
+
+routes.post('/comment', function (req, res){
+  var username = req.body.username;
+  var comment = req.body.comment;
+  var imageId = req.body.imageId;
+  console.log('imageId', imageId);
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+        if(err){
+          console.error('error on lookup of user_id', err)
+        }
+        else {
+          var userId = result.rows[0].user_id
+          client.query('INSERT INTO comments (image_id, user_id, comment) VALUES ($1, $2, $3)',[imageId, userId, comment], function(err, result){
+            if(err){
+              console.error('error inserting comment into comments table: ', err);
             }
             else{
               res.status(201).json({result: result.rows});
