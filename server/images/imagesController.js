@@ -303,6 +303,7 @@ exports = module.exports = {
 
 	collectUrlData: function (req, res, next) {
 		var url = req.body.url;
+		console.log('url: ', url)
 		var user_id = req.body.user_id;
 
 		if( ! util.isSafeUrl(url) ) {
