@@ -142,18 +142,19 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(rating, username, imageId){
+    register.vote = function(rating, username, imageId, message){
       console.log('Factory Image ID', imageId);
       console.log(rating);
       return $http({
         method: 'POST',
         url: '/vote',
-        data: {rating: rating, username: username, imageId: imageId}
+        data: {rating: rating, username: username, imageId: imageId, message: message}
       })
       .then(function(resp){
         return resp.data;
       })
     }
+
     /*****************VOTING ON IMAGE*******************/
 
     /*************GET CLOSET IMAGES********************/

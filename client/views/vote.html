@@ -1,4 +1,4 @@
-<div class='vote' ng-controller="VoteCtrl">
+<div class='detailBox-comment' ng-controller="VoteCtrl">
   <div class='vote-container'>
     <div class='vote-text-container'>
       <div ng-if="imageId !== -1">
@@ -8,21 +8,23 @@
       <div ng-if="imageId === -1" class="vote-no-images-text">You go, {{username}}!<br>No more clothes to vote on.<br>Please check back later.</div>
       <form ng-if="imageId !== -1">
       <star-rating ng-model="rating.value" max="5" readonly="false" on-rating-select="rating.rateFunction(rating)"></star-rating>
-      <br>
-        <button type="submit" ng-click="vote()">submit rating</button>
+      <div class="clean"></div>
         <div ng-if="updated">Vote Accepted</div>
       </form>
+      <div class="">
+        <div class="actionBox">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <textarea ng-model="comment.message" class="text-area-control" type="text" placeholder="Have an opinion? Leave a comment!"> </textarea>
+              <button ng-click="vote()" ng-click="submitComment()" type='button' class='btn btn-primary comment-button fa fa-pencil-square-o'><span class='comment-btn-text'>Vote</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <img class='vote-image' ng-src="{{imageUrl}}">
   </div>
-  <form class="form-inline" role="form">
-    <div class="form-group">
-      <input class="form-control" type="text" placeholder="Post Comment" />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-default">Post</button>
-    </div>
-  </form>
+    <img class='vote-image' ng-src="{{imageUrl}}">
+
 
 </div>
