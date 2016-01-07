@@ -1,9 +1,12 @@
-<div class='auth' ng-controller="AuthCtrl">
 
+<div class='auth' ng-controller="AuthCtrl">
+  <div id="badge">
+      <img src="cfbadge.svg" style="width:350px;height:200px;">
+  </div>
   <form novalidate class='signin'>
-  	<br>
-  	<h1>Closet Fashionista</h1>
-  	<br>
+    <!-- <div id="logo">
+      <img src="cflogo.svg" style="width:325px;height:100px;">
+    </div> -->
   	<br>
     <input class="auth-input" type="text" ng-model="user.username" placeholder="Username"/>
     <input class="auth-input" type="password" ng-model="user.password" placeholder="Password"/>

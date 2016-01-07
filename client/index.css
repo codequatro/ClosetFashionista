@@ -366,3 +366,11 @@ svg {
   text-indent: 0;
   /*padding: .5em;*/
 }
+
+#badge {
+  width: 350px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
