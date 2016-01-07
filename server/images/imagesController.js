@@ -105,7 +105,7 @@ exports = module.exports = {
 			if(err){
 			  console.error('error connecting to the DB:', err);
 			} else {
-				client.query('INSERT INTO images (image, image_name, link_url, source, user_id) VALUES ($1, $2, $3, $4, $5)', [image.image, image.image_name, image.link_url, image.source, image.user_id], 
+				client.query('INSERT INTO images (image, image_name, link_url, source, user_id) VALUES ($1, $2, $3, $4, $5)', [image.image, image.image_name, image.link_url, image.source, image.userID], 
 					function (err, result){
 				  if(err) {
 				    console.log('not cool man. database error when adding image: ', err)

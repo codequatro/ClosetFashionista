@@ -292,9 +292,8 @@ svg {
 }
 
 .gender-buttons {
-  list-style-type:none;
-  margin: 25px 0 0 0;
-  padding: 0;
+  list-style-type: none;
+  padding: 0px;
 }
 
 .gender-buttons li {
@@ -305,32 +304,33 @@ svg {
   position: relative;
 }
 
-.gender-buttons label, .donate-now input {
-    display:block;
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+.gender-buttons label, .gender-buttons input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width: 100%;
 }
 
 .gender-buttons input[type="radio"] {
-    opacity:0.01;
-    z-index:100;
+  opacity:1;
+  z-index:1;
 }
 
 .gender-buttons input[type="radio"]:checked + label,
 .Checked + label {
-    background:yellow;
+  background:yellow;
 }
 
 .gender-buttons label {
-     padding:5px;
-     border:1px solid #CCC; 
-     cursor:pointer;
-    z-index:90;
+  padding:5px;
+  border:1px solid #e0e0e0;
+  border-radius: 3px; 
+  cursor:pointer;
 }
 
 .gender-buttons label:hover {
-     background:#DDD;
+  background: #e0e0e0;
 }
