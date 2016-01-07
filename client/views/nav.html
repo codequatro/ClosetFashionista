@@ -3,7 +3,7 @@
 	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
 	<div class="add-link-modal firstModal" ng-show="firstModalShow">
 			<div id='firstModal'>
-			<i ng-click="changeFirstModal()" class="fa fa-times-circle fa-2x"></i>
+            <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="m10 6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4h-28m6.83 8l7.17 7.17 7.17-7.17 2.83 2.83-7.17 7.17 7.17 7.17-2.83 2.83-7.17-7.17-7.17 7.17-2.83-2.83 7.17-7.17-7.17-7.17 2.83-2.83"/></svg>
 			<h2>Share Your Story</h2>
 			<form name="addLink" ng-submit='getImageData(newLink)' novalidate>
 				<input type='url' name="urlText" placeholder="Paste URL..." ng-model="newLink"><br>
@@ -18,7 +18,7 @@
 			<div id='secondModal'>
 			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
 			<h2>Second Modal</h2>
-			<form name="post" ng-submit='postImage()' novalidate>
+			<form name="postImage" ng-submit='postImage(link)' novalidate>
 				<img ng-src='{{ image }}' />
 				<p>{{ image_name }}</p>
 				<p>{{ link_Url }}</p>
@@ -26,7 +26,7 @@
 				<input type="submit" value="Submit Link">
 			</form>
 		</div>
-		</div>
+	</div>
 
     <div id='navbar-left'>
 
@@ -43,11 +43,10 @@
     </div>
 
     <div class="nav-actions">
-		<i ng-click="changeFirstModal()" class="fa fa-plus-circle add-link-icon"></i>
+        <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="m10 6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4h-28m6.83 8l7.17 7.17 7.17-7.17 2.83 2.83-7.17 7.17 7.17 7.17-2.83 2.83-7.17-7.17-7.17 7.17-2.83-2.83 7.17-7.17-7.17-7.17 2.83-2.83"/></svg>
 		<div class="nav-dropdown-link" ng-show="!{{username}}">
 			<div class="nav-dropdown-link-username" ng-click="showNavDropdownContent()">
 				<p>{{firstname}} {{lastname}}</p>
-				<i class="fa fa-chevron-circle-down"></i>
 			</div>
 			<div class="nav-dropdown" ng-show="showNavDropdown">
 				<a ng-href="#/profile/{{user_id}}"><li><i class="fa fa-user"></i>Profile</li></a>
@@ -55,8 +54,6 @@
 			</div>
 		</div>
 	</div>
-
-
 </div>
 
 

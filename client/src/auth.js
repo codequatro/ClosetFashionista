@@ -35,7 +35,7 @@ angular.module('myApp')
     $scope.signup = function() {
       Register.register.signup($scope.user)
       .then(function(user){
-        $scope.signin(user)
+        $scope.signin($scope.user)
       })
     }
 
@@ -43,6 +43,7 @@ angular.module('myApp')
       Authorization.authorized = false
       $window.localStorage.removeItem('authtoken')
       $window.localStorage.removeItem('username')
+      $window.localStorage.removeItem('userID')
       $state.go('home')
     }
 
