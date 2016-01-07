@@ -15,13 +15,17 @@
 
     <img class='vote-image' ng-src="{{imageUrl}}">
   </div>
-  <form class="form-inline" role="form">
-    <div class="form-group">
-      <input class="form-control" type="text" placeholder="Post Comment" />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-default">Post</button>
-    </div>
-  </form>
 
+<div class="detailBox-comment">
+    <div class="titleBox">
+       <label>Have an opinion? Leave a comment!</label>
+    </div>
+    <div class="actionBox">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <textarea class="text-area-control" type="text" placeholder="Post Comment"> </textarea>
+          <button type'button' class='btn btn-primary comment-button'>Post Comment</button>
+        </div>
+      </form>
+    </div>
 </div>

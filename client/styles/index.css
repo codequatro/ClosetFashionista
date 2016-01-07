@@ -310,10 +310,16 @@ input::-webkit-input-placeholder{
   border-radius: 4px;
   margin-right: 110px;
 }
+.detailBox-comment {
+  width: 50%;
+  border-radius: 4px;
+  margin: 10px auto;
+  background: #fdfdfd;
+}
 
 .titleBox {
-    background-color:#fdfdfd;
-    padding:10px;
+  background-color:#fdfdfd;
+  padding:10px;
 }
 .titleBox label{
   color:#444;
@@ -322,8 +328,8 @@ input::-webkit-input-placeholder{
 }
 
 .commentBox {
-    padding:10px;
-    border-top:1px dotted #bbb;
+  padding:10px;
+  border-top:1px dotted #bbb;
 }
 .commentBox .form-group:first-child, .actionBox .form-group:first-child {
     width:80%;
@@ -356,6 +362,9 @@ input::-webkit-input-placeholder{
   height:100%;
   float:left;
 }
+.comment-button {
+  float: left;
+}
 .commenterImage img {
   width:100%;
   border-radius:50%;
@@ -371,4 +380,8 @@ input::-webkit-input-placeholder{
 .actionBox {
     border-top:1px dotted #bbb;
     padding:10px;
+}
+.text-area-control {
+  height: 40px;
+  width: 200px;
 }
