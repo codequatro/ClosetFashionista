@@ -1,17 +1,44 @@
-<div class='closet' ng-controller="ClosetCtrl">
 
+<style>
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+</style>
+
+<div class='closet container col-md-12' ng-controller="ClosetCtrl">
+<div class='clear'></div>
 <h1>welcome to your closet</h1>
-<br><br>
 
-<div class='closetform'>
-  <h3>&nbsp;&nbsp;add to your closet:</h3>
+<div class='row'>
+  <!-- <h3>add to your closet:</h3> -->
+  <div class='clear'></div>
 
-  <div class='imageupload'>
-    <form action="/postimage" method="post" enctype="multipart/form-data" class= 'closetform'>
-        <input type="file" name="upload" multiple="multiple">
+  <div class='col-md-6'>
+    <form action="/postimage" method="post" enctype="multipart/form-data" class='closetform'>
+        <div class="image-choice" ng-hide="imageChoice">
+          <div class="fileUpload btn btn-primary">
+            <span>Upload Photo</span>
+            <input type="file" name="upload" class="upload">
+          </div>
+          <button type="button" class="btn btn-primary" ng-click="showCamera()">Take Snapshot</button>
+        </div>
         <br><br>
-        <input type="submit" value="Upload File" class="pure-button">
+        <div>
+          <camera ng-show="webcam"></camera>
+          <button ng-show="webcam" type="button" class="btn btn-primary" ng-click="takePhoto()">Capture!</button>
+        </div>
         <input type="hidden" name="name" value="{{username}}">
+        <input type="hidden" name="image" value="{{image}}">
         <select class="type" name="clothingType" required>
           <option value="">please select a clothing type</option>
           <option value="1">tops</option>
@@ -19,10 +46,11 @@
           <option value="3">shoes</option>
           <option value="4">outfit</option>
         </select><br>
+        <input type="submit" value="Upload File" class="pure-button">
       </form>
     </div>
 
-    <div class='clothingfilter'>
+    <div class='col-md-6'>
       <h3>filter your closet:</h3>
        <select class="filtermenu" name="search" ng-model="search">
           <option ng-selected="true" value="-1">all</option>
@@ -37,28 +65,12 @@
 <br>
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
-  <div class="card" ng-repeat="pic in pics | filter:customFilter">
+  <div class="card" ng-repeat="pic in pics | filter:customPicTypeFilter">
     <pic-info info="pic"></pic-info>
     <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">
-      <img id="delete" src="delete-icon.jpg"/>
+      <img id="delete" src="client/img/delete-icon.jpg"/>
     </div>
   </div>
 
 </div>
-
-
-<!--
-  <div class="pure-menu pure-menu-horizontal">
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover" name="clothingType">
-            <a href="#" id="menuLink1" class="pure-menu-link">colthing type</a>
-            <ul class="pure-menu-children">
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link" option value="1">tops</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link" option value="2">bottoms</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link" option value="3">shoes</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link" option value="4">outfit</a></li>
-            </ul>
-        </li>
-    </ul>
-</div> -->
 

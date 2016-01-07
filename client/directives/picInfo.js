@@ -1,10 +1,15 @@
 angular.module('myApp')
-  .directive('picInfo', function(){
+  .directive('picInfo', function($state){
     return {
       restrict: 'E',
       scope: {
         info: '='
       },
-      templateUrl: '../views/picInfo.html'
+      templateUrl: '../client/views/picInfo.html',
+      link: function(scope, element, attrs){
+              scope.goToSingleOutfit = function(imageUrl){
+                $state.go('singleOutfit', {imageUrl: imageUrl});
+              };
+      }
     };
   });

@@ -1,7 +1,9 @@
-<div class='navbar' ng-controller="NavCtrl">
-  <a class='btn out' ng-show="!isAuth" ui-sref='signin'>sign in</a>
-  <a class='btn out' ng-show="!isAuth" ui-sref='signup'>sign up</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='signout'>sign out</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='vote'>vote</a>
-  <a class='btn in' ng-show="isAuth" ui-sref='closet'>closet</a>
-</div>
+
+<ul class='nav nav-pills' ng-controller="NavCtrl">
+	  <li role='presentation' class='' ng-show="!isAuth" ui-sref='signin'><a href="">Sign in</a></li>
+	  <li role='presentation' class='' ng-show="!isAuth" ui-sref='signup'><a href="">Sign up</a></li>
+	  <li role='presentation' class='' ng-show="isAuth" ui-sref='signout'><a href="">Sign out</a></li>
+	  <li role='presentation' class='' ng-show="isAuth" ui-sref='vote'><a href="">Votes</a></li>
+	  <li role='presentation' class='' ng-show="isAuth" ui-sref='closet'><a href="">Closet</a></li>
+  
+</ul>
