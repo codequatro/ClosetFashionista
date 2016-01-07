@@ -366,3 +366,30 @@ svg {
   text-indent: 0;
   /*padding: .5em;*/
 }
+
+.btn-back {
+  fill: #fff;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.btn-back:hover {
+  fill: gray;
+  cursor: pointer;
+}
+
+#navbar-left .btn {
+  float: left;
+}
+
+.top-user-interior h2:hover,
+.top-user-interior h3:hover,
+.top-user-interior h4:hover,
+.top-user-interior svg:hover {
+  cursor: pointer;
+}
+
+.top-user-interior svg {
+  width: 4em;
+  height: 4em;
+}
