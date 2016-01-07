@@ -13,56 +13,56 @@ angular.module('myApp', [
       .state('home', {
           url: '/',
           views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/main.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/main.html'}
           }
       })
 
       .state('signin', {
         url:'/signin',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signin.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signin.html'}
           }
       })
 
       .state('signup', {
         url:'/signup',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signup.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signup.html'}
           }
       })
 
       .state('signout', {
         url:'/signout',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/signout.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/signout.html'}
           }
       })
 
       .state('vote', {
-        url: '/vote',
+        url: '/votes',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/vote.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/vote.html'}
           }
       })
 
       .state('closet', {
         url: '/closet',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/closet.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/closet.html'}
           }
       })
 
       .state('s3test', {
         url: '/s3test',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
-            "main":{templateUrl: 'views/s3test.html'}
+            "nav": {templateUrl: "client/views/nav.html"},
+            "main":{templateUrl: 'client/views/s3test.html'}
           }
       })
 
@@ -90,7 +90,7 @@ angular.module('myApp', [
 
      if(Authorization.authorized === false) {
        if(next.match('vote') || next.match('closet')){
-        $location.path('/signin');
+        $location.path('/signin')
        }
      }
 
@@ -139,12 +139,13 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(hotOrNot, username, imageId){
+    register.vote = function(rating, username, imageId){
       console.log('Factory Image ID', imageId);
+      console.log(rating);
       return $http({
         method: 'POST',
         url: '/vote',
-        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
+        data: {rating: rating, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;

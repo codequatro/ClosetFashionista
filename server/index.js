@@ -14,7 +14,7 @@ var AWS = require('aws-sdk');
 //
 //route to your index.html
 //
-var assetFolder = Path.resolve(__dirname, '../client/');
+var assetFolder = Path.resolve(__dirname, '../');
 routes.use(express.static(assetFolder));
 
 // User route SIGNIN
@@ -73,7 +73,7 @@ routes.post('/postimage', function (req, res){
 
   form.parse(req, function(err, fields, files) {
 
-    //this is not the right way to go about it. url gets wierd
+    //this is not the right way to go about it. url gets weird
     //NEED TO FIX
 
     res.redirect('#/closet');
@@ -146,10 +146,10 @@ routes.post('/randomimage', function (req, res){
           var userId = result.rows[0].user_id;
           client.query('SELECT image_name, image_id FROM images WHERE images.user_id <> $1 AND images.image_id NOT IN (SELECT image_id FROM votes WHERE user_id = $1) ORDER BY RANDOM() LIMIT 1' ,[userId], function(err, image){
             if(image.rows.length === 0){
-              res.status(200).json({image_name: 'pablo.png', image_id: -1});
+              res.status(200).json({image_name: 'client/img/emptyCloset.jpg', image_id: -1});
             }
             else{
-              res.status(200).json({image_name: './uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
+              res.status(200).json({image_name: 'client/uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
             }
             done();
           });
@@ -185,7 +185,7 @@ routes.post('/closet', function (req, res){
               closetItems.pics = result.rows;
 
                 //grab all of the votes for each user pic
-                client.query('SELECT images.image_name, votes.vote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+                client.query('SELECT images.image_name, votes.rating FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
                     if(err){
                       console.error('error fetching votes', err);
                     }
@@ -241,9 +241,10 @@ routes.post('/removeimage', function (req, res){
 
 routes.post('/vote', function (req, res){
   var username = req.body.username;
-  var hotOrNot = req.body.hotOrNot;
+  var rating = req.body.rating;
   var imageId = req.body.imageId;
   console.log('imageId', imageId);
+  console.log('rating', rating);
   pg.connect(connectString, function (err, client, done) {
     if(err){
       console.error('error connecting to the DB:', err);
@@ -255,11 +256,12 @@ routes.post('/vote', function (req, res){
         }
         else {
           var userId = result.rows[0].user_id
-          client.query('INSERT INTO votes (user_id, image_id, vote) VALUES ($1, $2, $3)',[userId, imageId, hotOrNot], function(err, result){
+          client.query('INSERT INTO votes (user_id, image_id, rating) VALUES ($1, $2, $3)',[userId, imageId, rating], function(err, result){
             if(err){
               console.error('error inserting vote into votes table: ', err);
             }
             else{
+              console.log('inserted');
               res.status(201).json({result: result.rows});
               done();
             }
@@ -319,7 +321,7 @@ if(process.env.NODE_ENV !== 'test') {
   // NOTE: Make sure this route is always LAST.
   //
   routes.get('/*', function(req, res){
-    res.sendFile( assetFolder + '/index.html' )
+    res.sendFile( assetFolder + '/client/index.html' )
   })
 
   //

@@ -1,17 +1,19 @@
 <div class='vote' ng-controller="VoteCtrl">
+  <div class='vote-container'>
+    <div class='vote-text-container'>
+      <div ng-if="imageId !== -1">
+        <div class="vote-greeting">Bonjour Fashionista {{username}}!!</div>
+        <div class="vote-prompt-voting-text">What do you think of this look?</div>
+      </div>
+      <div ng-if="imageId === -1" class="vote-no-images-text">You go, {{username}}!<br>No more clothes to vote on.<br>Please check back later.</div>
+      <form ng-if="imageId !== -1">
+        <input type="text" ng-model="rating.value" />
+        <button type="submit" ng-click="vote()">submit rating</button>
+        <div ng-if="updated">Vote Accepted</div>
+      </form>
+    </div>
 
-	<h2>hello {{username}}</h2>
-  <br>
-  <h2>are you ready to vote on ugly fools ?</h2>
-  <a ><img class='image' ng-src="{{imageUrl}}"></a>
-
-  <form ng-if="imageId !== -1">
-    <input type="image" class="voteButton" src='thumb-up.png' ng-click="vote(1)" />
-
-    <input type="image" class="voteButton" src="../thumb-down.jpg" value="down" ng-click="vote(0)" />
-    <br />
-    <!-- <div ng-if="updated">Update Succesful</div> -->
-	  <div ng-if="updated">update succesful</div>
-  </form>
+    <a><img class='vote-image' ng-src="{{imageUrl}}"></a>
+  </div>
 
 </div>
