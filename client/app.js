@@ -150,12 +150,13 @@ angular.module('myApp', [
       })
     }
 
-    register.vote = function(hotOrNot, username, imageId){
+    register.vote = function(rating, username, imageId){
       console.log('Factory Image ID', imageId);
+      console.log(rating);
       return $http({
         method: 'POST',
         url: '/vote',
-        data: {hotOrNot: hotOrNot, username: username, imageId: imageId}
+        data: {rating: rating, username: username, imageId: imageId}
       })
       .then(function(resp){
         return resp.data;
