@@ -25,6 +25,41 @@
 				<p>{{ source }}</p>
 				<input type="submit" value="Submit Link">
 			</form>
+			<div class='gender-female' ng-show='femaleShow'>
+				<ul class="type-buttons">
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='tops' />tops</label> 
+	      			</li>
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='bottoms' />bottoms</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='dresses' />dresses</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='shoes' />shoes</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='accessories' />accessories</label>
+	     			</li>
+	   			</ul>
+	   		</div>
+	   		<div class='gender-male' ng-show='maleShow'>
+				<ul class="type-buttons">
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='tops' />tops</label> 
+	      			</li>
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='bottoms' />bottoms</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='shoes' />shoes</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='accessories' />accessories</label>
+	     			</li>
+	   			</ul>
+	   		</div>
 		</div>
 	</div>
 
@@ -44,7 +79,7 @@
     </div>
 
     <div class="nav-actions">
-        <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="m10 6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4h-28m6.83 8l7.17 7.17 7.17-7.17 2.83 2.83-7.17 7.17 7.17 7.17-2.83 2.83-7.17-7.17-7.17 7.17-2.83-2.83 7.17-7.17-7.17-7.17 2.83-2.83"/></svg>
+        <svg class="x-button" ng-click="changeFirstModal()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M38 26H26v12h-4V26H10v-4h12V10h4v12h12v4z"/></svg>
 		<div class="nav-dropdown-link" ng-show="!{{username}}">
 			<div class="nav-dropdown-link-username" ng-click="showNavDropdownContent()">
 				<p>{{firstname}} {{lastname}}</p>

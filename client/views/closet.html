@@ -38,7 +38,11 @@
 
   <!-- ng-repeat uses a directive called picInfo to display each image -->
   <div class="card" ng-repeat="pic in pics">
+  <a ng-href='{{ pic.link_url }}'>
     <img ng-src='{{ pic.image }}' />
+   </a> 
+    <p>{{ pic.image_name }}</p>
+    <p>{{ pic.source }}</p>
    <!--  <div class="remove" ng-click="removeImage(pic.image_id, pic.image_name); reloadPage()">
       <img id="delete" src="delete-icon.jpg"/>
     </div> -->
