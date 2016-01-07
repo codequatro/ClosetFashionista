@@ -14,11 +14,15 @@ angular.module('myApp')
     $scope.userCredibility = undefined; // will be set when 'getBasicUserInfo' is run
 
 
+    $scope.imagePic = undefined;
+    $scope.imageSource = undefined;
+    $scope.imageInfo = undefined;
+    $scope.imageId = undefined;
+
     $scope.getBasicUserInfo = function(){
         Register.register.getCloset($scope.username)
         .then(function(data){
             console.log('User Info: ', data)
-
             // Storing User Info
             $scope.firstname = data.firstname;
             $scope.lastname = data.lastname;
@@ -30,11 +34,10 @@ angular.module('myApp')
     $scope.getImage = function(){
     	Register.register.randomImage($scope.username)
     	.then(function(data){
-            console.log(data)
-            $scope.imagePic = data.image;
-            $scope.imageSource = data.source;
-    		$scope.imageInfo = data.image_name;
-    		$scope.imageId = data.image_id;
+            $scope.imagePic = data.image.image;
+            $scope.imageSource = data.image.source;
+            $scope.imageInfo = data.image.image_name;
+            $scope.imageId = data.image.image_id;
     	})
     };
 
