@@ -17,7 +17,7 @@
 
 <div class='closet container col-md-12' ng-controller="ClosetCtrl">
 <div class='clear'></div>
-<h1>welcome to your closet</h1>
+<h1>welcome to your closet {{photo}}</h1>
 
 <div class='row'>
   <!-- <h3>add to your closet:</h3> -->
@@ -37,7 +37,7 @@
           <button ng-show="webcam" type="button" class="btn btn-primary" ng-click="takePhoto()">Capture!</button>
         </div>
         <input type="hidden" name="name" value="{{username}}">
-        <input type="hidden" name="image" value="{{image}}">
+        <input id="camImage" type="hidden" name="image" value="">
         <select class="type" name="clothingType" required>
           <option value="">please select a clothing type</option>
           <option value="1">tops</option>

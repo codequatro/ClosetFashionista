@@ -91,7 +91,6 @@ routes.post('/postimage', function (req, res){
   var myFields = {};
   form.on('field', function(field, value){
     myFields[field] = value;
-    //console.log('fields in form.on', myFields);
   });
 
   form.on('end', function(fields, files) {
@@ -214,6 +213,7 @@ routes.post('/closet', function (req, res){
               console.error('error fetching closet images: ', err);
             }
             else{
+              console.log("result", result);
               closetItems.pics = result.rows;
 
                 //grab all of the votes for each user pic

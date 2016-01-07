@@ -3,7 +3,6 @@
 angular.module('myApp')
   .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', 'Authorization', function($scope,$http,$window,$state, Register, Authorization) {
     $scope.header = 'You will find your closet here';
-    $scope.imageUrl = url;
     $scope.username = $window.localStorage.getItem('username');
     $scope.search = "-1";
 
@@ -73,11 +72,15 @@ angular.module('myApp')
     $scope.takePhoto = function(){
       $window.countdown();
       setTimeout(function(){
-        $scope.image = $window.captured;
-        console.log($scope.image);
-      },400)
+        $scope.savePhoto();
+      },countown_sec * 1020)
     }
 
+    $scope.savePhoto = function(){
+      var formImage = document.getElementById("camImage");
+      formImage.value = $window.captured;
+      console.log(formImage.value);
+    }
 
 
     // initialize page with closet images if auth is good
