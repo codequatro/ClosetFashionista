@@ -7,7 +7,8 @@
       </div>
       <div ng-if="imageId === -1" class="vote-no-images-text">You go, {{username}}!<br>No more clothes to vote on.<br>Please check back later.</div>
       <form ng-if="imageId !== -1">
-        <input type="text" ng-model="rating.value" />
+      <star-rating ng-model="rating.value" max="5" readonly="false" on-rating-select="rating.rateFunction(rating)"></star-rating>
+      <br>
         <button type="submit" ng-click="vote()">submit rating</button>
         <div ng-if="updated">Vote Accepted</div>
       </form>
