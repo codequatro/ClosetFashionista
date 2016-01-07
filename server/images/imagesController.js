@@ -99,6 +99,7 @@ exports = module.exports = {
 	},
 
 	postUrl: function(req, res, next) {
+
 	},
 
 	randomImage: function(req, res, next) {
@@ -184,23 +185,28 @@ exports = module.exports = {
 		}
 		console.log('imageId', imageId);
 		pg.connect(connectString, function (err, client, done) {
-		if(err){
+		if (err) {
 		  console.error('error connecting to the DB:', err);
-		}
-		else {
+		} else {
 		  client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-		    if(err){
+		    if (err) {
 		      console.error('error on lookup of user_id', err)
-		    }
-		    else {
+		    } else {
 		      var userId = result.rows[0].user_id
 		      client.query('INSERT INTO votes (user_id, image_id, upvote, downvote, flag, gender) VALUES ($1, $2, $3, $4, $5, $6)',[userId, imageId, upvote, downvote, flag, voteGender], function(err, result){
-		        if(err){
+		        if (err) {
 		          console.error('error inserting vote into votes table: ', err);
-		        }
-		        else{
-		          res.status(201).json({result: result.rows});
-		          done();
+		        } else {
+		        	var flagCounter = 0;
+		        	client.query("SELECT flag FROM votes WHERE image_id = $1", [imageId], function(err, result){
+		        	for (var f = 0; f < result.rows.length; f++) { if (result.rows[f].flag === 1) flagCounter++ }
+	        		if (flagCounter >= 3) {
+						client.query('DELETE FROM votes WHERE image_id = $1', [imageId])
+						client.query('DELETE FROM images WHERE image_id = $1', [imageId])
+	        		}
+		        	res.status(201).json({result: result.rows});
+		        	done();
+		        	})
 		        }
 		      });
 		    }
