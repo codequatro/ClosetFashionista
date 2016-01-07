@@ -56,6 +56,14 @@ angular.module('myApp', [
           }
       })
 
+      .state('topUsers', {
+        url: '/topUsers',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/topUsers.html'}
+          }
+      })
+
       .state('s3test', {
         url: '/s3test',
         views: {
@@ -99,6 +107,7 @@ angular.module('myApp', [
     var register = {};  // local storage for users and current user
 
     register.currentUser =  $window.localStorage.getItem('username') || '' ;
+    register.currentUserID = $window.localStorage.getItem('userID') || '';
     register.users = [];
 
     /***************AUTHORIZATION***********************/
@@ -202,6 +211,17 @@ angular.module('myApp', [
         method: 'POST',
         url: 'images/removeimage',
         data: {imageId: imageId, imageName: imageName}
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+    /*************GET TOP USERS********************/
+    register.getTopUsers = function(user){
+      return $http({
+        method: 'GET',
+        url: 'users/topUsers',
+        data: user
       })
       .then(function(resp){
         return resp.data;
