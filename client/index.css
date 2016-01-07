@@ -37,8 +37,8 @@ a:hover, a:link {
 
 .navbar .btn, #navbar-right {
   color: #fff;
-  padding: 5px;
-  font-size: 25px;
+  padding: 9px 15px;
+  font-size: 18px;
   text-align: center;
   padding-left: 10px;
 }
