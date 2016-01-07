@@ -2,15 +2,17 @@
 
 angular.module('myApp')
   .controller('NavCtrl', ['$scope','$window', '$location', 'Authorization', 'Register', function($scope, $window, $location, Authorization, Register) {
+
    $scope.isAuth=Authorization.authorized;
 
    // data storage
-  $scope.username = $window.localStorage.getItem('username');
+    $scope.username = $window.localStorage.getItem('username');
 	$scope.userID = $window.localStorage.getItem('userID');
 	$scope.image_name = undefined;
 	$scope.image = undefined;
 	$scope.link_url = undefined;
 	$scope.source = undefined;
+    $scope.type = undefined;
 
    	$scope.firstModalShow = false;
 	$scope.changeFirstModal = function() {
@@ -47,11 +49,13 @@ angular.module('myApp')
     $scope.postImage = function() {
         console.log('here')
     	var imageData = {};
+        imageData.type = $scope.type;
     	imageData.userID = $scope.userID;
     	imageData.image_name = $scope.image_name;
         imageData.image = $scope.image;
         imageData.link_url = $scope.link_url;
         imageData.source = $scope.source;
+        imageData.type = $scope.type;
         console.log('imageData', imageData)
     	Register.register.postImage(imageData)
     	.then(function(data) {

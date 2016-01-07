@@ -25,6 +25,41 @@
 				<p>{{ source }}</p>
 				<input type="submit" value="Submit Link">
 			</form>
+			<div class='gender-female' ng-show='genderShow'>
+				<ul class="type-buttons">
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='tops' />tops</label> 
+	      			</li>
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='bottoms' />bottoms</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='dresses' />dresses</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='shoes' />shoes</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='accessories' />accessories</label>
+	     			</li>
+	   			</ul>
+	   		</div>
+	   		<div class='gender-male' ng-show='genderShow'>
+				<ul class="type-buttons">
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='tops' />tops</label> 
+	      			</li>
+	      			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='bottoms' />bottoms</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='shoes' />shoes</label>
+	     			</li>
+	     			<li>
+	        			<label><input type='radio' ng-model='entry.type' value='accessories' />accessories</label>
+	     			</li>
+	   			</ul>
+	   		</div>
 		</div>
 	</div>
 
