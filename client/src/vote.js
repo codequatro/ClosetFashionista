@@ -30,7 +30,10 @@ angular.module('myApp')
     $scope.getImage = function(){
     	Register.register.randomImage($scope.username)
     	.then(function(data){
-    		$scope.imageUrl = data.image_name;
+            console.log(data)
+            $scope.imagePic = data.image;
+            $scope.imageSource = data.source;
+    		$scope.imageInfo = data.image_name;
     		$scope.imageId = data.image_id;
     	})
     };

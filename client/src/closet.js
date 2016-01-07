@@ -19,7 +19,6 @@ angular.module('myApp')
 
 
     $scope.getUserInfo = function(){
-
       //Call the factory method which gets a users images and votes for those images
       Register.register.getCloset($scope.username)
       .then(function(data){

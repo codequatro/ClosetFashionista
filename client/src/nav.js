@@ -7,6 +7,7 @@ angular.module('myApp')
    // data storage
   $scope.username = $window.localStorage.getItem('username');
 	$scope.userID = $window.localStorage.getItem('userID');
+    $scope.gender = undefined;
 	$scope.image_name = undefined;
 	$scope.image = undefined;
 	$scope.link_url = undefined;
@@ -61,4 +62,16 @@ angular.module('myApp')
     		return data; 
     	})
     };
+
+    $scope.getBasicUserInfo = function() {
+      //Call the factory method which gets a users images and votes for those images
+      Register.register.getBasicUserInfo($scope.username)
+      .then(function(data){
+        // Storing User Info
+        $scope.firstname = data.firstname;
+        $scope.lastname = data.lastname;
+        $scope.gender = data.gender;
+      }); 
+    }
+
   }]);
