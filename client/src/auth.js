@@ -3,7 +3,8 @@
 angular.module('myApp')
   .controller('AuthCtrl', ['$state', '$scope', '$window', '$location', 'Register', 'Authorization', function($state, $scope, $window, $location, Register, Authorization) {
     // $scope.header = 'this will be the auth page';
-    $scope.user = {}
+    $scope.user = {};
+    $scope.showErr = false;
     // $scope.user.username might need to grab local storage for current user
 
     $scope.signin = function(user) {
@@ -13,15 +14,19 @@ angular.module('myApp')
       var user = user || {username: username, password: password}
 
       Register.register.signin(user)
-      .then(function(data){
-        console.log(' signin data from our authjs', data)
-        Authorization.authorized = true
-        $window.localStorage.setItem('authtoken', data.token)
-        $window.localStorage.setItem('username', data.username)
+        .then(function(data){
+          console.log(' signin data from our authjs', data);
+          Authorization.authorized = true;
+          $window.localStorage.setItem('authtoken', data.token);
+          $window.localStorage.setItem('username', data.username);
 
-        $state.go('closet')
+          $state.go('home');
 
-      })
+        })
+        .catch(function(error){
+          $scope.err = error.data.answer;
+          $scope.showErr = true;
+        });
     }
 
     $scope.signup = function() {
@@ -32,15 +37,19 @@ angular.module('myApp')
 
       Register.register.signup(user)
       .then(function(data){
-        $scope.signin(user)
+        $scope.signin(user);
       })
+      .catch(function(error){
+        $scope.err = error.data.answer;
+        $scope.showErr = true;
+      });
     }
 
     $scope.signout = function() {
-      Authorization.authorized = false
-      $window.localStorage.removeItem('authtoken')
-      $window.localStorage.removeItem('username')
-      $state.go('home')
+      Authorization.authorized = false;
+      $window.localStorage.removeItem('authtoken');
+      $window.localStorage.removeItem('username');
+      $state.go('signin');
     }
 
   }]);

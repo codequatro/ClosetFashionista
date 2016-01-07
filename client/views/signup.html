@@ -1,11 +1,23 @@
-<div class='auth' ng-controller="AuthCtrl">
-  <form novalidate class='signup'>
-    Username: <input type="text" ng-model="user.username" /><br><br>
-    Password: <input type="password" ng-model="user.password" /><br><br>
-    <input type="submit" ng-click="signup()" value="SignUp"
-  />
-  </form>
-<br>
-  <a ui-sref='signin' class='already'>already a fashionista? sign in to start voting</a>
+<div class='auth clear col-md-12' ng-controller="AuthCtrl">
+<div class="header-logo"><img class="logo" src="client/img/logo.svg"></div>
+	<div class='col-md-12 form-div'>
+		<div class="col-md-4 col-md-offset-4">
+			<h3 class="sign-in-up-title">Sign up</h3>
+			<div class='clean'></div>
+		  <form novalidate ng-submit='signup()' class='signup form-horizontal'>
+		    <input class='form-control' type="text" placeholder='User' ng-model="user.username" /><br>
+		    <input class='form-control' type="password" placeholder='Password' ng-model="user.password" />
+		    <div ng-show="showErr" class='message-error shadow'>{{err}}</div>
+		    <div class='clean'></div>
+		    <button class='btn btn-primary'>Enter Closet</button>
+		  </form>
+		  <div class='clean'></div>
+		  <a ui-sref='signin' class='already'>already a fashionista? <strong>Sign in</strong></a>
+		</div>
+  </div>
 
 </div>
+
+<footer class='footer-class'>
+  <p>From the team that brought you "The Original 'City Quest'"&copy</p>
+</footer>
