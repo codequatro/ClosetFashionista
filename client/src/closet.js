@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', 'Authorization', function($scope,$http,$window,$state, Register, Authorization) {
+  .controller('ClosetCtrl', ['$scope','$http', '$window','$state','Register', 'Authorization', '$stateParams', function($scope,$http,$window,$state, Register, Authorization, $stateParams) {
     $scope.header = 'You will find your closet here';
     // $scope.imageUrl = url;
     $scope.search = "-1";
@@ -10,7 +10,7 @@ angular.module('myApp')
 
 
     // Temporary Data Storage
-    $scope.username = $window.localStorage.getItem('username');
+    $scope.username = $stateParams.username || $window.localStorage.getItem('username');
     $scope.userID = undefined; // will be set when 'getUserInfo' is run
     $scope.firstname = undefined; // will be set when 'getUserInfo' is run
     $scope.lastname = undefined; // will be set when 'getUserInfo' is run

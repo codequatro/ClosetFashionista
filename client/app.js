@@ -56,6 +56,14 @@ angular.module('myApp', [
           }
       })
 
+      .state('profile', {
+        url: '/profile/:username',
+        views: {
+            "nav": {templateUrl: "views/nav.html"},
+            "main":{templateUrl: 'views/closet.html'}
+          }
+      })
+
       .state('topUsers', {
         url: '/topUsers',
         views: {

@@ -33,6 +33,14 @@ angular.module('myApp')
       });
     };
 
+    $scope.goToProfile = function(user) {
+      console.log('Switching to %s\'s profile', user.username);
+      Register.register.getCloset(user.username)
+        .then(function(data){
+          $window.location.href = '/#/profile/' + user.username;
+        });
+    }
+
     $scope.getTopUsers();
 
   }]);
