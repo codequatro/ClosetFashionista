@@ -334,3 +334,34 @@ svg {
 .gender-buttons label:hover {
   background: #e0e0e0;
 }
+
+#top-users {
+}
+
+#top-users .title {
+  display: block;
+}
+
+.top-user-container {
+  display: inline-block;
+  float: left;
+  width: 20em;
+  height: 15em;
+  border: 1px solid #6e5baa;
+  border-radius: 4px;
+  background-color: #6e5baa;
+  margin: .5em;
+  position: relative;
+}
+
+.top-user-interior {
+  background-color: #F5F5F5;
+  width: auto;
+  height: auto;
+  position: relative;
+  margin-top: 0;
+  margin: .75em;
+  text-align: center;
+  text-indent: 0;
+  /*padding: .5em;*/
+}
