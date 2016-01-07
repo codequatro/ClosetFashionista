@@ -5,12 +5,14 @@ angular.module('myApp')
 $scope.updated = false;
 $scope.username = $window.localStorage.getItem('username');
 $scope.rating = {};
+$scope.rating.value = 0;
 
 $scope.vote = function(){
   Register.register.vote(parseInt($scope.rating.value), $scope.username, $scope.imageId)
   .then(function(data){
     $scope.updated = true;
         $scope.getImage();
+        $scope.rating.value = 0;
   });
 };
 

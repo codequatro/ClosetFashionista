@@ -1,6 +1,6 @@
 <img class="closetPic" ng-src="client/uploads/{{info.image_name}}" ng-click="goToSingleOutfit(info.image_name)">
-<p class="percentage">
+<div class="percentage">
 	{{info.stars/info.total || 0 | limitTo:3}}
 	<star-rating ng-model="info.rating" readonly="true"></star-rating>
-</p>
+</div>
 
