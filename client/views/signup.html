@@ -10,10 +10,12 @@
     <input class="auth-input" type="password" ng-model="user.password" placeholder="Password"/>
     <ul class="gender-buttons">
       <li>
-        <label><input type='radio' ng-model='user.gender' value='female' />Female</label> 
+        <input id="female" type='radio' ng-model='user.gender' value='female' />
+        <label for="female">Female</label> 
       </li>
       <li>
-        <label><input type='radio' ng-model='user.gender' value='male' />Male</label>
+        <input id="male" type='radio' ng-model='user.gender' value='male' />
+        <label for="male">Male</label>
       </li>
     </ul>
     <input class="auth-button" type="submit" ng-click="signup()" value="Sign Up"/>

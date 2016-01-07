@@ -157,6 +157,31 @@ exports = module.exports = {
 		}) // pg.connect end
 	},
 
+	getBasicUserInfo: function(req, res, next) {
+		var username = req.body.username;
+
+		pg.connect(connectString, function (err, client, done) {
+		if(err) {
+			console.error('error connecting to the DB:', err);
+		} else {
+			client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
+		    if(err) {
+		    	console.error('error on lookup of user_id: ', err)
+		    } else {
+				var userId = result.rows[0].user_id;
+				//create a 'userInfo' object to send back to client
+				var userInfo = {};
+				userInfo.userID = result.rows[0].user_id;
+				userInfo.username = result.rows[0].username;
+				userInfo.firstname = result.rows[0].firstname;
+				userInfo.lastname = result.rows[0].lastname;
+				userInfo.gender = result.rows[0].gender;
+		    }
+		  }) //end of userInfo query
+		}
+		}) // pg.connect end
+	},
+
 	getAllUsers: function(req, res, next) {
 		pg.connect(connectString, function (err, client, done) {
 			client.query('SELECT user_id, username, firstname, lastname, gender, credibilityScore FROM users', [], function (err, result){

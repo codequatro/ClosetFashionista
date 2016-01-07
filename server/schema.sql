@@ -97,6 +97,19 @@ CREATE TABLE clothing_types (
 --
 -- ---
 
+DROP TABLE IF EXISTS following;
+
+CREATE TABLE following (
+  event_id SERIAL,
+  follower_id INTEGER,
+  following_id INTEGER
+);
+
+-- ---
+-- Table 'tag_relationships'
+--
+-- ---
+
 DROP TABLE IF EXISTS tag_relationships;
 
 CREATE TABLE tag_relationships (
