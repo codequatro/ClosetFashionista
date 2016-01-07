@@ -146,10 +146,10 @@ routes.post('/randomimage', function (req, res){
           var userId = result.rows[0].user_id;
           client.query('SELECT image_name, image_id FROM images WHERE images.user_id <> $1 AND images.image_id NOT IN (SELECT image_id FROM votes WHERE user_id = $1) ORDER BY RANDOM() LIMIT 1' ,[userId], function(err, image){
             if(image.rows.length === 0){
-              res.status(200).json({image_name: 'client/img/pablo.png', image_id: -1});
+              res.status(200).json({image_name: 'client/img/emptyCloset.jpg', image_id: -1});
             }
             else{
-              res.status(200).json({image_name: './uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
+              res.status(200).json({image_name: 'client/uploads/' + image.rows[0].image_name, image_id: image.rows[0].image_id});
             }
             done();
           });
