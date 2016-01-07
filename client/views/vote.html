@@ -24,7 +24,8 @@
       <form class="form-inline" role="form">
         <div class="form-group">
           <textarea class="text-area-control" type="text" placeholder="Post Comment"> </textarea>
-          <button type'button' class='btn btn-primary comment-button'>Post Comment</button>
+          <button ng-show='submitButton' ng-click="submitComment()" type='button' class='btn btn-primary comment-button fa fa-pencil-square-o'><span class='comment-btn-text'> Post Comment</span></button>
+          <div ng-show='submitted' class='alert alert-success'>Thanks for your feedback!</div>
         </div>
       </form>
     </div>

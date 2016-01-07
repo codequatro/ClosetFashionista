@@ -154,6 +154,19 @@ angular.module('myApp', [
         return resp.data;
       })
     }
+
+    /*****************COMMENTING ON IMAGES*******************/
+
+    register.comment = function(message, username, imageId){
+      return $http({
+        method: 'POST',
+        url: '/comment',
+        data: {message: message, username: username, imageId: imageId}
+      })
+      .then(function(response){
+        return response.data;
+      })
+    }
     /*****************VOTING ON IMAGE*******************/
 
     /*************GET CLOSET IMAGES********************/

@@ -312,14 +312,16 @@ input::-webkit-input-placeholder{
 }
 .detailBox-comment {
   width: 50%;
-  border-radius: 4px;
+  border-radius: 10px;
   margin: 10px auto;
   background: #fdfdfd;
+  opacity: 0.9;
 }
 
 .titleBox {
   background-color:#fdfdfd;
   padding:10px;
+  border-radius: 10px;
 }
 .titleBox label{
   color:#444;
@@ -363,7 +365,11 @@ input::-webkit-input-placeholder{
   float:left;
 }
 .comment-button {
-  float: left;
+  float: right !important;
+  width: 50% !important;
+}
+.comment-btn-text {
+  font-family: 'Catamaran', serif;
 }
 .commenterImage img {
   width:100%;
@@ -382,6 +388,7 @@ input::-webkit-input-placeholder{
     padding:10px;
 }
 .text-area-control {
-  height: 40px;
+  height: 60px;
   width: 200px;
+  resize: none;
 }
