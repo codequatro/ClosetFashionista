@@ -1,7 +1,5 @@
 body { 
-  background-image: url(closet.png);
-  background-repeat: no-repeat;
-  background-size: cover; 
+  background: #f9f9f9;
 }
 
 h1 {
@@ -50,7 +48,7 @@ a:hover, a:link {
 
 .navbar .btn, #navbar-right {
   font-family: 'Playfair Display', serif;
-  color: black;
+  color: #fff;
   padding: 5px;
   font-size: 25px;
   font-variant: small-caps;
@@ -59,8 +57,9 @@ a:hover, a:link {
 }
 
 .navbar {
-  height: 75px;
-  background: rgba(0,0,0,0.0);
+  height: 40px;
+  background: #9E7BFF;
+  border-bottom: 5px solid #7e62cc;
 }
 
 #navbar-left {
