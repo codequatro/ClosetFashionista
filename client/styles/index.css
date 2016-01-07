@@ -1,6 +1,7 @@
 body { 
   background-image: url(../img/closet.png);
   background-repeat: no-repeat;
+  font-family: 'Catamaran', serif;
   background-size: cover; 
 }
 a {
@@ -234,7 +235,12 @@ input::-webkit-input-placeholder{
   font-family: 'Catamaran', serif;
   font-size: 2em;
 }
-
+.footer-class {
+  text-align: right;
+  font-family: 'Catamaran', serif;
+  font-size: 1.2em;
+  margin-right: 30px;
+}
 .vote-image {
   margin: 10px 0px 0px 0px;
   /*margin-top: 10px;*/

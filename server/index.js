@@ -55,12 +55,9 @@ routes.post('/signup', function (req, res){
     if(err){
       console.error(err);
     }
-    client.query('SELECT * FROM users WHERE username', [username], function(err){
-      if(username){
-        res.status(401).json({answer: 'Username already exists!'});
-      }else{
-
-        client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
+    client.query('SELECT * FROM users WHERE username = $1', [username], function (err, result) {
+      if(result.rows.length === 0){
+         client.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], function (err, result){
           if(err){
             console.log('database error on signup')
             console.error(err);
@@ -69,7 +66,10 @@ routes.post('/signup', function (req, res){
             done();   
           }
         })
-
+       
+      }else if(result.rows[0].username === username){
+         console.log('result', result);
+         res.status(401).json({answer: 'Username already exists!'}); 
       }
     });
   })
