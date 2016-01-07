@@ -25,6 +25,17 @@ angular.module('myApp')
 		$scope.secondModalShow = $scope.secondModalShow === false ? true : false;
 	};
 
+    $scope.femaleShow = false;
+    $scope.maleShow = false;
+    $scope.genderShowTypes = function() {
+        if($scope.gender === 'female') {
+            $scope.femaleShow = true;
+        } else {
+            $scope.maleShow = true;
+        }
+    };
+
+
 	$scope.getImageData = function(link) {
     	Register.register.getImageData({ url: link, user_id: $scope.userID })
     	.then(function(data) {
