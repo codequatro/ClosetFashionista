@@ -206,6 +206,19 @@ angular.module('myApp', [
       })
     };
     /*************GET CLOSET IMAGES********************/
+    register.getBasicUserInfo = function(user){
+      console.log('getBasicUserInfo', user)
+      return $http({
+        method: 'GET',
+        url: 'users/getBasicUserInfo',
+        data: {username: user}
+      })
+      .then(function(resp){
+        console.log(resp)
+        return resp.data;
+      })
+    };
+    /*************GET CLOSET IMAGES********************/
     register.removeImage = function(imageId, imageName){
       return $http({
         method: 'POST',
