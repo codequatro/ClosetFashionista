@@ -216,3 +216,28 @@ input::-webkit-input-placeholder{
   max-width: 500px;
   border: 6px solid black;
 }
+
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.star {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.star .ng-class .filled {
+  color: #fd0;
+}
+
+.star .filled .readonly {
+  color: #666;
+}

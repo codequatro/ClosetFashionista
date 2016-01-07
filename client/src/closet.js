@@ -22,7 +22,6 @@ angular.module('myApp')
           $scope.pics[j].stars = 0; //total number of 'up' votes
             //loop through every vote that belongs to one of the user's pictures
             for(var i = 0; i<data.votes.length; i++){
-              console.log('data.votes', data.votes)
               var row = data.votes[i]; //data.votes is an array of objects, so this grabs the individual object
               var rating = row["rating"]; //value is either a 1 for 'up' or 0 for 'down' vote
               console.log('rating', rating);
@@ -37,12 +36,15 @@ angular.module('myApp')
                 // }
                 $scope.pics[j].stars += rating;
                 $scope.pics[j].total += 1;
+                $scope.pics[j].rating = $scope.pics[j].stars / $scope.pics[j].total;
             }
           }//end first for loop
         }
         /*************this needs to be moved into the factory******************/
       }); //end .then
     };
+
+
 
     $scope.removeImage = function(imageId, imageName){
       console.log('inside of remove image function');
