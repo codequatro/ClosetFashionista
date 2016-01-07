@@ -217,12 +217,12 @@ angular.module('myApp', [
     register.getBasicUserInfo = function(user){
       console.log('getBasicUserInfo', user)
       return $http({
-        method: 'GET',
+        method: 'POST',
         url: 'users/getBasicUserInfo',
         data: {username: user}
       })
       .then(function(resp){
-        console.log(resp)
+        console.log('basic info response: ', resp)
         return resp.data;
       })
     };

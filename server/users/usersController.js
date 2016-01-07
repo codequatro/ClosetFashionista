@@ -159,7 +159,6 @@ exports = module.exports = {
 
 	getBasicUserInfo: function(req, res, next) {
 		var username = req.body.username;
-
 		pg.connect(connectString, function (err, client, done) {
 		if(err) {
 			console.error('error connecting to the DB:', err);
@@ -176,6 +175,8 @@ exports = module.exports = {
 				userInfo.firstname = result.rows[0].firstname;
 				userInfo.lastname = result.rows[0].lastname;
 				userInfo.gender = result.rows[0].gender;
+				res.status(200).json(userInfo);
+				done();
 		    }
 		  }) //end of userInfo query
 		}
