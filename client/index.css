@@ -1,27 +1,22 @@
 body { 
   background: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
   text-align: center;
   display: inline;
 	color: black;
-	font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
   bottom: 50px;
   padding-left: 10px;
 }
 
 h3 {
   color: black;
-  font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
 }
 
 h2 {
   color: black;
-  font-family: 'Playfair Display', serif;
-  font-variant: small-caps;
 }
 
 a:hover {
@@ -36,22 +31,14 @@ a:hover {
   width: 50%;
  }
 
- .vote {
-  text-align: center;
-  margin:0 auto;
-  width: 50%;
- }
-
 a:hover, a:link {
   text-decoration: none;
 }
 
 .navbar .btn, #navbar-right {
-  font-family: 'Playfair Display', serif;
   color: #fff;
   padding: 5px;
   font-size: 25px;
-  font-variant: small-caps;
   text-align: center;
   padding-left: 10px;
 }
@@ -168,7 +155,6 @@ a:hover, a:link {
 .already {
   padding-left: 10px;
   color: black;
-  font-family: 'Playfair Display', serif;
   font-variant: small-caps;
   font-size: 20px;
 }
@@ -392,4 +378,46 @@ svg {
 .top-user-interior svg {
   width: 4em;
   height: 4em;
+
+
+
+/*** Vote Page ***/
+
+.vote-card {
+  text-align: center;
+  margin: 40px auto 0px;
+  width: 300px;
+}
+
+.vote-card h3 {
+  color: #fff;
+  margin: 0px 20px;
+  padding: 10px 0px;
+  border-bottom: 1px solid #fff;
+}
+
+.vote-card-img {
+  background-color: #e0e0e0;
+  position: absolute;
+  border-radius: 3px;
+  width: 300px;
+}
+
+.vote-card-info {
+  width: 300px;
+  cursor: pointer;
+  color: #fff;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.60);
+  z-index: 1;
+  opacity: 0;
+}
+
+.vote-card-info:hover {
+  opacity: 1;
+}
+
+.vote-card img {
+  padding: 2%;
+  width: 96%;
 }
