@@ -8,9 +8,9 @@ angular.module('myApp')
    // data storage
     $scope.username = $window.localStorage.getItem('username');
 	$scope.userID = $window.localStorage.getItem('userID');
-  $scope.gender = undefined;
-  $scope.firstname = undefined;
-  $scope.lastname = undefined;
+    $scope.gender = undefined;
+    $scope.firstname = undefined;
+    $scope.lastname = undefined;
 
 	$scope.image_name = undefined;
 	$scope.image = undefined;
@@ -26,6 +26,7 @@ angular.module('myApp')
    	$scope.secondModalShow = false;
 	$scope.changeSecondModal = function() {
 		$scope.secondModalShow = $scope.secondModalShow === false ? true : false;
+        $scope.genderShowTypes();
 	};
 
     $scope.femaleShow = false;
