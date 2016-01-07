@@ -58,6 +58,17 @@ angular.module('myApp', [
           }
       })
 
+      .state('singleOutfit', {
+        url: '/singleOutfit',
+        views: {
+          "nav": {templateUrl: "client/views/nav.html"},
+          "main": {templateUrl: "client/views/singleOutfit.html"}
+        },
+        params: {
+          imageUrl: null
+        }
+      })
+
       .state('s3test', {
         url: '/s3test',
         views: {

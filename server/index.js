@@ -70,64 +70,88 @@ routes.post('/signup', function (req, res){
 routes.post('/postimage', function (req, res){
 
   var form = new formidable.IncomingForm();
-
   form.parse(req, function(err, fields, files) {
-
     //this is not the right way to go about it. url gets weird
     //NEED TO FIX
 
     res.redirect('#/closet');
 
     //if you want to look at the form getting sent to the server
-    // res.end(util.inspect({fields: fields, files: files}));
+    //res.end(util.inspect({fields: fields, files: files}));
   });
 
   var myFields = {};
   form.on('field', function(field, value){
     myFields[field] = value;
-    console.log('fields in form.on', myFields);
+    //console.log('fields in form.on', myFields);
   });
 
   form.on('end', function(fields, files) {
     var username = myFields.name;
     var clothing_type = myFields.clothingType;
     /* Temporary location of our uploaded file */
-    var temp_path = this.openedFiles[0].path;
-    /* The file name of the uploaded file */
-    var file_name = this.openedFiles[0].name;
+    if(myFields.image){
+      var decodedImage = new Buffer(myFields.image
+    .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
+      //var decodedImage = new Buffer(myFields.image, 'base64').toString('binary');
+      /* The file name of the uploaded file */
+      var file_name = myFields.image.slice(50,60) + ".jpeg";
+      var temp_path = "";
+    }else{
+      var temp_path = this.openedFiles[0].path;
+      /* The file name of the uploaded file */
+      var file_name = this.openedFiles[0].name;
+      console.log(file_name);
+      var getExt = /(?:\.([^.]+))?$/;
+      var ext = getExt.exec(file_name)[1]; 
+      file_name = file_name.replace(ext,""); 
+      file_name = file_name + Math.floor(Math.random()*9999999999) + "." + ext;
+      //console.log("name", file_name, "rand", Math.floor(Math.random()*9999999999), "ext", ext);
+    }
+
     /* Location where we want to copy the uploaded file */
     var new_location = './client/uploads/';
 
     fs.copy(temp_path, new_location + file_name, function(err) {
       if (err) {
-        console.error(err);
-      }
-      else {
-        pg.connect(connectString, function (err, client, done){
-          if(err){
-            console.error('error connecting to the DB:', err);
+        fs.writeFile(new_location + file_name, decodedImage, function(err) {
+          if (err) console.error(err);
+          else {
+            console.log(file_name);
+            saveToDB();
           }
-          // console.log('username', username);
-          client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
-            var user_id = result.rows[0].user_id;
-            if(err){
-              console.error('error on lookup of user id:', err)
-            }
-            else
-            {
-              // console.log('select user result', result);
-              client.query('INSERT INTO images (image_name, user_id, type_id) VALUES ($1, $2, $3)', [file_name, user_id, clothing_type], function (err, result){
-                if(err){
-                  console.error(err);
-                }else {
-                  done();
-                }
-              })
-            }
-          });
-        })
+        });
+      }else{
+        saveToDB();
       }
-    }); //fs copy end
+    });
+
+    function saveToDB(){
+      pg.connect(connectString, function (err, client, done){
+        if(err){
+          console.error('error connecting to the DB:', err);
+        }
+        // console.log('username', username);
+        client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+          var user_id = result.rows[0].user_id;
+          if(err){
+            console.error('error on lookup of user id:', err)
+          }
+          else
+          {
+            // console.log('select user result', result);
+            client.query('INSERT INTO images (image_name, user_id, type_id) VALUES ($1, $2, $3)', [file_name, user_id, clothing_type], function (err, result){
+              if(err){
+                console.error(err);
+              }else {
+                done();
+              }
+            })
+          }
+        });
+      });
+    }
+
   }); //form.on 'end' end
 });
 
@@ -262,6 +286,37 @@ routes.post('/vote', function (req, res){
             }
             else{
               console.log('inserted');
+              res.status(201).json({result: result.rows});
+              done();
+            }
+          });
+        }
+      })
+    }
+  });
+});
+
+routes.post('/comment', function (req, res){
+  var username = req.body.username;
+  var comment = req.body.comment;
+  var imageId = req.body.imageId;
+  console.log('imageId', imageId);
+  pg.connect(connectString, function (err, client, done) {
+    if(err){
+      console.error('error connecting to the DB:', err);
+    }
+    else {
+      client.query('SELECT user_id FROM users WHERE username = $1', [username], function(err, result){
+        if(err){
+          console.error('error on lookup of user_id', err)
+        }
+        else {
+          var userId = result.rows[0].user_id
+          client.query('INSERT INTO comments (image_id, user_id, comment) VALUES ($1, $2, $3)',[imageId, userId, comment], function(err, result){
+            if(err){
+              console.error('error inserting comment into comments table: ', err);
+            }
+            else{
               res.status(201).json({result: result.rows});
               done();
             }
