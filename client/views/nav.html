@@ -14,6 +14,20 @@
       <a>{{ username }}</a>
     </div>
 
+    <div class="nav-actions">
+		<i ng-click="changeFirstModal()" class="fa fa-plus-circle add-link-icon"></i>
+		<div class="nav-dropdown-link" ng-show="!{{username}}">
+			<div class="nav-dropdown-link-username" ng-click="showNavDropdownContent()">
+				<p>{{firstname}} {{lastname}}</p>
+				<i class="fa fa-chevron-circle-down"></i>
+			</div>
+			<div class="nav-dropdown" ng-show="showNavDropdown">
+				<a ng-href="#/profile/{{user_id}}"><li><i class="fa fa-user"></i>Profile</li></a>
+				<li ng-click="signout()"><i class="fa fa-sign-out"></i>Log Out</li>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
 	<div class="add-link-modal firstModal" ng-show="firstModalShow">
 			<div id='firstModal'>

@@ -160,6 +160,7 @@ angular.module('myApp', [
         url: 'images/getAllImages'
       })
       .then(function(data) {
+        console.log(data)
         return data; 
       })
     };
