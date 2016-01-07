@@ -1,5 +1,33 @@
 <div class='navbar' ng-controller="NavCtrl">
 
+	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
+	<div class="add-link-modal firstModal" ng-show="firstModalShow">
+			<div id='firstModal'>
+			<i ng-click="changeFirstModal()" class="fa fa-times-circle fa-2x"></i>
+			<h2>Share Your Story</h2>
+			<form name="addLink" ng-submit='getImageData(newLink)' novalidate>
+				<input type='url' name="urlText" placeholder="Paste URL..." ng-model="newLink"><br>
+				<input type="submit" value="Submit Link">
+			</form>
+		</div>
+	</div>
+	
+
+	<div class="modal-background" ng-click="changeModal()" ng-show="secondModalShow"></div>
+	<div class="add-link-modal" ng-show="secondModalShow" ng-model='link'>
+			<div id='secondModal'>
+			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
+			<h2>Second Modal</h2>
+			<form name="postImage" ng-submit='postImage(link)' novalidate>
+				<img ng-src='{{ image }}' />
+				<p>{{ image_name }}</p>
+				<p>{{ link_Url }}</p>
+				<p>{{ source }}</p>
+				<input type="submit" value="Submit Link">
+			</form>
+		</div>
+		</div>
+
     <div id='navbar-left'>
 
         <a class='btn out' ng-show="!isAuth" ui-sref='signin'>sign in</a>
@@ -28,32 +56,6 @@
 		</div>
 	</div>
 
-	<div class="modal-background" ng-click="changeModal()" ng-show="firstModalShow"></div>
-	<div class="add-link-modal firstModal" ng-show="firstModalShow">
-			<div id='firstModal'>
-			<i ng-click="changeFirstModal()" class="fa fa-times-circle fa-2x"></i>
-			<h2>Share Your Story</h2>
-			<form name="addLink" ng-submit='getImageData(newLink)' novalidate>
-				<input type='url' name="urlText" placeholder="Paste URL..." ng-model="newLink"><br>
-				<input type="submit" value="Submit Link">
-			</form>
-		</div>
-	</div>
-	
-
-	<div class="modal-background" ng-click="changeModal()" ng-show="secondModalShow"></div>
-	<div class="add-link-modal" ng-show="secondModalShow" ng-model='link'>
-			<div id='secondModal'>
-			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
-			<h2>Second Modal</h2>
-			<form name="postImage" ng-submit='postImage(link)' novalidate>
-				<img ng-src='{{ image }}' />
-				<p>{{ image_name }}</p>
-				<p>{{ link_Url }}</p>
-				<p>{{ source }}</p>
-			</form>
-		</div>
-		</div>
 
 </div>
 
