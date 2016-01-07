@@ -180,18 +180,19 @@ angular.module('myApp', [
         url: 'images/postUrl',
         data: data
       }).then(function(res) {
-        console.log('app.js')
         return res.data; 
       })
     }
     /*************GET CLOSET IMAGES********************/
     register.getCloset = function(user){
+      console.log('getCloset', user)
       return $http({
         method: 'POST',
         url: 'users/closet',
         data: {username: user}
       })
       .then(function(resp){
+        console.log(resp)
         return resp.data;
       })
     };

@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('NavCtrl', ['$scope','$window', 'Authorization', 'Register', function($scope, $window, Authorization, Register) {
+  .controller('NavCtrl', ['$scope','$window', '$location', 'Authorization', 'Register', function($scope, $window, $location, Authorization, Register) {
    $scope.isAuth=Authorization.authorized;
 
    // data storage
   $scope.username = $window.localStorage.getItem('username');
-	$scope.userID = $window.localStorage.getItem('user_id');
+	$scope.userID = $window.localStorage.getItem('userID');
 	$scope.image_name = undefined;
 	$scope.image = undefined;
 	$scope.link_url = undefined;
@@ -55,6 +55,8 @@ angular.module('myApp')
         console.log('imageData', imageData)
     	Register.register.postImage(imageData)
     	.then(function(data) {
+            $scope.changeSecondModal();
+            $location.path('closet')
             console.log('data', data)
     		return data; 
     	})
