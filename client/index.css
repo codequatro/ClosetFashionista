@@ -182,12 +182,6 @@ a:hover, a:link {
   font-size: 20px;
 }
 
-.thumb {
-  width: 2em;
-  height: 2em;
-}
-
-
 /*** Add Link Modal ***/
 
 .add-link-modal {
@@ -230,4 +224,14 @@ a:hover, a:link {
   cursor: pointer;
   background-color: #000;
   opacity: 0.6;
+}
+
+#secondModal {
+  width: 50%;
+  height: 700px;
+}
+
+.thumb {
+  width: 2em;
+  height: 2em;
 }
