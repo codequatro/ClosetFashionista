@@ -94,6 +94,10 @@ angular.module('myApp')
       }); 
     }
 
+    $scope.goBack = function() {
+      $window.history.back();
+    }
+
     if(Authorization.authorized) {
       $scope.getBasicUserInfo();
     }
