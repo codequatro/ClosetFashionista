@@ -33,6 +33,8 @@ angular.module('myApp')
 
         // Scoring Closet Photos
         $scope.pics = data.pics;
+        console.log(data)
+        console.log('pics', data.pics)
 
         // NEED TO REVIEW...pics now have upvote/downvote data included in picture object
         //for each picture, we have an inner for loop that checks every vote to see if it belongs to the current picture
