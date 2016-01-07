@@ -103,7 +103,7 @@ routes.post('/postimage', function (req, res){
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
       //var decodedImage = new Buffer(myFields.image, 'base64').toString('binary');
       /* The file name of the uploaded file */
-      var file_name = myFields.image.slice(50,60) + ".jpeg";
+      var file_name = "cam" + Math.floor(Math.random()*9999999999) + ".jpeg";
       var temp_path = "";
     }else{
       var temp_path = this.openedFiles[0].path;

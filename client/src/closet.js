@@ -71,9 +71,11 @@ angular.module('myApp')
     }
 
     $scope.takePhoto = function(){
-      $window.capture();
-      $scope.webcamLink = true;
-      $scope.image = $window.captured;
+      $window.countdown();
+      setTimeout(function(){
+        $scope.image = $window.captured;
+        console.log($scope.image);
+      },400)
     }
 
 

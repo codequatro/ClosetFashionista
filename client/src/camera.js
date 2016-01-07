@@ -3,6 +3,7 @@ window.URL = window.URL || window.webkitURL;
 
 var video = document.getElementById('live');
 var canvas = document.getElementById('photo').getContext('2d');
+var countown_sec = 3;
 var feed;
 
 
@@ -13,7 +14,22 @@ function gotStream(stream) {
   video.src = window.URL.createObjectURL(feed);
 }
 
-function capture() {
+function countdown(){
+  document.getElementById("countdown").innerHTML = countown_sec;
+
+  (function tick(){
+    setTimeout(function(){
+      document.getElementById("countdown").innerHTML = parseInt(document.getElementById("countdown").innerHTML)-1;
+      if(document.getElementById("countdown").innerHTML !== "0") tick();
+      else{
+        document.getElementById("cam").remove();
+        capture();
+      }
+    },1000)
+  })()
+}
+
+function capture() {  
   var context = photo.getContext('2d');
   photo.width = 640;
   photo.height = 480;
@@ -26,9 +42,9 @@ function capture() {
   image.src = data;
   canvas.drawImage(image,0,0);
   feed.getVideoTracks()[0].stop();
-  }
+}
 
 
 function init() {
-  navigator.getUserMedia({video: true}, gotStream, capture);
+  navigator.getUserMedia({video: true}, gotStream, function(){});
 };
