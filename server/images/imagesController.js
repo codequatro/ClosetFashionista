@@ -133,7 +133,10 @@ exports = module.exports = {
 			      var userId = result.rows[0].user_id;
 			      client.query('SELECT image_name, image_id, image, link_url, source FROM images WHERE images.user_id <> $1 AND images.image_id NOT IN (SELECT image_id FROM votes WHERE user_id = $1) ORDER BY RANDOM() LIMIT 1' ,[userId], function(err, result){
 			        if(result.rows.length === 0) {
-			          res.status(200).json({image_name: 'pablo.png', image_id: -1});
+			        	var image = {};
+			        	image.image = 'https://s-media-cache-ak0.pinimg.com/736x/61/80/a8/6180a89617ff46f4e9736000023d4cd3.jpg';
+			        	image.image_id = -1;
+			          	res.status(200).json({image});
 			        } else {
 			        	var image = {};
 			        	image.image = result.rows[0].image;
@@ -141,9 +144,8 @@ exports = module.exports = {
 			        	image.source = result.rows[0].source;
 			        	image.link_url = result.rows[0].link_url;
 			        	image.image_id = result.rows[0].image_id;
-			          res.status(200).json({image});
+			          	res.status(200).json({image});
 			        }
-			        done();
 			      });
 			    }
 			  })

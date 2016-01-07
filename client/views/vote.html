@@ -1,14 +1,19 @@
-<div class='vote' ng-controller="VoteCtrl">
-
-  <img ng-src='{{ imagePic }}' />
-
+<div class='vote-card' ng-controller="VoteCtrl">
+  <div class='vote-card-img'>
+    <div><img ng-src='{{ imagePic }}' /><div>
+    <div class='vote-card-info'>
+      <h3>{{ imageInfo }}</h3>
+      <p>{{ imageSource }}</p>
+    </div>
+  </div>
   <form ng-if="imageId !== -1">
     <input type="image" class="voteButton" src='../assets/thumbs_up.png' ng-click="vote('upvote')" />
     <input type="image" class="voteButton" src="../assets/thumbs_down.png" value="down" ng-click="vote('downvote')" />
     <input type="image" class="voteButton" src="../assets/flag.png" value="down" ng-click="vote('flag')" />
     <br />
-    <!-- <div ng-if="updated">Update Succesful</div> -->
-	  <div ng-if="updated">update succesful</div>
   </form>
+    
+    <!-- <div ng-if="updated">Update Succesful</div> -->
+    <div ng-if="updated">update succesful</div>
 
 </div>
