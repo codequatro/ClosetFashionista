@@ -21,7 +21,6 @@ angular.module('myApp', [
       .state('signin', {
         url:'/signin',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
             "main":{templateUrl: 'views/signin.html'}
           }
       })
@@ -29,7 +28,6 @@ angular.module('myApp', [
       .state('signup', {
         url:'/signup',
         views: {
-            "nav": {templateUrl: "views/nav.html"},
             "main":{templateUrl: 'views/signup.html'}
           }
       })
