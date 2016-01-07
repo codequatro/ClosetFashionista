@@ -159,6 +159,9 @@ a:hover, a:link {
   font-size: 20px;
 }
 
+
+
+
 /*** Add Link Modal ***/
 
 .add-link-modal {
@@ -168,7 +171,7 @@ a:hover, a:link {
   height: 100%;
 }
 
-.add-link-modal div {
+/*.add-link-modal div {
   width: 50%;
   height: 180px;
   margin: 60px auto;  
@@ -176,7 +179,7 @@ a:hover, a:link {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   text-align: center;
-}
+}*/
 
 .add-link-modal div i, .x-button {
   float: right;
@@ -203,17 +206,31 @@ a:hover, a:link {
   opacity: 0.6;
 }
 
-#secondModal {
-  width: 50%;
-  height: 500px;
-}
-
 svg {
   width: 2em;
   height: 2em;
 }
 
 
+.firstModal {
+  width: 50%;
+  height: 180px;
+  margin: 60px auto;  
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.secondModal {
+  width: 50%;
+  height: 180px;
+  margin: 60px auto;  
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+  background-color: blue;
+}
 
 
 
@@ -378,7 +395,7 @@ svg {
 .top-user-interior svg {
   width: 4em;
   height: 4em;
-
+}
 
 
 /*** Vote Page ***/
@@ -421,3 +438,4 @@ svg {
   padding: 2%;
   width: 96%;
 }
+
