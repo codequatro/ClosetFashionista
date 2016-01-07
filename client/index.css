@@ -290,3 +290,47 @@ svg {
 .auth-redirect a:hover {
   color: #372d55;
 }
+
+.gender-buttons {
+  list-style-type:none;
+  margin: 25px 0 0 0;
+  padding: 0;
+}
+
+.gender-buttons li {
+  float: left;
+  margin: 0% 0% 0% 5%;
+  width: 42.5%;
+  height: 40px;
+  position: relative;
+}
+
+.gender-buttons label, .donate-now input {
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+.gender-buttons input[type="radio"] {
+    opacity:0.01;
+    z-index:100;
+}
+
+.gender-buttons input[type="radio"]:checked + label,
+.Checked + label {
+    background:yellow;
+}
+
+.gender-buttons label {
+     padding:5px;
+     border:1px solid #CCC; 
+     cursor:pointer;
+    z-index:90;
+}
+
+.gender-buttons label:hover {
+     background:#DDD;
+}
