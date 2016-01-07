@@ -33,31 +33,6 @@ angular.module('myApp')
 
         // Scoring Closet Photos
         $scope.pics = data.pics;
-        console.log(data)
-        console.log('pics', data.pics)
-
-        // NEED TO REVIEW...pics now have upvote/downvote data included in picture object
-        //for each picture, we have an inner for loop that checks every vote to see if it belongs to the current picture
-        for(var j = 0; j<data.pics.length; j++){
-          $scope.pics[j].total = 0; //total number of votes
-          $scope.pics[j].yes = 0; //total number of 'up' votes
-            //loop through every vote that belongs to one of the user's pictures
-            for(var i = 0; i<data.votes.length; i++){
-              var row = data.votes[i]; //data.votes is an array of objects, so this grabs the individual object
-              var vote = row["vote"]; //value is either a 1 for 'up' or 0 for 'down' vote
-              var imageName = row["image_name"];
-              if($scope.pics[j].image_name === imageName){
-                if(vote === 1){
-                  $scope.pics[j].yes += 1;
-                  $scope.pics[j].total += 1;
-                }
-                else{
-                  $scope.pics[j].total += 1;
-                }
-            }
-          }//end first for loop
-        }
-        /*************this needs to be moved into the factory******************/
       }); //end .then
     };
 
