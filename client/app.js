@@ -179,9 +179,10 @@ angular.module('myApp', [
     register.postImage = function(data) {
       return $http({
         method: 'POST',
-        url: 'images/postimage',
+        url: 'images/postUrl',
         data: data
       }).then(function(res) {
+        console.log('app.js')
         return res.data; 
       })
     }

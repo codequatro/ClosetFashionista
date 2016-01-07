@@ -44,13 +44,18 @@ angular.module('myApp')
     	})
     };
 
-    $scope.postImage = function(data) {
+    $scope.postImage = function() {
+        console.log('here')
     	var imageData = {};
-    	imageData.image_Url = $scope.image_Url;
-    	imageData.link_Url = $scope.link_Url;
+    	imageData.userID = $scope.userID;
     	imageData.image_name = $scope.image_name;
+        imageData.image = $scope.image;
+        imageData.link_url = $scope.link_url;
+        imageData.source = $scope.source;
+        console.log('imageData', imageData)
     	Register.register.postImage(imageData)
     	.then(function(data) {
+            console.log('data', data)
     		return data; 
     	})
     };

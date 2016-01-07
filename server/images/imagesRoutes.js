@@ -11,5 +11,5 @@ module.exports = function (app) {
 	app.post('/removeimage', imagesController.removeImage);
 	app.post('/getImageData', imagesController.collectUrlData);
 	app.post('/vote', imagesController.vote);
-
+	app.post('/postUrl', imagesController.postUrl);
 };
