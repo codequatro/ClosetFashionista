@@ -37,6 +37,7 @@ CREATE TABLE votes (
   user_id INTEGER,
   image_id INTEGER,
   rating INTEGER,
+  message varchar(300),
   PRIMARY KEY (user_id, image_id)
 );
 
