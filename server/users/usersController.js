@@ -16,7 +16,7 @@ exports = module.exports = {
 			if(err) {
 			  console.error(err);
 			} else {
-				client.query('SELECT username, password FROM users WHERE username = $1', [attemptedUsername], function (err, result){
+				client.query('SELECT username, password, user_id FROM users WHERE username = $1', [attemptedUsername], function (err, result){
 				  if(result.rows.length === 0){
 				    res.status(401).json({ answer: 'Invalid Username' });
 				  } else {
@@ -49,6 +49,7 @@ exports = module.exports = {
 				  if(err) {
 				    console.log('not cool man. database error on signup: ', err)
 				  } else {
+				  	console.log('result: ', result)
 				    res.status(201).json({ username: username }) // removed token as was undefined for signup
 				    done();
 				  }
