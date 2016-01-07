@@ -1,6 +1,6 @@
-<img class="closetPic" ng-src="client/uploads/{{info.image_name}}">
+<img class="closetPic" ng-src="client/uploads/{{info.image_name}}" ng-click="goToSingleOutfit(info.image_name)">
 <p class="percentage">
-	{{info.yes/info.total * 100 || 0 | number:1}}%
-	<img class="fire" src="client/img/fire.jpg">
+  {{info.yes/info.total * 100 || 0 | number:1}}%
+  <img class="fire" src="client/img/fire.jpg">
 </p>
 
