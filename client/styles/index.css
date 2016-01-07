@@ -1,0 +1,394 @@
+body { 
+  background-image: url(../img/closet.png);
+  background-repeat: no-repeat;
+  font-family: 'Catamaran', serif;
+  background-size: cover; 
+}
+a {
+  font-family: "Catamaran", serif;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  display: inline;
+	font-family: 'Catamaran', serif;
+}
+
+.nav-pad {
+  padding-right: 140px;
+}
+
+.sign-in-up-title {
+ font-family: 'Catamaran', serif; 
+}
+
+input {
+  font-family: "Catamaran", serif;
+}
+.btn {
+  font-family: 'Catamaran', seri
+}
+.form-div {
+  width: 100%;
+  height: 500px;
+  margin: -50px 0 0 0;
+}
+.nav-brand-logo {
+  height: 50px;
+  width: 124px;
+}
+.message-error {
+  height: 35px;
+  width: 280px;
+  background-color: #d63049;
+  color: white;
+  border-radius: 2px;
+  font-family: 'Catamaran', cursive;
+  text-align: center;
+  line-height: 35px;
+  font-size: 1.3em;
+  margin: 14px 0px;
+}
+.clean {
+  margin: 20px;
+}
+
+.clear {
+  margin-top: 53px;
+}
+.header-logo {
+  height: 190px;
+  width: 62%;
+  margin: auto;
+}
+.main {
+  background-image: url(http://s21.postimg.org/cbxlj5x47/image.jpg);
+  background-repeat: no-repeat;
+  margin:0 auto;
+  padding-top: 500px;
+  width: 50%;
+ }
+
+.nav {
+  margin-right: 40px;
+  font-size: 1.2em;
+}
+
+.container {
+   height: 120px;
+}
+
+.navbar-default {
+  height: 10px;
+}
+
+.vote {
+  text-align: center;
+  margin:0 auto;
+  width: 50%;
+}
+
+a:hover, a:link {
+  text-decoration: none;
+}
+
+.image {
+  margin: 50px 15px;
+  max-width: 500px;
+}
+
+.closetPic {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  border: 3px solid #000;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.card:hover {
+  cursor: pointer;
+  border: 3px solid teal;
+  -webkit-transform: translate(0, -1em);
+  -moz-transform:    translate(0, -1em);
+  -o-transform:      translate(0, -1em);
+  -ms-transform:     translate(0, -1em);
+  transform:         translate(0, -1em);
+}
+
+.percentage {
+  font-size: 14px;
+  font-weight: 700;
+  margin: auto;
+  bottom: 50px;
+  line-height: 60px;
+  width: 200px;
+  height: 60px;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #000;
+  border-bottom: 5px solid #000;
+  text-align: center;
+}
+
+.remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+}
+
+.fire {
+  width: 20px;
+  height: 20px;
+}
+
+.voteButton {
+  max-height: 40px;
+  max-width: 40px;
+  margin-right: 20px;
+}
+
+#delete {
+  max-height: 25px;
+  max-width: 25px;
+}
+
+#delete:hover {
+  max-height: 70px;
+  max-width: 70px;
+}
+
+.closet {
+  text-align: center;
+}
+
+.logo {
+  width: 97%;
+  margin: -350px 0 0 0;
+}
+
+
+.closetbuttons {
+  display: inline;
+}
+
+.closetform {
+  text-align: left;
+}
+
+.imageupload {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.clothingfilter {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  float: right;
+  padding-right: 200px;
+  bottom: 60px;
+}
+
+.already {
+  padding-left: 10px;
+  color: black;
+  font-family: 'Catamaran', serif;
+  font-variant: small-caps;
+  font-size: 20px;
+}
+
+input::-webkit-input-placeholder{
+   font-family: 'Catamaran', serif; 
+ }
+
+.vote {
+  background-image: url('../img/voteThinker.jpg');
+  height: 1200px;
+  width: 100%;
+}
+
+.vote-container{
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.vote-text-container{
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.vote-prompt-voting-text{
+  color: black;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.vote-no-images-text{
+  color: black;
+  font-family: 'Catamaran', sans-serif;
+  color: purple;
+  font-size: 2em;
+}
+
+.vote-greeting{
+  color: black;
+  font-family: 'Catamaran', serif;
+  font-size: 2em;
+}
+.footer-class {
+  text-align: right;
+  font-family: 'Catamaran', serif;
+  font-size: 1.2em;
+  margin-right: 30px;
+}
+.vote-image {
+  display: block;
+  margin: 10px auto 0px auto;
+  -webkit-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 41px 10px rgba(0,0,0,0.75);
+  max-width: 500px;
+  border: 6px solid black;
+}
+
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.star {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.star.filled {
+  color: #fd0;
+}
+
+.readonly .star.filled {
+  color: #fd0;
+}
+
+.singleOutfitDiv{
+  height: 100%;
+  width: 100%;
+}
+
+.singleOutfitImage{
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+
+.singleOutfitCommentsDiv {
+  float: right;
+  height: 100%;
+  width: 50%;
+  background-color: white;
+  margin: auto;
+}
+
+
+
+.detailBox {
+  width: 390px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin-right: 110px;
+}
+.detailBox-comment {
+  width: 65%;
+  border-radius: 10px;
+  margin: 10px auto;
+  background: #fdfdfd;
+  opacity: 0.9;
+}
+
+.titleBox {
+  background-color:#fdfdfd;
+  padding:10px;
+  border-radius: 10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+  padding:10px;
+  border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+  width:30px;
+  margin-right:5px;
+  height:100%;
+  float:left;
+}
+.comment-button {
+  float: right !important;
+  width: 50% !important;
+}
+.comment-btn-text {
+  font-family: 'Catamaran', serif;
+}
+.commenterImage img {
+  width:100%;
+  border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+}
+.text-area-control {
+  height: 60px;
+  width: 200px;
+  resize: none;
+}
