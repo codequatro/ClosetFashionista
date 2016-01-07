@@ -12,7 +12,7 @@ angular.module('myApp')
 	$scope.link_url = undefined;
 	$scope.source = undefined;
 
-   	$scope.firstModalShow = false;
+   	$scope.firstModalShow = true;
 	$scope.changeFirstModal = function() {
 		$scope.firstModalShow = $scope.firstModalShow === false ? true : false;
 	};
