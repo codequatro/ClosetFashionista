@@ -224,12 +224,25 @@ svg {
 
 .secondModal {
   width: 50%;
-  height: 180px;
+  height: 580px;
   margin: 60px auto;  
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   text-align: center;
-  background-color: blue;
+  background-color: #fff;
+}
+
+.secondModal img {
+  float: left;
+  padding-left: 60px;
+}
+
+.secondModal p {
+  float: right;
+}
+
+.secondModal li {
+  list-style-type: none;
 }
 
 
