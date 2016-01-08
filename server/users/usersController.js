@@ -33,27 +33,97 @@ exports = module.exports = {
 	signin: function(req, res, next) {
 		var attemptedUsername = req.body.username;
 		var attemptedPassword = req.body.password;
-		pg.connect(connectString, function (err, client, done) {
-			if(err) {
-			  console.error(err);
-			} else {
-				client.query('SELECT username, password, user_id FROM users WHERE username = $1', [attemptedUsername], function (err, result){
-				  if(result.rows.length === 0){
-				    res.status(401).json({ answer: 'Invalid Username' });
-				  } else {
-				    var username = result.rows[0].username;
-				    var password = result.rows[0].password;
-				    var user_id = result.rows[0].user_id;
-				    if(attemptedPassword === password) {
-				      var token = jwt.encode(result.rows[0].password, 'secret');
-				      res.status(200).json({ token: token, username: username, userID: user_id });
-				    } else {
-				      res.status(401).json({ answer: 'Invalid Password' });
-				    }
-				  }
-				})
-			}
-		})
+
+		var clientQuery;
+		var done;
+
+		pgConnect()
+			.then(function(connection) {
+    		done = connection.done;
+    		clientQuery = Q.nbind(connection.client.query, connection.client);
+
+    		return clientQuery(`
+					SELECT username,  password, user_id,
+								 firstname, lastname, gender,  credibilityScore
+						FROM users
+							WHERE username = $1`, [attemptedUsername]
+    		);
+    	})
+    	.then(function(result) {
+    		if(result.rows.length === 0){
+			    res.status(401).json({ answer: 'Invalid Username' });
+			    throw new Error('Stop promise chain');
+			  }
+		    var username         = result.rows[0].username;
+		    var password         = result.rows[0].password;
+		    var user_id          = result.rows[0].user_id;
+		    var firstname        = result.rows[0].firstname;
+		    var lastname         = result.rows[0].lastname;
+		    var gender           = result.rows[0].gender;
+		    var credibilityScore = result.rows[0].credibilityScore;
+
+		    if(attemptedPassword !== password) {
+		      res.status(401).json({ answer: 'Invalid Password' });
+			    throw new Error('Stop promise chain');
+		    }
+	      var token = jwt.encode(password, 'secret');
+	      res.status(200).json({
+	      	token: token,
+	      	username: username,
+	      	userID: user_id,
+	      	firstname: firstname,
+				  lastname: lastname,
+				  gender: gender,
+				  credibilityScore: credibilityScore
+	      });
+    	})
+    	.then(done)
+    	.fail(function(err) {
+    		if (err.message === 'Stop promise chain') {
+					console.log('Failed to signin %s', attemptedUsername);
+    		} else {
+    			console.log(err);
+    			next(err);
+    		}
+    		done();
+    	})
+		// pg.connect(connectString, function (err, client, done) {
+		// 	if(err) {
+		// 	  console.error(err);
+		// 	} else {
+		// 		client.query(`
+		// 			SELECT username, password, user_id, firstname, lastname, gender, credibilityScore
+		// 				FROM users
+		// 					WHERE username = $1`, [attemptedUsername],
+		// 		function (err, result){
+		// 		  if(result.rows.length === 0){
+		// 		    res.status(401).json({ answer: 'Invalid Username' });
+		// 		  } else {
+		// 		    var username = result.rows[0].username;
+		// 		    var password = result.rows[0].password;
+		// 		    var user_id = result.rows[0].user_id;
+		// 		    var firstname = result.rows[0].firstname;
+		// 		    var lastname = result.rows[0].lastname;
+		// 		    var gender = result.rows[0].gender;
+		// 		    var credibilityScore = result.rows[0].credibilityScore;
+		// 		    if(attemptedPassword === password) {
+		// 		      var token = jwt.encode(result.rows[0].password, 'secret');
+		// 		      res.status(200).json({
+		// 		      	token: token,
+		// 		      	username: username,
+		// 		      	userID: user_id,
+		// 		      	firstname: firstname,
+		// 					  lastname: lastname,
+		// 					  gender: gender,
+		// 					  credibilityScore: credibilityScore,
+		// 		      });
+		// 		    } else {
+		// 		      res.status(401).json({ answer: 'Invalid Password' });
+		// 		    }
+		// 		  }
+		// 		})
+		// 	}
+		// })
 	},
 
 	signup: function(req, res, next) {
@@ -243,15 +313,34 @@ exports = module.exports = {
 	addFollower: function(req, res, next) {
 		var follower = req.body.follower;
 		var following = req.body.following;
+
+    // Example for 'following':
+		//   user_id: 1,
+	  //   username: 'Tarly',
+	  //   firstname: 'Tarly',
+	  //   lastname: 'Fass',
+	  //   gender: 'male',
+	  //   credibilityscore: null
+
 		var clientQuery;
 		var done;
-		console.log('adding follower\n', follower);
-		console.log('to user:\n', following)
 
 		pgConnect()
 			.then(function(connection) {
     		done = connection.done;
     		clientQuery = Q.nbind(connection.client.query, connection.client);
+
+    		return clientQuery(`
+    			SELECT follower_id FROM following
+    				WHERE following_id = $1`,
+    			[following.user_id]
+    		);
+    	})
+    	.then(function(result) {
+    		var alreadyExists = ( result.rowCount !== 0 );
+    		if (alreadyExists) {
+    			throw new Error('Stop promise chain');
+    		}
     		return clientQuery(`
     			INSERT INTO following (follower_id, following_id)
     				VALUES ($1, $2)`,
@@ -259,31 +348,7 @@ exports = module.exports = {
     		);
     	})
     	.then(function(result) {
-    		console.log('addFollower insert result:\n', result);
-
-    		// Example for 'following':
-    		//   user_id: 1,
-			  //   username: 'Tarly',
-			  //   firstname: 'Tarly',
-			  //   lastname: 'Fass',
-			  //   gender: 'male',
-			  //   credibilityscore: null
-
-    		// if ( ! follower.following ) {
-    		// 	follower.following =[];
-    		// }
-
-    		// if ( ! following.followers ) {
-    		// 	following.followers =[];
-    		// }
-
-    		// follower.following.push(following)
-    		// following.followers.push(follower);
-
-    		// return res.json({
-    		// 	follower: follower,
-    		// 	following: following
-    		// });
+				console.log('%s is now following %s', follower.username, following.username);
 
     		return res.json({
     			follower: {
@@ -306,7 +371,34 @@ exports = module.exports = {
     	})
     	.then(done)
     	.fail(function(err) {
-    		console.log(err);
+    		if (err.message === 'Stop promise chain') {
+					console.log(
+						'%s is already following %s',
+						follower.username, following.username
+					);
+    			res.json({
+	    			follower: {
+	    				user_id: follower.user_id,
+	    				username: follower.username,
+	    				firstname: follower.firstname,
+	    				lastname: follower.lastname,
+	    				gender: follower.gender,
+	    				credibilityscore: follower.credibilityscore
+	    			},
+	    			following: {
+	    				user_id: following.user_id,
+	    				username: following.username,
+	    				firstname: following.firstname,
+	    				lastname: following.lastname,
+	    				gender: following.gender,
+	    				credibilityscore: following.credibilityscore
+	    			}
+	    		});
+    		} else {
+    			console.log(err);
+    			next(err);
+    		}
+    		done();
     	})
 	}
 

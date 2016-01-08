@@ -9,7 +9,8 @@
 
 .signin, .signup {
   width: 350px;
-  margin: 100px auto 0px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #f9f9f9;
   border-radius: 5px;
   text-align: center;
@@ -100,4 +101,12 @@
 
 .gender-buttons label:hover {
   background: #e0e0e0;
+}
+
+#logo {
+  height: auto;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 75px;
 }

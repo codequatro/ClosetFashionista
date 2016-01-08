@@ -25,6 +25,8 @@ angular.module('myApp')
         console.log('User Info: ', data)
 
         // Storing User Info
+        $scope.user = data;
+
         $scope.firstname = data.firstname;
         $scope.lastname = data.lastname;
         $scope.gender = data.gender;
@@ -32,6 +34,7 @@ angular.module('myApp')
 
         // Scoring Closet Photos
         $scope.pics = data.pics;
+
       }); //end .then
     };
 

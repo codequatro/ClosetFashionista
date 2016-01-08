@@ -3,9 +3,16 @@
 angular.module('myApp')
   .controller('TopUsersCtrl', ['$state', '$scope', '$window', '$location', 'Register', 'Authorization', function($state, $scope, $window, $location, Register, Authorization) {
 
-    $scope.user = {
-      username: $window.localStorage.getItem('username'),
-      userID: $window.localStorage.getItem('userID')
+    // $scope.user = {
+    //   username: $window.localStorage.getItem('username'),
+    //   userID: $window.localStorage.getItem('userID')
+    // }
+
+    $scope.storage = $window.localStorage;
+
+    $scope.user = $scope.storage.getItem('user');
+    if ($scope.user) {
+      $scope.user = JSON.parse($scope.user);
     }
 
     $scope.users = [];
