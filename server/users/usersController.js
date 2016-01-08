@@ -243,15 +243,34 @@ exports = module.exports = {
 	addFollower: function(req, res, next) {
 		var follower = req.body.follower;
 		var following = req.body.following;
+
+    // Example for 'following':
+		//   user_id: 1,
+	  //   username: 'Tarly',
+	  //   firstname: 'Tarly',
+	  //   lastname: 'Fass',
+	  //   gender: 'male',
+	  //   credibilityscore: null
+
 		var clientQuery;
 		var done;
-		console.log('adding follower\n', follower);
-		console.log('to user:\n', following)
 
 		pgConnect()
 			.then(function(connection) {
     		done = connection.done;
     		clientQuery = Q.nbind(connection.client.query, connection.client);
+
+    		return clientQuery(`
+    			SELECT follower_id FROM following
+    				WHERE following_id = $1`,
+    			[following.user_id]
+    		);
+    	})
+    	.then(function(result) {
+    		var alreadyExists = ( result.rowCount !== 0 );
+    		if (alreadyExists) {
+    			throw new Error('Stop promise chain');
+    		}
     		return clientQuery(`
     			INSERT INTO following (follower_id, following_id)
     				VALUES ($1, $2)`,
@@ -259,31 +278,7 @@ exports = module.exports = {
     		);
     	})
     	.then(function(result) {
-    		console.log('addFollower insert result:\n', result);
-
-    		// Example for 'following':
-    		//   user_id: 1,
-			  //   username: 'Tarly',
-			  //   firstname: 'Tarly',
-			  //   lastname: 'Fass',
-			  //   gender: 'male',
-			  //   credibilityscore: null
-
-    		// if ( ! follower.following ) {
-    		// 	follower.following =[];
-    		// }
-
-    		// if ( ! following.followers ) {
-    		// 	following.followers =[];
-    		// }
-
-    		// follower.following.push(following)
-    		// following.followers.push(follower);
-
-    		// return res.json({
-    		// 	follower: follower,
-    		// 	following: following
-    		// });
+				console.log('%s is now following %s', follower.username, following.username);
 
     		return res.json({
     			follower: {
@@ -306,7 +301,34 @@ exports = module.exports = {
     	})
     	.then(done)
     	.fail(function(err) {
-    		console.log(err);
+    		if (err.message === 'Stop promise chain') {
+					console.log(
+						'%s is already following %s',
+						follower.username, following.username
+					);
+    			res.json({
+	    			follower: {
+	    				user_id: follower.user_id,
+	    				username: follower.username,
+	    				firstname: follower.firstname,
+	    				lastname: follower.lastname,
+	    				gender: follower.gender,
+	    				credibilityscore: follower.credibilityscore
+	    			},
+	    			following: {
+	    				user_id: following.user_id,
+	    				username: following.username,
+	    				firstname: following.firstname,
+	    				lastname: following.lastname,
+	    				gender: following.gender,
+	    				credibilityscore: following.credibilityscore
+	    			}
+	    		});
+    		} else {
+    			console.log(err);
+    			next(err);
+    		}
+    		done();
     	})
 	}
 
