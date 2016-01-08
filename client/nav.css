@@ -79,7 +79,7 @@
 
 .secondModal {
   width: 50%;
-  height: 480px;
+  height: 580px;
   margin: 60px auto;  
   border: 1px solid #e5e5e5;
   border-radius: 10px;
@@ -89,65 +89,17 @@
 
 .secondModal img {
   float: left;
-  padding-left: 10px;
-  padding-top: 45px;
-  height: 350px;
+  padding-left: 60px;
 }
 
-.entry {
-  padding-top: 20px !important;
-  font-style: italic !important;
-  font-size: 15px;
+.secondModal p {
+  float: right;
 }
 
-.secondModal ul {
+.secondModal li {
   list-style-type: none;
-  text-align: left;
 }
 
-input[type='radio'] {
-  margin-right: 2px;
-}
-
-/*.secondModal ul li {
-  line-height: 3px;
-  padding: 0;
-  margin: 0;
-  background-color: yellow;
-}*/
-
-/*.type-buttons input[type="radio"] {
-    opacity: 0;
-    z-index: 1;
-    height: 20px;
-    
-    background-color: orange;
-}*/
-
-.type-buttons label  {
-    display: block;
-    /*position: absolute;*/
-   /* top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;*/
-   /* width: 100%;*/
-}
-
-/*.type-buttons ul li {
-  height: 15px;
-}*/
-
-.source {
-  font-size: 20px;
-}
-
-.image_name {
-  font-size: 22px;
-  font-weight: bold;
-  padding-top: 30px;
-  padding-right: 20px;
-}
 
 .btn-back {
   fill: #fff;
@@ -162,10 +114,4 @@ input[type='radio'] {
 
 #navbar-left .btn {
   float: left;
-}
-
-#navlogo {
-  height: 40px;
-  width: auto;
-  display: inline-block;
 }
