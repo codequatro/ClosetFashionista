@@ -79,7 +79,7 @@
 
 .secondModal {
   width: 50%;
-  height: 580px;
+  height: 480px;
   margin: 60px auto;  
   border: 1px solid #e5e5e5;
   border-radius: 10px;
@@ -89,24 +89,24 @@
 
 .secondModal img {
   float: left;
-  padding-left: 60px;
+  padding-left: 10px;
+  padding-top: 45px;
+  height: 350px;
 }
 
-/*.secondModal p {
-  float: right;
-}*/
-
-/*.image-name {
-  float: right;
-}*/
-
-.secondModal input {
-  text-align: center;
-  margin-top: 10px;
+.entry {
+  padding-top: 20px !important;
+  font-style: italic !important;
+  font-size: 15px;
 }
 
 .secondModal ul {
   list-style-type: none;
+  text-align: left;
+}
+
+input[type='radio'] {
+  margin-right: 2px;
 }
 
 /*.secondModal ul li {
@@ -115,11 +115,6 @@
   margin: 0;
   background-color: yellow;
 }*/
-
-.secondModal img {
-  height: 350px;
-}
-
 
 /*.type-buttons input[type="radio"] {
     opacity: 0;
@@ -144,7 +139,14 @@
 }*/
 
 .source {
-  font-size: 25px;
+  font-size: 20px;
+}
+
+.image_name {
+  font-size: 22px;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-right: 20px;
 }
 
 .btn-back {
@@ -161,3 +163,4 @@
 #navbar-left .btn {
   float: left;
 }
+
