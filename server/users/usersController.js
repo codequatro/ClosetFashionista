@@ -218,78 +218,227 @@ exports = module.exports = {
 	getUserInfo: function(req, res, next) {
 		var username = req.body.username;
 
-		pg.connect(connectString, function (err, client, done) {
-		if(err) {
-			console.error('error connecting to the DB:', err);
-		} else {
-			client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
-		    if(err) {
-		    	console.error('error on lookup of user_id: ', err)
-		    } else {
-				var userId = result.rows[0].user_id;
-				//create a 'userInfo' object to send back to client
-				var userInfo = {};
-				userInfo.userID = result.rows[0].user_id;
-				userInfo.username = result.rows[0].username;
-				userInfo.firstname = result.rows[0].firstname;
-				userInfo.lastname = result.rows[0].lastname;
-				userInfo.gender = result.rows[0].gender;
-				//get all of the current users images
-				client.query('SELECT image_name, image_id, type_id, source, image, link_url FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
-				if(err) {
-					console.error('error fetching closet images: ', err);
-				} else {
-					userInfo.pics = result.rows;
-				    //grab all of the votes for each user pic
-				    client.query('SELECT images.image_name, images.image_id, votes.gender, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
-				        if(err) {
-				        	console.error('error fetching votes: ', err);
-				    	} else {
-							userInfo.votes = result.rows;
-							userInfo.userCredibility = 0;
-							// Calculate votes for each pictures and user credibility			          
-							for (var i = 0; i < result.rows.length; i++) {
-								if (result.rows[i].upvote === 1) {
-									userInfo.userCredibility++;
-									for (var x = 0; x < userInfo.pics.length; x++) {
-								  		if (!userInfo.pics[x].upvotes) userInfo.pics[x].upvotes = 0;
-								  		if (result.rows[i].image_id === userInfo.pics[x].image_id) {
-								  			userInfo.pics[x].upvotes++;
-								  			if (!userInfo.pics[x].genderData) userInfo.pics[x].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
-									  		if (result.rows[i].gender === 'male') userInfo.pics[x].genderData.male.upvotes++
-									  		if (result.rows[i].gender === 'female') userInfo.pics[x].genderData.female.upvotes++
-									  		if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[x].genderData.other.upvotes++
-								  		}
-								  	}
-								} else if (result.rows[i].downvote === 1) {
-									userInfo.userCredibility--;
-									for (var y = 0; y < userInfo.pics.length; y++) {
-										if (!userInfo.pics[y].downvotes) userInfo.pics[y].downvotes = 0;
-					  					if (result.rows[i].image_id === userInfo.pics[y].image_id) {
-								  			userInfo.pics[y].downvotes++;
-								  			if (!userInfo.pics[y].genderData) userInfo.pics[y].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
-									  		if (result.rows[i].gender === 'male') userInfo.pics[y].genderData.male.downvotes++
-									  		if (result.rows[i].gender === 'female') userInfo.pics[y].genderData.female.downvotes++
-									  		if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[y].genderData.other.downvotes++
-								  		}
-									}
-								}
-							}
+    var userInfo = {};
 
-							// Update User Credibility Score in Database for Efficiency When Grabbing Score Later
-							client.query('UPDATE users SET credibilityScore = $2 WHERE username = $1', [username, userInfo.userCredibility])
+    var clientQuery;
+    var done;
 
-							res.status(200).json(userInfo);
-							done();
-				        }
-				    });
-				  }
-				}) // end of user images query
-		    }
-		  }) //end of userInfo query
-		}
-		}) // pg.connect end
-	},
+    pgConnect()
+      .then(function(connection) {
+        done = connection.done;
+        clientQuery = Q.nbind(connection.client.query, connection.client);
+
+        return clientQuery(`
+          SELECT * FROM users
+            WHERE username = $1`, [username]
+        );
+      })
+      .then(function(result) {
+        var user = result.rows[0];
+        var userId = result.rows[0].user_id;
+
+        //create a 'userInfo' object to send back to client
+        userInfo.userID = user.user_id;
+        userInfo.userId = user.user_id;
+        userInfo.username = user.username;
+        userInfo.firstname = user.firstname;
+        userInfo.lastname = user.lastname;
+        userInfo.gender = user.gender;
+
+        //get all of the current users images
+        return clientQuery(`
+          SELECT image_name, image_id, type_id, source, image, link_url
+            FROM images i, users u
+              WHERE i.user_id = u.user_id
+                AND u.user_id = $1`, [userInfo.userId]
+        );
+      })
+      .then(function(result) {
+        userInfo.pics = result.rows;
+
+        //grab all of the votes for each user pic
+        return clientQuery(`
+          SELECT images.image_name, images.image_id,
+                 votes.gender, votes.upvote, votes.downvote
+            FROM images
+              INNER JOIN votes
+                ON    images.image_id = votes.image_id
+                  AND images.user_id=$1`, [userInfo.userId]
+        );
+      })
+      .then(function(result) {
+        userInfo.votes = result.rows;
+        userInfo.userCredibility = 0;
+
+        // Calculate votes for each pictures and user credibility               
+        for (var i = 0; i < result.rows.length; i++) {
+          if (result.rows[i].upvote === 1) {
+            userInfo.userCredibility++;
+            for (var x = 0; x < userInfo.pics.length; x++) {
+                if (!userInfo.pics[x].upvotes) userInfo.pics[x].upvotes = 0;
+                if (result.rows[i].image_id === userInfo.pics[x].image_id) {
+                  userInfo.pics[x].upvotes++;
+                  if (!userInfo.pics[x].genderData) userInfo.pics[x].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+                  if (result.rows[i].gender === 'male') userInfo.pics[x].genderData.male.upvotes++
+                  if (result.rows[i].gender === 'female') userInfo.pics[x].genderData.female.upvotes++
+                  if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[x].genderData.other.upvotes++
+                }
+              }
+          } else if (result.rows[i].downvote === 1) {
+            userInfo.userCredibility--;
+            for (var y = 0; y < userInfo.pics.length; y++) {
+              if (!userInfo.pics[y].downvotes) userInfo.pics[y].downvotes = 0;
+                if (result.rows[i].image_id === userInfo.pics[y].image_id) {
+                  userInfo.pics[y].downvotes++;
+                  if (!userInfo.pics[y].genderData) userInfo.pics[y].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+                  if (result.rows[i].gender === 'male') userInfo.pics[y].genderData.male.downvotes++
+                  if (result.rows[i].gender === 'female') userInfo.pics[y].genderData.female.downvotes++
+                  if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[y].genderData.other.downvotes++
+                }
+            }
+          }
+        }
+
+        // Update User Credibility Score in Database for Efficiency When Grabbing Score Later
+        return clientQuery(`
+          UPDATE users
+            SET credibilityScore = $2
+              WHERE username = $1`,
+          [username, userInfo.userCredibility]
+        );
+      })
+      .then(function(result) {
+        return clientQuery(`
+          SELECT users.username, users.user_id, users.firstname,
+                 users.lastname, users.gender, users.credibilityScore,
+                 following.follower_id, following.following_id
+            FROM users
+              INNER JOIN following
+                ON    users.user_id = following.follower_id
+                  AND following.following_id = $1`,
+          [userInfo.userID]
+        );
+      })
+      .then(function(result) {
+        var followers = result.rows;
+
+        // Example followers:
+        // [
+        //   {
+        //     username: 'sue',
+        //     user_id: 3,
+        //     firstname: 'sue',
+        //     lastname: 'bob',
+        //     gender: 'female',
+        //     credibilityscore: 0,
+        //     follower_id: 3,
+        //     following_id: 2
+        //   }
+        // ]
+
+        userInfo.followers = followers.map(function(follower) {
+          return {
+            username:         follower.username,
+            user_id:          follower.user_id,
+            firstname:        follower.firstname,
+            lastname:         follower.lastname,
+            gender:           follower.gender,
+            credibilityScore: follower.credibilityscore,
+            follower_id:      follower.follower_id,
+            // following_id:     follower.following_id
+          }
+        })
+
+        console.log('userInfo:\n', userInfo);
+        res.status(200).json(userInfo);
+      })
+      .then(done)
+      .fail(function(err) {
+        done();
+        if (err.message === 'Stop promise chain') {
+          console.log('Failed to get user info for %s', username);
+        } else {
+          console.log(err);
+          next(err);
+        }
+      });
+  },
+
+	// getUserInfo: function(req, res, next) {
+ //    var username = req.body.username;
+
+ //    pg.connect(connectString, function (err, client, done) {
+ //    if(err) {
+ //      console.error('error connecting to the DB:', err);
+ //    } else {
+ //      client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
+ //        if(err) {
+ //          console.error('error on lookup of user_id: ', err)
+ //        } else {
+ //        var userId = result.rows[0].user_id;
+ //        //create a 'userInfo' object to send back to client
+ //        var userInfo = {};
+ //        userInfo.userID = result.rows[0].user_id;
+ //        userInfo.username = result.rows[0].username;
+ //        userInfo.firstname = result.rows[0].firstname;
+ //        userInfo.lastname = result.rows[0].lastname;
+ //        userInfo.gender = result.rows[0].gender;
+ //        //get all of the current users images
+ //        client.query('SELECT image_name, image_id, type_id, source, image, link_url FROM images i, users u WHERE i.user_id = u.user_id and u.user_id = $1', [userId], function(err, result){
+ //        if(err) {
+ //          console.error('error fetching closet images: ', err);
+ //        } else {
+ //          userInfo.pics = result.rows;
+ //            //grab all of the votes for each user pic
+ //            client.query('SELECT images.image_name, images.image_id, votes.gender, votes.upvote, votes.downvote FROM images INNER JOIN votes ON images.image_id = votes.image_id and images.user_id=$1', [userId], function(err, result){
+ //                if(err) {
+ //                  console.error('error fetching votes: ', err);
+ //              } else {
+ //              userInfo.votes = result.rows;
+ //              userInfo.userCredibility = 0;
+ //              // Calculate votes for each pictures and user credibility               
+ //              for (var i = 0; i < result.rows.length; i++) {
+ //                if (result.rows[i].upvote === 1) {
+ //                  userInfo.userCredibility++;
+ //                  for (var x = 0; x < userInfo.pics.length; x++) {
+ //                      if (!userInfo.pics[x].upvotes) userInfo.pics[x].upvotes = 0;
+ //                      if (result.rows[i].image_id === userInfo.pics[x].image_id) {
+ //                        userInfo.pics[x].upvotes++;
+ //                        if (!userInfo.pics[x].genderData) userInfo.pics[x].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+ //                        if (result.rows[i].gender === 'male') userInfo.pics[x].genderData.male.upvotes++
+ //                        if (result.rows[i].gender === 'female') userInfo.pics[x].genderData.female.upvotes++
+ //                        if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[x].genderData.other.upvotes++
+ //                      }
+ //                    }
+ //                } else if (result.rows[i].downvote === 1) {
+ //                  userInfo.userCredibility--;
+ //                  for (var y = 0; y < userInfo.pics.length; y++) {
+ //                    if (!userInfo.pics[y].downvotes) userInfo.pics[y].downvotes = 0;
+ //                      if (result.rows[i].image_id === userInfo.pics[y].image_id) {
+ //                        userInfo.pics[y].downvotes++;
+ //                        if (!userInfo.pics[y].genderData) userInfo.pics[y].genderData = {male: {upvotes: 0, downvotes: 0}, female: {upvotes: 0, downvotes: 0}, other: {upvotes: 0, downvotes: 0}};
+ //                        if (result.rows[i].gender === 'male') userInfo.pics[y].genderData.male.downvotes++
+ //                        if (result.rows[i].gender === 'female') userInfo.pics[y].genderData.female.downvotes++
+ //                        if (result.rows[i].gender != 'male' && result.rows[i].gender != 'female') userInfo.pics[y].genderData.other.downvotes++
+ //                      }
+ //                  }
+ //                }
+ //              }
+
+ //              // Update User Credibility Score in Database for Efficiency When Grabbing Score Later
+ //              client.query('UPDATE users SET credibilityScore = $2 WHERE username = $1', [username, userInfo.userCredibility])
+
+ //              res.status(200).json(userInfo);
+ //              done();
+ //                }
+ //            });
+ //          }
+ //        }) // end of user images query
+ //        }
+ //      }) //end of userInfo query
+ //    }
+ //    }) // pg.connect end
+ //  },
 
 	getBasicUserInfo: function(req, res, next) {
 		var username = req.body.username;
