@@ -110,6 +110,7 @@ exports = module.exports = {
 				  if(err) {
 				    console.log('not cool man. database error when adding image: ', err)
 				  } else {
+				  	// res.redirect('../#/closet')
 				    res.status(201).send('success') // removed token as was undefined for signup
 				    done();
 				  }

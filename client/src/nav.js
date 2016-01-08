@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('NavCtrl', ['$scope','$window', '$location', 'Authorization', 'Register', function($scope, $window, $location, Authorization, Register) {
+  .controller('NavCtrl', ['$scope','$window', '$location', 'Authorization', 'Register', '$state', function($scope, $window, $location, Authorization, Register, $state) {
 
    $scope.isAuth=Authorization.authorized;
 
@@ -76,7 +76,12 @@ angular.module('myApp')
     	Register.register.postImage(imageData)
     	.then(function(data) {
             $scope.changeSecondModal();
-            $location.path('closet')
+            console.log('loc: ', $location)
+            if ($location.$$path === '/closet') {
+                $state.reload();
+            } else {
+                $location.path('closet');
+            }
             console.log('data', data)
     		return data; 
     	})
