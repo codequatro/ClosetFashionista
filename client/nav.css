@@ -164,3 +164,8 @@ input[type='radio'] {
   float: left;
 }
 
+#navlogo {
+  height: 40px;
+  width: auto;
+  display: inline-block;
+}
