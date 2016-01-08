@@ -41,6 +41,37 @@ angular.module('myApp')
         });
     }
 
+    $scope.follow = function(userToFollow) {
+      console.log('About to follow user:\n', userToFollow);
+      Register.register.follow({
+        follower: $scope.user,
+        following: userToFollow
+      })
+        .then(function(data) {
+          console.log('cool');
+          var follower = data.follower;
+          var following = data.following;
+
+          if ( ! $scope.user.following ) {
+            $scope.user.following =[];
+          }
+
+          if ( ! userToFollow.followers ) {
+            userToFollow.followers =[];
+          }
+
+          console.log('userToFollow before\n', userToFollow);
+          userToFollow.followers.push(follower);
+          console.log('userToFollow after\n', userToFollow);
+
+          $scope.user.following.push(following);
+        })
+        .catch(function (error) {
+          console.log('not cool');
+          console.error(error);
+        });
+    }
+
     $scope.getTopUsers();
 
   }]);

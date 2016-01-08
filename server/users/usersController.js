@@ -7,6 +7,27 @@ var connectString = process.env.DATABASE_URL ||
     ? 'postgres://postgres:password@localhost:5432/closet'
     : 'postgres://localhost:5432/closet';
 
+// Object.prototype.forEach = function(fn) {
+// 	for (var p in this) {
+// 		fn(this[p], p, this);
+// 	}
+// };
+
+function pgConnect() {
+	var deferred = Q.defer();
+  pg.connect(connectString, function (err, client, done){
+    if(err){
+      deffered.reject(new Error('error connecting to the DB:', err) );
+    } else {
+    	deferred.resolve({
+    		client: client,
+    		done: done
+    	})
+    }
+  })
+  return deferred.promise;
+};
+
 exports = module.exports = {
 
 	signin: function(req, res, next) {
@@ -217,6 +238,76 @@ exports = module.exports = {
 			    }
 			})	
 		}) // pg.connect end
+	},
+
+	addFollower: function(req, res, next) {
+		var follower = req.body.follower;
+		var following = req.body.following;
+		var clientQuery;
+		var done;
+		console.log('adding follower\n', follower);
+		console.log('to user:\n', following)
+
+		pgConnect()
+			.then(function(connection) {
+    		done = connection.done;
+    		clientQuery = Q.nbind(connection.client.query, connection.client);
+    		return clientQuery(`
+    			INSERT INTO following (follower_id, following_id)
+    				VALUES ($1, $2)`,
+    			[follower.userID, following.user_id]
+    		);
+    	})
+    	.then(function(result) {
+    		console.log('addFollower insert result:\n', result);
+
+    		// Example for 'following':
+    		//   user_id: 1,
+			  //   username: 'Tarly',
+			  //   firstname: 'Tarly',
+			  //   lastname: 'Fass',
+			  //   gender: 'male',
+			  //   credibilityscore: null
+
+    		// if ( ! follower.following ) {
+    		// 	follower.following =[];
+    		// }
+
+    		// if ( ! following.followers ) {
+    		// 	following.followers =[];
+    		// }
+
+    		// follower.following.push(following)
+    		// following.followers.push(follower);
+
+    		// return res.json({
+    		// 	follower: follower,
+    		// 	following: following
+    		// });
+
+    		return res.json({
+    			follower: {
+    				user_id: follower.user_id,
+    				username: follower.username,
+    				firstname: follower.firstname,
+    				lastname: follower.lastname,
+    				gender: follower.gender,
+    				credibilityscore: follower.credibilityscore
+    			},
+    			following: {
+    				user_id: following.user_id,
+    				username: following.username,
+    				firstname: following.firstname,
+    				lastname: following.lastname,
+    				gender: following.gender,
+    				credibilityscore: following.credibilityscore
+    			}
+    		});
+    	})
+    	.then(done)
+    	.fail(function(err) {
+    		console.log(err);
+    	})
 	}
 
 }
