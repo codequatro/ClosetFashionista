@@ -210,7 +210,9 @@ svg {
 }
 
 .home-feed-card-title {
-
+  text-align: center;
+  padding: 20px 10px 0px;
+  font-size: 12px;
 }
 
 .home-feed-card-layer {
@@ -230,13 +232,24 @@ svg {
 
 .home-feed-card-vote-info {
     background-color: #6e5baa;
+    padding: 4px 5%;
+    font-size: 16px;
     color: #fff;
     fill: #fff;
     position: absolute;
     top: 90%;
     height: 10%;
     left: 0;
-    width: 100%;
+    width: 90%;
+}
+
+.home-feed-card-vote-info svg {
+  font-size: 7px;
+  margin-right: 15px;
+}
+
+.home-feed-card-vote-info .source {
+  float: right;
 }
 
 
