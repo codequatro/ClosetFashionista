@@ -1,11 +1,24 @@
 <div class='auth' ng-controller="AuthCtrl">
+  <div id="logo">
+    <img src="cfbadge.svg" style="width:350px;height:225px;">
+  </div>
   <form novalidate class='signup'>
-    Username: <input type="text" ng-model="user.username" /><br><br>
-    Password: <input type="password" ng-model="user.password" /><br><br>
-    <input type="submit" ng-click="signup()" value="SignUp"
-  />
+    <br>
+  	<input class="auth-input" type='text' ng-model='user.firstname' placeholder="First Name"/>
+  	<input class="auth-input" type='text' ng-model='user.lastname' placeholder="Last Name"/>
+    <input class="auth-input" type="text" ng-model="user.username" placeholder="Username"/>
+    <input class="auth-input" type="password" ng-model="user.password" placeholder="Password"/>
+    <ul class="gender-buttons">
+      <li>
+        <input id="female" type='radio' ng-model='user.gender' value='female' />
+        <label for="female">Female</label> 
+      </li>
+      <li>
+        <input id="male" type='radio' ng-model='user.gender' value='male' />
+        <label for="male">Male</label>
+      </li>
+    </ul>
+    <input class="auth-button" type="submit" ng-click="signup()" value="Sign Up"/>
+    <div class="auth-redirect">Already a fashionista? <a ng-href="#/signin">Sign In</a></div>
   </form>
-<br>
-  <a ui-sref='signin' class='already'>already a fashionista? sign in to start voting</a>
-
 </div>

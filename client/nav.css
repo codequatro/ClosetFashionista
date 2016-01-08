@@ -1,0 +1,166 @@
+.navbar .btn, #navbar-right {
+  color: #fff;
+  padding: 9px 15px;
+  font-size: 18px;
+  text-align: center;
+  padding-left: 10px;
+}
+
+.navbar {
+  height: 40px;
+  background: #6e5baa;
+  border-bottom: 5px solid #372d55;
+}
+
+#navbar-left {
+  display: inline-block;
+  width: 35%;
+}
+
+#navbar-right {
+  float: right;
+  padding-right: 10px;
+}
+
+
+/*** Add Link Modal ***/
+
+.add-link-modal {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+}
+
+/*.add-link-modal div {
+  width: 50%;
+  height: 180px;
+  margin: 60px auto;  
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+}*/
+
+.add-link-modal div i, .x-button {
+  float: right;
+  cursor: pointer;
+}
+
+.add-link-modal h2 {
+  margin: 20px auto 5px;
+  width: 300px;
+}
+
+.add-link-modal input {
+  padding: 8px 14px;
+  width: 260px;
+  font-size: 16px;
+}
+
+.modal-background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #000;
+  opacity: 0.6;
+}
+
+.firstModal {
+  width: 50%;
+  height: 180px;
+  margin: 60px auto;  
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.secondModal {
+  width: 50%;
+  height: 480px;
+  margin: 60px auto;  
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.secondModal img {
+  float: left;
+  padding-left: 10px;
+  padding-top: 45px;
+  height: 350px;
+}
+
+.entry {
+  padding-top: 20px !important;
+  font-style: italic !important;
+  font-size: 15px;
+}
+
+.secondModal ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+input[type='radio'] {
+  margin-right: 2px;
+}
+
+/*.secondModal ul li {
+  line-height: 3px;
+  padding: 0;
+  margin: 0;
+  background-color: yellow;
+}*/
+
+/*.type-buttons input[type="radio"] {
+    opacity: 0;
+    z-index: 1;
+    height: 20px;
+    
+    background-color: orange;
+}*/
+
+.type-buttons label  {
+    display: block;
+    /*position: absolute;*/
+   /* top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;*/
+   /* width: 100%;*/
+}
+
+/*.type-buttons ul li {
+  height: 15px;
+}*/
+
+.source {
+  font-size: 20px;
+}
+
+.image_name {
+  font-size: 22px;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-right: 20px;
+}
+
+.btn-back {
+  fill: #fff;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.btn-back:hover {
+  fill: gray;
+  cursor: pointer;
+}
+
+#navbar-left .btn {
+  float: left;
+}
+
