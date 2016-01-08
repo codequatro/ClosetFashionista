@@ -53,6 +53,7 @@ DROP TABLE IF EXISTS images;
 CREATE TABLE images (
   image_id SERIAL,
   user_id INTEGER,
+  fullname varchar(200),
   type_id INTEGER,
   image_name varchar(200),
   image TEXT,
