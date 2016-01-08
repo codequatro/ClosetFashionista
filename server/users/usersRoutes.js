@@ -11,6 +11,7 @@ module.exports = function (app) {
 	app.post('/signup', usersController.signup);
 	app.post('/closet', usersController.getUserInfo);
 	app.post('/editUser', usersController.updateUserInfo);
-	app.post('/getBasicUserInfo', usersController.getBasicUserInfo);
+  app.post('/getBasicUserInfo', usersController.getBasicUserInfo);
+	app.post('/follow', usersController.addFollower);
 
 };
