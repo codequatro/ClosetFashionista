@@ -19,10 +19,9 @@
 			<h2>Second Modal</h2>
 			<form name="post" ng-submit='postImage()' novalidate>
 				<img ng-src='{{ image }}' />
-				<p>{{ image_name }}</p>
-				<p>{{ link_Url }}</p><br><br>
-				<p>{{ source }}</p>
-				<input type="submit" value="Submit Link">
+				<p class='source'>{{ source }}</p>
+				<p class='image_name'>{{ image_name }}</p>
+				<input type="submit" value="Submit">
 			</form>
 			<div class='gender-female' ng-show='femaleShow'>
 				<ul class="type-buttons">
