@@ -248,6 +248,17 @@ angular.module('myApp', [
         return resp.data;
       })
     };
+    /*************FOLLOW USER********************/
+    register.follow = function(data) {
+      return $http({
+        method: 'POST',
+        url: 'users/follow',
+        data: data
+      })
+      .then(function(res) {
+        return res.data;
+      })
+    };
     /***************** AWS S3 ****************************/
     register.s3 = function(params){
       return $http({

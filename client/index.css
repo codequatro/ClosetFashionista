@@ -280,3 +280,8 @@ svg {
   padding: 2%;
   width: 96%;
 }
+
+.top-user-follow {
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+}
