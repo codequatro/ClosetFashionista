@@ -19,6 +19,7 @@ angular.module('myApp')
         $window.localStorage.setItem('authtoken', data.token)
         $window.localStorage.setItem('username', data.username)
         $window.localStorage.setItem('userID', data.userID);
+        $window.localStorage.setItem('user', JSON.stringify(data));
 
         $state.go('closet')
 
