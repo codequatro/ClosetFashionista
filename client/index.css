@@ -188,7 +188,8 @@ svg {
 
 
 .home-feed {
-
+  width: 90%;
+  margin: 0px auto;
 }
 
 .home-feed-card {
@@ -295,6 +296,23 @@ svg {
 
 .home-feed-filter-buttons label:hover {
   background: #e0e0e0;
+}
+
+
+/*** Profile Page ***/
+.closet-user-stats {
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+
+.closet-user-stats span {
+  width: 29.33%;
+  padding-top: 5px;
+  height: 100%;
+  margin: 0px 2%;
+  float: left;
 }
 
 

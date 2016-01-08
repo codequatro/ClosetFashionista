@@ -34,6 +34,7 @@ angular.module('myApp')
 
         // Scoring Closet Photos
         $scope.pics = data.pics;
+
       }); //end .then
     };
 
