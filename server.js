@@ -4,17 +4,28 @@
       initdb db; sudo chown -R $USER:users /run/postgresql; postgres -D db;
     - Mac:
       initdb db; sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
+    - Windows:
+      initdb db
+      postgres -D db
 
-// Then in another Terminal window: 
-  createdb closet; psql closet < server/schema.sql
+  - Then in another Terminal window: 
+    - Unix:
+      createdb closet; psql closet < server/schema.sql
+    - Windows:
+      createdb -U postgres closet
+      psql -U postgres closet < server/schema.sql
+
+  - For Windows, change the postgres password to 'password'
 */ 
 
 /* 
   - To start postgres server:
     - Linux:
-    sudo chown -R $USER:users /run/postgresql; postgres -D db
+      sudo chown -R $USER:users /run/postgresql; postgres -D db
     - Mac:
-    sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
+      sudo chown -R $USER:staff /var/run/postgresql; postgres -D db;
+    - Windows:
+      postgres -D db
 */
 
 var express = require('express');
