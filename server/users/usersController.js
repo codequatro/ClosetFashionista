@@ -33,27 +33,97 @@ exports = module.exports = {
 	signin: function(req, res, next) {
 		var attemptedUsername = req.body.username;
 		var attemptedPassword = req.body.password;
-		pg.connect(connectString, function (err, client, done) {
-			if(err) {
-			  console.error(err);
-			} else {
-				client.query('SELECT username, password, user_id FROM users WHERE username = $1', [attemptedUsername], function (err, result){
-				  if(result.rows.length === 0){
-				    res.status(401).json({ answer: 'Invalid Username' });
-				  } else {
-				    var username = result.rows[0].username;
-				    var password = result.rows[0].password;
-				    var user_id = result.rows[0].user_id;
-				    if(attemptedPassword === password) {
-				      var token = jwt.encode(result.rows[0].password, 'secret');
-				      res.status(200).json({ token: token, username: username, userID: user_id });
-				    } else {
-				      res.status(401).json({ answer: 'Invalid Password' });
-				    }
-				  }
-				})
-			}
-		})
+
+		var clientQuery;
+		var done;
+
+		pgConnect()
+			.then(function(connection) {
+    		done = connection.done;
+    		clientQuery = Q.nbind(connection.client.query, connection.client);
+
+    		return clientQuery(`
+					SELECT username,  password, user_id,
+								 firstname, lastname, gender,  credibilityScore
+						FROM users
+							WHERE username = $1`, [attemptedUsername]
+    		);
+    	})
+    	.then(function(result) {
+    		if(result.rows.length === 0){
+			    res.status(401).json({ answer: 'Invalid Username' });
+			    throw new Error('Stop promise chain');
+			  }
+		    var username         = result.rows[0].username;
+		    var password         = result.rows[0].password;
+		    var user_id          = result.rows[0].user_id;
+		    var firstname        = result.rows[0].firstname;
+		    var lastname         = result.rows[0].lastname;
+		    var gender           = result.rows[0].gender;
+		    var credibilityScore = result.rows[0].credibilityScore;
+
+		    if(attemptedPassword !== password) {
+		      res.status(401).json({ answer: 'Invalid Password' });
+			    throw new Error('Stop promise chain');
+		    }
+	      var token = jwt.encode(password, 'secret');
+	      res.status(200).json({
+	      	token: token,
+	      	username: username,
+	      	userID: user_id,
+	      	firstname: firstname,
+				  lastname: lastname,
+				  gender: gender,
+				  credibilityScore: credibilityScore
+	      });
+    	})
+    	.then(done)
+    	.fail(function(err) {
+    		if (err.message === 'Stop promise chain') {
+					console.log('Failed to signin %s', attemptedUsername);
+    		} else {
+    			console.log(err);
+    			next(err);
+    		}
+    		done();
+    	})
+		// pg.connect(connectString, function (err, client, done) {
+		// 	if(err) {
+		// 	  console.error(err);
+		// 	} else {
+		// 		client.query(`
+		// 			SELECT username, password, user_id, firstname, lastname, gender, credibilityScore
+		// 				FROM users
+		// 					WHERE username = $1`, [attemptedUsername],
+		// 		function (err, result){
+		// 		  if(result.rows.length === 0){
+		// 		    res.status(401).json({ answer: 'Invalid Username' });
+		// 		  } else {
+		// 		    var username = result.rows[0].username;
+		// 		    var password = result.rows[0].password;
+		// 		    var user_id = result.rows[0].user_id;
+		// 		    var firstname = result.rows[0].firstname;
+		// 		    var lastname = result.rows[0].lastname;
+		// 		    var gender = result.rows[0].gender;
+		// 		    var credibilityScore = result.rows[0].credibilityScore;
+		// 		    if(attemptedPassword === password) {
+		// 		      var token = jwt.encode(result.rows[0].password, 'secret');
+		// 		      res.status(200).json({
+		// 		      	token: token,
+		// 		      	username: username,
+		// 		      	userID: user_id,
+		// 		      	firstname: firstname,
+		// 					  lastname: lastname,
+		// 					  gender: gender,
+		// 					  credibilityScore: credibilityScore,
+		// 		      });
+		// 		    } else {
+		// 		      res.status(401).json({ answer: 'Invalid Password' });
+		// 		    }
+		// 		  }
+		// 		})
+		// 	}
+		// })
 	},
 
 	signup: function(req, res, next) {
