@@ -18,6 +18,12 @@ angular.module('myApp')
 	$scope.source = undefined;
     $scope.type = undefined;
 
+    // For the nav dropdown
+    $scope.showNavDropdown = false;
+    $scope.showNavDropdownContent = function() {
+        $scope.showNavDropdown = $scope.showNavDropdown === false ? true : false;
+    }
+
    	$scope.firstModalShow = false;
 	$scope.changeFirstModal = function() {
 		$scope.firstModalShow = $scope.firstModalShow === false ? true : false;

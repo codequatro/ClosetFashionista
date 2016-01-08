@@ -1,35 +1,126 @@
-.navbar .btn, #navbar-right {
-  color: #fff;
-  padding: 9px 15px;
-  font-size: 18px;
-  text-align: center;
-  padding-left: 10px;
-}
 
 .navbar {
   height: 40px;
+  font-size: 18px;
+  padding: 0px;
   background: #6e5baa;
   border-bottom: 5px solid #372d55;
+  color: #fff;
 }
 
-#navbar-left {
+.navbar-left {
+  margin-left: 20px;
+  font-size: 26px;
+  padding-top: 3px;
+  width: 32%;
+  float: left;
+  height: 100%;
+  cursor: pointer;
+}
+
+.navbar-left i {
+  padding-right: 20px;
+}
+
+.fa-check-square-o {
+  padding-top: 2px;
+}
+
+.navbar-center {
+  padding-top: 9px;
   display: inline-block;
-  width: 35%;
+  width: 32%;
+  text-align: center;
+  cursor: pointer;
 }
 
-#navbar-right {
+.navbar-right {
+  padding-top: 6px;
   float: right;
-  padding-right: 10px;
+  margin-right: 20px;
+  width: 32%;
+  cursor: pointer;
 }
+
+
+.navbar-right p {
+  font-size: 16px;
+  float: left;
+  margin: 4px 20px 0px 0px;
+}
+
+.navbar-right i {
+  float: right;
+  margin: 3px 20px 0px 10px;
+}
+
+.add-link-icon {
+  color: #fff;
+  font-size: 26px;
+}
+
+.add-link-icon:hover {
+  color: #3b77db;
+}
+
+.nav-dropdown-link {
+  float:right;
+}
+
+.nav-dropdown-link-username:hover {
+  color: #999999;
+}
+
+.nav-dropdown {
+  width: 140px;
+  z-index: 5;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  background-color: #fff;
+  list-style: none;
+  text-align: left;
+  font-size: 14px;
+  margin-top: 40px;
+  position: absolute;
+}
+
+.nav-dropdown li {
+  color: #372d55;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.nav-dropdown li:hover {
+  background-color: #e5e5e5;
+}
+
+.navbar-right .nav-dropdown-link i {
+  margin-right: 5px;
+}
+
+.navbar-right .nav-dropdown i {
+  float: left;
+  margin: 3px 10px 0px 0px;
+  width: 13px;
+}
+
+.btn {
+  font-size: 18px;
+  color: #fff;
+  padding: 9px 20px 0px 0px;
+}
+
+
+
 
 
 /*** Add Link Modal ***/
 
 .add-link-modal {
   position: fixed;
-  z-index: 3;
+  z-index: 10;
   width: 100%;
-  height: 100%;
 }
 
 /*.add-link-modal div {
@@ -62,6 +153,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
+  z-index: 8;
   cursor: pointer;
   background-color: #000;
   opacity: 0.6;
