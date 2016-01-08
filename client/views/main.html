@@ -8,6 +8,26 @@
 </div> -->
 
 <div class="home-feed">
+<!-- 	<div class='home-feed-filter-bar'>
+		<ul class="home-feed-filter-buttons">
+    		<li>
+    			<input id="tops" type='radio' ng-model='' value='Tops' />
+    			<label for="tops">Toms</label> 
+    		</li>
+    		<li>
+    			<input id="bottoms" type='radio' ng-model='' value='Bottoms' />
+    			<label for="bottoms">Bottoms</label>
+    		</li>
+    		<li>
+    			<input id="shoes" type='radio' ng-model='' value='Shoes' />
+    			<label for="shoes">Shoes</label>
+    		</li>
+    		<li>
+    			<input id="accessories" type='radio' ng-model='' value='Accessories' />
+    			<label for="accessories">Accessories</label>
+    		</li>
+  		</ul>
+	</div> -->
 	<div class='home-feed-card' ng-repeat='image in images'>
 		<img class='item_url' ng-src='{{ image.image }}'>
 		<a ng-href="{{image.link_url}}">

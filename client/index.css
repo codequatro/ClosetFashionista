@@ -252,6 +252,51 @@ svg {
   float: right;
 }
 
+.home-feed-filter-buttons {
+  list-style-type: none;
+  padding: 0px;
+  margin: 8px 0px;
+}
+
+.home-feed-filter-buttons li {
+  float: left;
+  margin: 0px;
+  width: 24%;
+  height: 40px;
+  position: relative;
+}
+
+.home-feed-filter-buttons label, .home-feed-filter-buttons input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width: 100%;
+}
+
+.home-feed-filter-buttons input[type="radio"] {
+  opacity:0;
+  z-index:1;
+}
+
+.home-feed-filter-buttons input[type="radio"]:checked + label,
+.Checked + label {
+  background: #e0e0e0;
+}
+
+.home-feed-filter-buttons label {
+  padding-top: 10px;
+  border:1px solid #e0e0e0;
+  border-radius: 3px; 
+  cursor:pointer;
+}
+
+.home-feed-filter-buttons label:hover {
+  background: #e0e0e0;
+}
+
 
 /*** Vote Page ***/
 
