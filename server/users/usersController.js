@@ -37,6 +37,8 @@ exports = module.exports = {
 		var clientQuery;
 		var done;
 
+		var resObject;
+
 		pgConnect()
 			.then(function(connection) {
     		done = connection.done;
@@ -54,28 +56,69 @@ exports = module.exports = {
 			    res.status(401).json({ answer: 'Invalid Username' });
 			    throw new Error('Stop promise chain');
 			  }
-		    var username         = result.rows[0].username;
-		    var password         = result.rows[0].password;
-		    var user_id          = result.rows[0].user_id;
-		    var firstname        = result.rows[0].firstname;
-		    var lastname         = result.rows[0].lastname;
-		    var gender           = result.rows[0].gender;
-		    var credibilityScore = result.rows[0].credibilityScore;
 
-		    if(attemptedPassword !== password) {
+		    if(attemptedPassword !== result.rows[0].password) {
 		      res.status(401).json({ answer: 'Invalid Password' });
 			    throw new Error('Stop promise chain');
 		    }
-	      var token = jwt.encode(password, 'secret');
-	      res.status(200).json({
-	      	token: token,
-	      	username: username,
-	      	userID: user_id,
-	      	firstname: firstname,
-				  lastname: lastname,
-				  gender: gender,
-				  credibilityScore: credibilityScore
-	      });
+
+    		var user = result.rows[0];
+
+		    resObject = {
+	      	token:            jwt.encode(user.password, 'secret'),
+	      	username:         user.username,
+	      	userID:           user.user_id,
+	      	firstname:        user.firstname,
+				  lastname:         user.lastname,
+				  gender:           user.gender,
+				  credibilityScore: user.credibilityScore,
+          // followers:        []
+		    }
+
+        return clientQuery(`
+          SELECT users.username, users.user_id, users.firstname,
+                 users.lastname, users.gender, users.credibilityScore,
+                 following.follower_id, following.following_id
+            FROM users
+              INNER JOIN following
+                ON    users.user_id = following.follower_id
+                  AND following.following_id = $1`,
+          [user.user_id]
+        );
+    	})
+    	.then(function(result) {
+        var followers = result.rows;
+
+        // Example followers:
+        // [
+        //   {
+        //     username: 'sue',
+        //     user_id: 3,
+        //     firstname: 'sue',
+        //     lastname: 'bob',
+        //     gender: 'female',
+        //     credibilityscore: 0,
+        //     follower_id: 3,
+        //     following_id: 2
+        //   }
+        // ]
+
+        resObject.followers = followers.map(function(follower) {
+          return {
+            username:         follower.username,
+            user_id:          follower.user_id,
+            firstname:        follower.firstname,
+            lastname:         follower.lastname,
+            gender:           follower.gender,
+            credibilityScore: follower.credibilityscore,
+            follower_id:      follower.follower_id,
+            // following_id:     follower.following_id
+          }
+        })
+
+        console.log('resObject:\n', resObject);
+
+	      res.status(200).json(resObject);
     	})
     	.then(done)
     	.fail(function(err) {
