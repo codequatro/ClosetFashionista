@@ -75,46 +75,10 @@ exports = module.exports = {
           // followers:        []
 		    }
 
-        return clientQuery(`
-          SELECT users.username, users.user_id, users.firstname,
-                 users.lastname, users.gender, users.credibilityScore,
-                 following.follower_id, following.following_id
-            FROM users
-              INNER JOIN following
-                ON    users.user_id = following.follower_id
-                  AND following.following_id = $1`,
-          [user.user_id]
-        );
+        return exports.getFollowers(clientQuery, user.user_id);
     	})
-    	.then(function(result) {
-        var followers = result.rows;
-
-        // Example followers:
-        // [
-        //   {
-        //     username: 'sue',
-        //     user_id: 3,
-        //     firstname: 'sue',
-        //     lastname: 'bob',
-        //     gender: 'female',
-        //     credibilityscore: 0,
-        //     follower_id: 3,
-        //     following_id: 2
-        //   }
-        // ]
-
-        resObject.followers = followers.map(function(follower) {
-          return {
-            username:         follower.username,
-            user_id:          follower.user_id,
-            firstname:        follower.firstname,
-            lastname:         follower.lastname,
-            gender:           follower.gender,
-            credibilityScore: follower.credibilityscore,
-            follower_id:      follower.follower_id,
-            // following_id:     follower.following_id
-          }
-        })
+    	.then(function(followers) {
+        resObject.followers = followers;
 
         console.log('resObject:\n', resObject);
 
@@ -308,46 +272,10 @@ exports = module.exports = {
         );
       })
       .then(function(result) {
-        return clientQuery(`
-          SELECT users.username, users.user_id, users.firstname,
-                 users.lastname, users.gender, users.credibilityScore,
-                 following.follower_id, following.following_id
-            FROM users
-              INNER JOIN following
-                ON    users.user_id = following.follower_id
-                  AND following.following_id = $1`,
-          [userInfo.userID]
-        );
+        return exports.getFollowers(clientQuery, userInfo.userId);
       })
-      .then(function(result) {
-        var followers = result.rows;
-
-        // Example followers:
-        // [
-        //   {
-        //     username: 'sue',
-        //     user_id: 3,
-        //     firstname: 'sue',
-        //     lastname: 'bob',
-        //     gender: 'female',
-        //     credibilityscore: 0,
-        //     follower_id: 3,
-        //     following_id: 2
-        //   }
-        // ]
-
-        userInfo.followers = followers.map(function(follower) {
-          return {
-            username:         follower.username,
-            user_id:          follower.user_id,
-            firstname:        follower.firstname,
-            lastname:         follower.lastname,
-            gender:           follower.gender,
-            credibilityScore: follower.credibilityscore,
-            follower_id:      follower.follower_id,
-            // following_id:     follower.following_id
-          }
-        })
+      .then(function(followers) {
+        userInfo.followers = followers;
 
         console.log('userInfo:\n', userInfo);
         res.status(200).json(userInfo);
@@ -439,32 +367,124 @@ exports = module.exports = {
  //    }
  //    }) // pg.connect end
  //  },
+ 
+  getFollowers: function(clientQuery, userId) {
+    return clientQuery(`
+      SELECT users.username, users.user_id, users.firstname,
+             users.lastname, users.gender, users.credibilityScore,
+             following.follower_id, following.following_id
+        FROM users
+          INNER JOIN following
+            ON    users.user_id = following.follower_id
+              AND following.following_id = $1`,
+      [userId]
+    )
+      .then(function(result) {
+        var followers = result.rows;
+
+        // Example followers:
+        // [
+        //   {
+        //     username: 'sue',
+        //     user_id: 3,
+        //     firstname: 'sue',
+        //     lastname: 'bob',
+        //     gender: 'female',
+        //     credibilityscore: 0,
+        //     follower_id: 3,
+        //     following_id: 2
+        //   }
+        // ]
+
+        return followers.map(function(follower) {
+          return {
+            username:         follower.username,
+            user_id:          follower.user_id,
+            firstname:        follower.firstname,
+            lastname:         follower.lastname,
+            gender:           follower.gender,
+            credibilityScore: follower.credibilityscore,
+            follower_id:      follower.follower_id,
+            // following_id:     follower.following_id
+          };
+        });
+      })
+  },
 
 	getBasicUserInfo: function(req, res, next) {
 		var username = req.body.username;
-		pg.connect(connectString, function (err, client, done) {
-		if(err) {
-			console.error('error connecting to the DB:', err);
-		} else {
-			client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
-		    if(err) {
-		    	console.error('error on lookup of user_id: ', err)
-		    } else {
-				var userId = result.rows[0].user_id;
-				//create a 'userInfo' object to send back to client
-				var userInfo = {};
-				userInfo.userID = result.rows[0].user_id;
-				userInfo.username = result.rows[0].username;
-				userInfo.firstname = result.rows[0].firstname;
-				userInfo.lastname = result.rows[0].lastname;
-				userInfo.gender = result.rows[0].gender;
-				res.status(200).json(userInfo);
-				done();
-		    }
-		  }) //end of userInfo query
-		}
-		}) // pg.connect end
+
+    var userInfo = {};
+
+    var clientQuery;
+    var done;
+
+    pgConnect()
+      .then(function(connection) {
+        done = connection.done;
+        clientQuery = Q.nbind(connection.client.query, connection.client);
+
+        return clientQuery(`
+          SELECT * FROM users
+            WHERE username = $1`, [username]
+        );
+      })
+      .then(function(result) {
+        var user = result.rows[0];
+
+        //create a 'userInfo' object to send back to client
+        userInfo.userID = user.user_id;
+        userInfo.userId = user.user_id;
+        userInfo.username = user.username;
+        userInfo.firstname = user.firstname;
+        userInfo.lastname = user.lastname;
+        userInfo.gender = user.gender;
+      })
+      .then(function(result) {
+        return exports.getFollowers(clientQuery, userInfo.userId);
+      })
+      .then(function(followers) {
+        userInfo.followers = followers;
+        console.log('Basic userInfo:\n', userInfo);
+        res.status(200).json(userInfo);
+      })
+      .then(done)
+      .fail(function(err) {
+        done();
+        if (err.message === 'Stop promise chain') {
+          console.log('Failed to get user info for %s', username);
+        } else {
+          console.log(err);
+          next(err);
+        }
+      });
 	},
+
+  // getBasicUserInfo: function(req, res, next) {
+  //   var username = req.body.username;
+  //   pg.connect(connectString, function (err, client, done) {
+  //   if(err) {
+  //     console.error('error connecting to the DB:', err);
+  //   } else {
+  //     client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result){
+  //       if(err) {
+  //         console.error('error on lookup of user_id: ', err)
+  //       } else {
+  //       var userId = result.rows[0].user_id;
+  //       //create a 'userInfo' object to send back to client
+  //       var userInfo = {};
+  //       userInfo.userID = result.rows[0].user_id;
+  //       userInfo.username = result.rows[0].username;
+  //       userInfo.firstname = result.rows[0].firstname;
+  //       userInfo.lastname = result.rows[0].lastname;
+  //       userInfo.gender = result.rows[0].gender;
+  //       res.status(200).json(userInfo);
+  //       done();
+  //       }
+  //     }) //end of userInfo query
+  //   }
+  //   }) // pg.connect end
+  // },
 
 	getAllUsers: function(req, res, next) {
 		pg.connect(connectString, function (err, client, done) {
@@ -536,7 +556,7 @@ exports = module.exports = {
     		return clientQuery(`
     			INSERT INTO following (follower_id, following_id)
     				VALUES ($1, $2)`,
-    			[follower.userID, following.user_id]
+    			[follower.userId, following.user_id]
     		);
     	})
     	.then(function(result) {
