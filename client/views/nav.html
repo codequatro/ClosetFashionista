@@ -16,12 +16,14 @@
 	<div class="add-link-modal" ng-show="secondModalShow" ng-model='link'>
 			<div class='secondModal'>
 			<i ng-click="changeSecondModal()" class="fa fa-times-circle fa-2x"></i>
-			<!-- <h2>Second Modal</h2> -->
+			<h2>Second Modal</h2>
 			<form name="post" ng-submit='postImage()' novalidate>
 				<img ng-src='{{ image }}' />
-				<p class='image_name'>{{ image_name }}</p>
-				<p class='source'>{{ source }}</p>
-			<p>What type of clothing is this?</p>
+				<p>{{ image_name }}</p>
+				<p>{{ link_Url }}</p><br><br>
+				<p>{{ source }}</p>
+				<input type="submit" value="Submit Link">
+			</form>
 			<div class='gender-female' ng-show='femaleShow'>
 				<ul class="type-buttons">
 	      			<li>
@@ -57,9 +59,6 @@
 	     			</li>
 	   			</ul>
 	   		</div>
-	   		<p class='entry'>Like what you see? Submit your entry.</p>
-	   		<input class='submit-button' type="submit" value="Submit">
-	   		</form>
 		</div>
 	</div>
 
